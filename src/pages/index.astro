@@ -1,26 +1,13 @@
 ---
-// Component Imports
-import Button from '../components/Button.astro';
-
-// Full Astro Component Syntax:
-// https://docs.astro.build/core-concepts/astro-components/
+import ThemeSwitcher from '../components/ThemeSwitcher.astro';
+import MainLayout from '../layouts/MainLayout.astro';
 ---
 
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width" />
-        <link rel="icon" type="image/png" href="/favicon.png" />
-        <meta name="generator" content={Astro.generator} />
-        <title>Woodshed Technology LLC</title>
-    </head>
-
+<MainLayout title="Woodshed Technology LLC">
     <body>
         <div class="grid place-items-center h-screen content-center">
-            <Button>Tailwind Button in Astro!</Button>
-            <a href="/markdown-page" class="p-4 underline"
-                >Markdown is also supported...</a
-            >
+            <ThemeSwitcher />
+            <p class="dark:bg-black dark:text-primary-10 p-4">Dark mode test</p>
         </div>
     </body>
-</html>
+</MainLayout>

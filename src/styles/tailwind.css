@@ -1,0 +1,23 @@
+@tailwind base;
+h1 {
+    @apply font-sans;
+    @apply text-2xl;
+    @apply font-semibold;
+}
+h2 {
+    @apply font-sans;
+    @apply text-xl;
+    @apply font-medium;
+}
+html {
+    @apply font-sans;
+    @apply text-base;
+}
+hr {
+    border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+@tailwind components;
+@tailwind utilities;
