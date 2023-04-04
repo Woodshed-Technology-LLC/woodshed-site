@@ -1,0 +1,19 @@
+<span class="highlight pb-2">
+    <slot />
+</span>
+<style>
+    .highlight {
+        background: linear-gradient(to bottom, transparent 35%, #86a287 35%);
+        background-repeat: no-repeat;
+        background-size: 100% 10%;
+        background-position: 0 100%;
+        transition: background-size 200ms ease;
+        will-change: background-size;
+    }
+    @media (prefers-reduced-motion: no-preference) {
+        .highlight:hover {
+            background-size: 100% 130%;
+            transition: background-size 200ms ease;
+        }
+    }
+</style>

@@ -1,21 +1,28 @@
-<div class="bg-black flex justify-center">
+---
+import Highlight from './Highlight.astro';
+---
+
+<div class="bg-black py-24 flex justify-center">
     <div class="main-content">
-        <p class="font-cta text-5xl leading-9 pt-24 pb-8 text-gray-light-300">
+        <p class="font-cta text-5xl leading-9 pb-8 text-gray-light-300">
             Come say Hello!
         </p>
-        <a
-            class="text-gray-light-400 highlight text-xl"
-            href="mailto:hello@woodshed.tech">hello@woodshed.tech</a
-        >
+        <Highlight>
+            <a
+                class="text-gray-light-400 text-xl"
+                href="mailto:hello@woodshed.tech"
+                rel="noreferrer">hello@woodshed.tech</a
+            >
+        </Highlight>
         <p id="copyright" class="text-gray-light-300 pt-8">
             © Woodshed Technology LLC
         </p>
     </div>
-</div>
 
-<script>
-    const copyright = document.getElementById('copyright');
-    if (copyright) {
-        copyright.innerHTML = `©${new Date().getFullYear()} Woodshed Technology LLC`;
-    }
-</script>
+    <script>
+        const copyright = document.getElementById('copyright');
+        if (copyright) {
+            copyright.innerHTML = `©${new Date().getFullYear()} Woodshed Technology LLC`;
+        }
+    </script>
+</div>
