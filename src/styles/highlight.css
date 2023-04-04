@@ -1,0 +1,10 @@
+.animate-highlight {
+    animation-duration: 0.5s;
+    animation-name: animate-highlight;
+    animation-delay: 0.5s;
+    animation-fill-mode: backwards;
+}
+
+.highlight {
+    background: linear-gradient(to bottom, transparent 35%, #86a287 35%);
+}
