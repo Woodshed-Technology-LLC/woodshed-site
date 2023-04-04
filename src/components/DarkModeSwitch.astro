@@ -1,0 +1,77 @@
+---
+// A button that toggles the theme between Dark and Light modes
+---
+
+<div class="flex flex-col">
+    <label
+        class="text-gray-light-shade-500 dark:text-primary-dark-400 pb-3 text-22"
+        for="dark-mode-switch">Dark Mode</label
+    >
+    <div class="flex">
+        <button
+            class="relative rounded-full shadow-inner border-2 border-gray-light-100 dark:border-gray-dark-200 focus:shadow-xs h-[20px] w-[40px]"
+            id="dark-mode-switch"
+            role="switch"
+        >
+            <span
+                id="dark-mode-switch-thumb"
+                class="block relative bg-gray-light-shade-500 dark:bg-primary-dark-400 rounded-full shadow translate-x-0 dark:translate-x-5 h-[20px] w-[20px]"
+            >
+            </span>
+        </button>
+        <p
+            class="pl-3 text-gray-light-shade-500 dark:text-primary-dark-400"
+            id="dark-mode-on-off"
+        >
+            off
+        </p>
+    </div>
+</div>
+
+<script>
+    const button = document.getElementById('dark-mode-switch');
+    const onOff = document.getElementById('dark-mode-on-off');
+
+    if (document.documentElement.classList.contains('dark')) {
+        if (onOff) {
+            onOff.innerHTML = 'on';
+        }
+    }
+
+    if (button) {
+        button.addEventListener('click', () => {
+            const currentTheme = document.documentElement.classList.contains(
+                'dark',
+            )
+                ? 'dark'
+                : 'light';
+
+            if (currentTheme === 'dark') {
+                localStorage.setItem('theme', 'light');
+                document.documentElement.classList.remove('dark');
+                if (onOff) {
+                    onOff.innerHTML = 'off';
+                }
+            } else {
+                localStorage.setItem('theme', 'dark');
+                document.documentElement.classList.add('dark');
+                if (onOff) {
+                    onOff.innerHTML = 'on';
+                }
+            }
+        });
+    }
+</script>
+
+<style>
+    #dark-mode-switch {
+        top: 3px;
+    }
+
+    #dark-mode-switch-thumb {
+        transition: transform 500ms;
+        will-change: transform;
+        top: -2px;
+        left: -2px;
+    }
+</style>

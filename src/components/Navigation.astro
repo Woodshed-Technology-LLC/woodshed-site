@@ -1,0 +1,130 @@
+---
+import DarkModeSwitch from './DarkModeSwitch.astro';
+---
+
+<div class="relative" id="navigation">
+    <div
+        id="menu"
+        class="relative bg-primary-light-shade-500 dark:bg-gray-dark-shade-400 pt-16 pb-12"
+    >
+        <nav>
+            <ul
+                class="pl-12 text-22 flex flex-col gap-5 text-gray-light-shade-800 dark:text-primary-dark-200"
+            >
+                <li>
+                    <a href="/process/">Process</a>
+                </li>
+                <li>
+                    <a href="/projects/">Projects</a>
+                </li>
+                <li>
+                    <a href="/contact/">Contact</a>
+                </li>
+            </ul>
+            <div class="ml-12 mr-24 pt-12 border-b border-gray-light-100"></div>
+        </nav>
+        <div class="ml-12 pt-10 flex flex-col">
+            <DarkModeSwitch />
+        </div>
+    </div>
+    <div id="hamburger">
+        <div id="icon bg-gray-light-shade-900"></div>
+    </div>
+</div>
+
+<style>
+    #navigation #menu {
+        position: absolute;
+        display: none;
+    }
+
+    #navigation.open #menu {
+        display: block;
+        position: absolute;
+        width: 338px;
+        left: -280px;
+        top: -16px;
+    }
+
+    #hamburger {
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        top: -6px;
+        left: 0px;
+        transition-duration: 0.5s;
+        transform: scale(0.4);
+    }
+
+    #hamburger #icon {
+        transition-duration: 0.5s;
+        position: absolute;
+        height: 0px;
+        width: 60px;
+        top: 30px;
+    }
+
+    #hamburger:before {
+        transition-duration: 0.5s;
+        position: absolute;
+        width: 60px;
+        height: 8px;
+        border-radius: 4px;
+        content: '';
+        top: -20px;
+    }
+
+    html:not(.dark) #hamburger:before {
+        @apply bg-gray-light-shade-900;
+    }
+
+    html.dark #hamburger:before {
+        @apply bg-primary-dark-100;
+    }
+
+    #hamburger:after {
+        transition-duration: 0.5s;
+        position: absolute;
+        width: 60px;
+        height: 8px;
+        border-radius: 4px;
+        content: '';
+        top: 20px;
+    }
+
+    html:not(.dark) #hamburger:after {
+        @apply bg-gray-light-shade-900;
+    }
+
+    html.dark #hamburger:after {
+        @apply bg-primary-dark-100;
+    }
+
+    #navigation.open #hamburger #icon {
+        transition: 0.5s;
+    }
+
+    #navigation.open #hamburger:before {
+        transform: rotateZ(45deg) scaleX(1.33) translate(12px, 12px);
+    }
+
+    #navigation.open #hamburger:after {
+        transform: rotateZ(-45deg) scaleX(1.33) translate(12px, -12px);
+    }
+
+    #hamburger:hover {
+        cursor: pointer;
+    }
+</style>
+
+<script>
+    const hamburger = document.getElementById('hamburger');
+
+    if (hamburger) {
+        hamburger.addEventListener('click', () => {
+            if (hamburger.parentElement) {
+                hamburger.parentElement.classList.toggle('open');
+            }
+        });
+    }
+</script>

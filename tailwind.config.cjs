@@ -1,4 +1,13 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
+const plugin = require('tailwindcss/plugin');
+
+/**
+ * Add Tailwind variants for various CSS data attributes.
+ */
+const variantsForDataAttributes = plugin(function ({ addVariant }) {
+    addVariant('data-state-checked', '&[data-state="checked"]');
+    addVariant('data-state-unchecked', '&[data-state="unchecked"]');
+});
 
 module.exports = {
     content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
@@ -94,8 +103,16 @@ module.exports = {
                 ...defaultTheme.fontFamily.sans,
             ],
         },
+        fontSize: {
+            15: '0.9375rem',
+            16: '1rem',
+            18: '1.125rem',
+            20: '1.25rem',
+            22: '1.375rem',
+            24: '1.5rem',
+        },
     },
     darkMode: 'class',
     safelist: ['dark'],
-    plugins: [],
+    plugins: [variantsForDataAttributes],
 };
