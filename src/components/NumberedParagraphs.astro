@@ -1,4 +1,12 @@
 ---
+/**
+ * Renders a list of paragraphs with numbered headers. The numbers move downward individually as the
+ * user scrolls through each paragraph. This is done with CSS `position: sticky;` which on its own
+ * doesn't allow us to add styling based on whether an element is "stuck" or "unstuck." The design
+ * has some specific styling for stuck / unstuck states, and I've started building that in
+ * NumberedParagraphs.next.astro using JavaScript, which is currently a work in progress.
+ */
+
 interface NumberedParagraph {
     heading: string;
     body: string;
@@ -11,12 +19,12 @@ interface Props {
 const { paragraphs } = Astro.props;
 ---
 
-<div>
+<div class="grid gap-8">
     {
         paragraphs.map((paragraph, index) => (
             <div class="flex">
-                <div class="pr-2 pt-[3px]">
-                    <div class="rounded-full border w-6 h-6 flex items-center justify-center">
+                <div class="pr-2 pt-[5px]">
+                    <div class="sticky top-[55vh] rounded-full border border-primary-light-500 dark:border-primary-dark-500 text-primary-light-500 dark:text-primary-dark-500 w-5 h-5 flex items-center justify-center text-15">
                         {index + 1}
                     </div>
                 </div>

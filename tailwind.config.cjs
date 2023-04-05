@@ -1,13 +1,4 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
-const plugin = require('tailwindcss/plugin');
-
-/**
- * Add Tailwind variants for various CSS data attributes.
- */
-const variantsForDataAttributes = plugin(function ({ addVariant }) {
-    addVariant('data-state-checked', '&[data-state="checked"]');
-    addVariant('data-state-unchecked', '&[data-state="unchecked"]');
-});
 
 module.exports = {
     content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
@@ -111,5 +102,4 @@ module.exports = {
     },
     darkMode: 'class',
     safelist: ['dark'],
-    plugins: [variantsForDataAttributes],
 };

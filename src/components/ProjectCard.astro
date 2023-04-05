@@ -1,0 +1,17 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+    alt: string;
+    href: string;
+    imageMetaData: ImageMetadata;
+    projectName: string;
+}
+
+const { alt, href, projectName, imageMetaData } = Astro.props;
+---
+
+<a href={href} class="flex flex-col items-center justify-center">
+    <Image alt={alt} src={imageMetaData} width={312} />
+    <p class="pt-12 text-20 font-medium">{projectName}</p>
+</a>

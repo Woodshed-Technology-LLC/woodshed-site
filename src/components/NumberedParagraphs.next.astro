@@ -1,0 +1,251 @@
+---
+/**
+ * Renders a list of paragraphs with numbered headers. The numbers move downward individually as the
+ * user scrolls through each paragraph. This is done with CSS `position: sticky;` which on its own
+ * doesn't allow us to add styling based on whether an element is "stuck" or "unstuck." The design
+ * has some specific styling for stuck / unstuck states, and I've started building that in this file
+ * using JavaScript. This is currently a work in progress.
+ *
+ * This is based on: https://developer.chrome.com/blog/sticky-headers/
+ */
+
+interface NumberedParagraph {
+    heading: string;
+    body: string;
+}
+
+interface Props {
+    paragraphs: NumberedParagraph[];
+}
+
+const { paragraphs } = Astro.props;
+---
+
+<div class="grid gap-8">
+    {
+        paragraphs.map((paragraph, index) => (
+            <div class="flex sticky-container">
+                <div class="pr-2 pt-[5px]">
+                    <div class="sticky-element rounded-full border border-primary-light-500 text-primary-light-500 w-5 h-5 flex items-center justify-center text-15">
+                        {index + 1}
+                    </div>
+                </div>
+                <div>
+                    <h2>{paragraph.heading}</h2>
+                    <p>{paragraph.body}</p>
+                </div>
+            </div>
+        ))
+    }
+</div>
+
+<script>
+    interface StickyChangeEventDetail {
+        stuck: boolean;
+        target: Element;
+    }
+
+    type StickyChangeEvent = CustomEvent<StickyChangeEventDetail>;
+
+    declare global {
+        interface DocumentEventMap {
+            'sticky-change': StickyChangeEvent;
+        }
+    }
+
+    (function () {
+        /**
+         * Returns true if the element's computed style is `position: sticky`.
+         */
+        // function isSticky(el: Element): boolean {
+        //     return getComputedStyle(el).position.match('sticky') !== null;
+        // }
+
+        /**
+         * Dispatches a `sticky-change` custom event on the element.
+         */
+        function fire(stuck: boolean, target: Element) {
+            const evt = new CustomEvent<StickyChangeEventDetail>(
+                'sticky-change',
+                {
+                    detail: { stuck, target },
+                },
+            );
+            document.dispatchEvent(evt);
+        }
+
+        /**
+         * @param {!Element} container
+         * @param {string} className
+         */
+        function addSentinels(container: Element, className: string) {
+            return Array.from(
+                container.querySelectorAll('.sticky-element'),
+            ).reduce((acc, el) => {
+                if (el.parentElement) {
+                    const sentinel = document.createElement('div');
+                    sentinel.classList.add('sticky_sentinel', className);
+                    acc.push(el.parentElement.appendChild(sentinel));
+                }
+                return acc;
+            }, [] as Element[]);
+        }
+
+        /**
+         * Sets up an intersection observer to notify when elements with the class
+         * `.sticky_sentinel--top` become visible/invisible at the top of the container.
+         */
+        function observeHeaders(container: Element) {
+            const observer = new IntersectionObserver(
+                records => {
+                    for (const record of records) {
+                        const targetInfo = record.boundingClientRect;
+                        const stickyTarget =
+                            record.target?.parentElement?.querySelector(
+                                '.sticky-element',
+                            );
+                        const rootBoundsInfo = record.rootBounds;
+
+                        if (stickyTarget && rootBoundsInfo) {
+                            if (targetInfo.bottom < rootBoundsInfo.top) {
+                                fire(true, stickyTarget);
+                            }
+
+                            if (
+                                targetInfo.bottom >= rootBoundsInfo.top &&
+                                targetInfo.bottom < rootBoundsInfo.bottom
+                            ) {
+                                fire(false, stickyTarget);
+                            }
+                        }
+                    }
+                },
+                {
+                    // rootMargin: '-16px',
+                    threshold: [0],
+                    root: container,
+                },
+            );
+
+            // Add the bottom sentinels to each section and attach an observer.
+            const sentinels = addSentinels(container, 'sticky_sentinel--top');
+            sentinels.forEach(el => observer.observe(el));
+        }
+
+        /**
+         * Sets up an intersection observer to notify when elements with the class
+         * `.sticky_sentinel--bottom` become visible/invisible at the botton of the
+         * container.
+         */
+        function observeFooters(container: Element) {
+            const observer = new IntersectionObserver(
+                records => {
+                    for (const record of records) {
+                        const targetInfo = record.boundingClientRect;
+                        const stickyTarget =
+                            record.target?.parentElement?.querySelector(
+                                '.sticky-element',
+                            );
+                        const rootBoundsInfo = record.rootBounds;
+                        const ratio = record.intersectionRatio;
+
+                        if (stickyTarget && rootBoundsInfo) {
+                            if (
+                                targetInfo.bottom > rootBoundsInfo.top &&
+                                ratio === 1
+                            ) {
+                                fire(true, stickyTarget);
+                            }
+
+                            if (
+                                targetInfo.top < rootBoundsInfo.top &&
+                                targetInfo.bottom < rootBoundsInfo.bottom
+                            ) {
+                                fire(false, stickyTarget);
+                            }
+                        }
+                    }
+                },
+                {
+                    // rootMargin: '16px',
+                    // Get callback slightly before element is 100% visible/invisible.
+                    threshold: [1],
+                    root: container,
+                },
+            );
+
+            // Add the bottom sentinels to each section and attach an observer.
+            const sentinels = addSentinels(
+                container,
+                'sticky_sentinel--bottom',
+            );
+            sentinels.forEach(el => observer.observe(el));
+        }
+
+        /**
+         * Notifies when elements that have the class `sticky` begin to stick or not.
+         * Note: these should be children of the `container` element.
+         */
+        function notifyWhenStickyHeadersChange(container: Element) {
+            observeHeaders(container);
+            observeFooters(container);
+        }
+
+        const containers = document.querySelectorAll('.sticky-container');
+
+        Array.from(containers).forEach(container => {
+            notifyWhenStickyHeadersChange(container);
+        });
+
+        document.addEventListener('sticky-change', (e: StickyChangeEvent) => {
+            console.log('event detail.stuck: ', e.detail.stuck);
+            console.log(
+                'event: e.detail.target?.innerText',
+                // @ts-ignore
+                e.detail.target?.innerText,
+            );
+        });
+    })();
+</script>
+<style>
+    :root {
+        --default-padding: 0px;
+        --header-height: 24px;
+        --sticky-pos: 55vh;
+    }
+    .sticky-container {
+        /* overflow: auto; */
+        will-change: transform; /* make overflow fast on non-retina */
+        padding: var(--default-padding);
+        scroll-behavior: smooth;
+    }
+    .sticky-element {
+        position: sticky;
+        top: var(--sticky-pos); /* Sentinels adjust based on this position. */
+        height: var(--header-height);
+        padding: 0 var(--default-padding);
+        display: flex;
+        align-items: center;
+    }
+    .sticky_sentinel {
+        background: yellow;
+        position: absolute;
+        left: 0;
+        right: 0; /* needs dimensions */
+        visibility: hidden;
+    }
+    .sticky_sentinel--top {
+        /* Adjust the height and top values based on your on your sticky top position.
+    e.g. make the height bigger and adjust the top so observeHeaders()'s
+    IntersectionObserver fires as soon as the bottom of the sentinel crosses the
+    top of the intersection container. */
+        height: calc(55vh + 30px);
+        top: -24px;
+    }
+    .sticky_sentinel--bottom {
+        bottom: 0;
+        /* Height should match the top of the header when it's at the bottom of the
+    intersection container. */
+        height: calc(var(--header-height) + var(--default-padding));
+    }
+</style>
