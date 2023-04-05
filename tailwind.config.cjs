@@ -96,12 +96,8 @@ module.exports = {
             },
         },
         fontFamily: {
-            sans: ['InterVariable', 'Inter', ...defaultTheme.fontFamily.sans],
-            cta: [
-                'MontserratVariable',
-                'Montserrat',
-                ...defaultTheme.fontFamily.sans,
-            ],
+            sans: ['Inter', ...defaultTheme.fontFamily.sans],
+            cta: ['Montserrat', ...defaultTheme.fontFamily.sans],
         },
         fontSize: {
             15: '0.9375rem',

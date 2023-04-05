@@ -1,23 +1,28 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
-
-const text = `Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-    doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
-    veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim
-    ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
-    consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque
-    porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-    adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et
-    dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis
-    nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid
-    ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea
-    voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem
-    eum fugiat quo voluptas nulla pariatur?`;
 ---
 
 <MainLayout title="Woodshed Technology LLC">
-    <p>{text}</p>
-    <p>{text}</p>
-    <p>{text}</p>
-    <p>{text}</p>
+    <h1>Hello. We are Woodshed.</h1>
+    <div class="flex flex-col gap-10 py-5">
+        <p class="text-22">
+            We build intuitive online experiences that connect you and your
+            audience in a seamless, engaging conversation. Our knowledge and
+            experience can take your project from an abstract idea to a fully
+            fledged product.
+        </p>
+        <p class="text-22">
+            We are a web design and development agency in the San Francisco Bay
+            Area.
+        </p>
+        <div
+            class="border-b-[1.5px] w-80 border-primary-light-shade-500 dark:border-primary-dark-900"
+        >
+        </div>
+        <p class="text-20">
+            While developing your product, we follow an iterative process that
+            leads you through the stages of design and development in a
+            structured, efficient workflow.
+        </p>
+    </div>
 </MainLayout>
