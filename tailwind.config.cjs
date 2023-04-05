@@ -110,6 +110,7 @@ module.exports = {
             20: '1.25rem',
             22: '1.375rem',
             24: '1.5rem',
+            48: '3rem',
         },
     },
     darkMode: 'class',

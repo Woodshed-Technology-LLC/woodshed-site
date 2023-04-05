@@ -2,15 +2,24 @@
 import Navigation from './Navigation.astro';
 ---
 
-<div
-    class="bg-gray-light-300 dark:bg-gray-dark-900 py-24 flex justify-center border-b-2 border-primary-light-shade-500 dark:border-primary-dark-900"
->
-    <img class="block dark:hidden" src="/icon-black.svg" alt="Woodshed icon" />
-    <img
-        class="hidden dark:block"
-        src="/icon-light-blue.svg"
-        alt="Woodshed icon"
-    />
-
-    <Navigation />
+<div class="header fixed flex justify-center w-screen">
+    <div class="flex justify-between w-[956px]">
+        <img
+            class="block dark:hidden"
+            src="/icon-black.svg"
+            alt="Woodshed icon"
+        />
+        <img
+            class="hidden dark:block"
+            src="/icon-light-blue.svg"
+            alt="Woodshed icon"
+        />
+        <Navigation />
+    </div>
 </div>
+
+<style>
+    .header {
+        top: 60px;
+    }
+</style>

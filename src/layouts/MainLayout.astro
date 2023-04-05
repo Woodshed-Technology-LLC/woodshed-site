@@ -15,12 +15,16 @@ const { title } = Astro.props;
         <link rel="icon" type="image/png" href="/favicon.png" />
         <title>{title}</title>
     </head>
-    <body class="flex flex-col">
+    <body class="flex flex-col min-h-screen">
+        <div
+            class="bg-gray-light-300 dark:bg-gray-dark-900 h-[120px] border-b-2 border-primary-light-shade-500 dark:border-primary-dark-900"
+        >
+        </div>
         <Header />
         <div
-            class="text-gray-light-shade-900 dark:text-gray-dark-200 flex justify-center items-center flex-grow"
+            class="text-gray-light-shade-900 dark:text-gray-dark-200 flex justify-center flex-grow main-content"
         >
-            <div class="w-[840px]">
+            <div class="w-[840px] py-16">
                 <slot />
             </div>
         </div>
@@ -48,3 +52,17 @@ const { title } = Astro.props;
     }
     window.localStorage.setItem('theme', theme);
 </script>
+<style>
+    .main-content {
+        @apply bg-gray-light-300;
+        background-image: url('bg-dot-tile-light.png');
+        background-repeat: repeat;
+        background-position: top 22px left 22px;
+    }
+    .dark .main-content {
+        @apply bg-gray-dark-900;
+        background-image: url('bg-dot-tile-dark.png');
+        background-repeat: repeat;
+        background-position: top 22px left 20px;
+    }
+</style>

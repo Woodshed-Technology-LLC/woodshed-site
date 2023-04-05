@@ -16,13 +16,5 @@
     html {
         @apply text-16;
         @apply font-sans;
-        @apply bg-gray-light-300;
-        background-image: url('bg-dot-tile-light.png');
-        background-repeat: repeat;
-    }
-    html.dark {
-        @apply bg-gray-dark-900;
-        background-image: url('bg-dot-tile-dark.png');
-        background-repeat: repeat;
     }
 }

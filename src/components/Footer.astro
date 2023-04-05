@@ -3,13 +3,13 @@ import Highlight from './Highlight.astro';
 ---
 
 <div class="bg-black py-24 flex justify-center">
-    <div class="main-content">
-        <p class="font-cta text-5xl leading-9 pb-8 text-gray-light-300">
+    <div class="w-[840px]">
+        <p class="font-cta text-48 leading-9 pb-8 text-gray-light-300">
             Come say Hello!
         </p>
         <Highlight>
             <a
-                class="text-gray-light-400 text-xl"
+                class="text-gray-light-400 text-22"
                 href="mailto:hello@woodshed.tech"
                 rel="noreferrer">hello@woodshed.tech</a
             >
@@ -18,11 +18,11 @@ import Highlight from './Highlight.astro';
             © Woodshed Technology LLC
         </p>
     </div>
-
-    <script>
-        const copyright = document.getElementById('copyright');
-        if (copyright) {
-            copyright.innerHTML = `©${new Date().getFullYear()} Woodshed Technology LLC`;
-        }
-    </script>
 </div>
+
+<script>
+    const copyright = document.getElementById('copyright');
+    if (copyright) {
+        copyright.innerHTML = `©${new Date().getFullYear()} Woodshed Technology LLC`;
+    }
+</script>
