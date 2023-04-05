@@ -1,5 +1,17 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
+import NumberedParagraphs from '../components/NumberedParagraphs.astro';
+
+const paragraphs = [
+    {
+        heading: 'Persona',
+        body: `An effective product begins with discovering who your
+            audience is and what makes them tick. We’ll help you
+            identify the user profiles that will drive your success,
+            then use these identities to design experiences that deliver
+            the highest possible value.`,
+    },
+];
 ---
 
 <MainLayout title="Woodshed Technology LLC">
@@ -8,8 +20,8 @@ import MainLayout from '../layouts/MainLayout.astro';
         <p class="text-22">
             We build intuitive online experiences that connect you and your
             audience in a seamless, engaging conversation. Our knowledge and
-            experience can take your project from an abstract idea to a fully
-            fledged product.
+            experience can take your project from an abstract idea to a
+            full-fledged product.
         </p>
         <p class="text-22">
             We are a web design and development agency in the San Francisco Bay
@@ -24,5 +36,8 @@ import MainLayout from '../layouts/MainLayout.astro';
             leads you through the stages of design and development in a
             structured, efficient workflow.
         </p>
+        <div class="pl-12">
+            <NumberedParagraphs paragraphs={paragraphs} />
+        </div>
     </div>
 </MainLayout>

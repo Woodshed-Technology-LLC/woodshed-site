@@ -1,0 +1,30 @@
+---
+interface NumberedParagraph {
+    heading: string;
+    body: string;
+}
+
+interface Props {
+    paragraphs: NumberedParagraph[];
+}
+
+const { paragraphs } = Astro.props;
+---
+
+<div>
+    {
+        paragraphs.map((paragraph, index) => (
+            <div class="flex">
+                <div class="pr-2 pt-[3px]">
+                    <div class="rounded-full border w-6 h-6 flex items-center justify-center">
+                        {index + 1}
+                    </div>
+                </div>
+                <div>
+                    <h2>{paragraph.heading}</h2>
+                    <p>{paragraph.body}</p>
+                </div>
+            </div>
+        ))
+    }
+</div>
