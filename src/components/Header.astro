@@ -4,16 +4,18 @@ import Navigation from './Navigation.astro';
 
 <div class="header fixed flex justify-center w-screen">
     <div class="flex justify-between w-[956px]">
-        <img
-            class="block dark:hidden"
-            src="/icon-black.svg"
-            alt="Woodshed icon"
-        />
-        <img
-            class="hidden dark:block"
-            src="/icon-light-blue.svg"
-            alt="Woodshed icon"
-        />
+        <a href="/">
+            <img
+                class="block dark:hidden"
+                src="/icon-black.svg"
+                alt="Woodshed icon"
+            />
+            <img
+                class="hidden dark:block"
+                src="/icon-light-blue.svg"
+                alt="Woodshed icon"
+            />
+        </a>
         <Navigation />
     </div>
 </div>

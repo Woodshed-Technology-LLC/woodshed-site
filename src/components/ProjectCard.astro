@@ -12,6 +12,6 @@ const { alt, href, projectName, imageMetaData } = Astro.props;
 ---
 
 <a href={href} class="flex flex-col items-center justify-center">
-    <Image alt={alt} src={imageMetaData} width={312} />
+    <Image alt={alt} src={imageMetaData} class="w-[312px] h-[428px]" />
     <p class="pt-12 text-20 font-medium">{projectName}</p>
 </a>

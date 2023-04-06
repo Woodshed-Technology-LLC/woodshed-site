@@ -1,0 +1,32 @@
+---
+import { Image } from 'astro:assets';
+
+interface ImageDetail {
+    alt: string;
+    caption: string;
+    imageMetaData: ImageMetadata;
+}
+
+interface Props {
+    imageDetails: ImageDetail[];
+}
+
+const { imageDetails } = Astro.props;
+---
+
+<div class="image-scroller grid overflow-x-auto gap-x-14 pb-4">
+    {
+        imageDetails.map(({ alt, caption, imageMetaData }) => (
+            <div class="flex flex-col items-center gap-4">
+                <Image class="flex-none pt-12" alt={alt} src={imageMetaData} />
+                <p>{caption}</p>
+            </div>
+        ))
+    }
+</div>
+
+<style>
+    .image-scroller {
+        grid-template-columns: repeat(3, 400px);
+    }
+</style>
