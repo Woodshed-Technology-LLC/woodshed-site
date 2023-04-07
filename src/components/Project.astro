@@ -3,16 +3,20 @@ import { Image } from 'astro:assets';
 
 interface Props {
     alt: string;
+    /**
+     * Used to refer to this section in an anchor link
+     */
+    id: string;
     imageMetaData: ImageMetadata;
     intro: string;
     projectName: string;
 }
 
-const { alt, projectName, imageMetaData, intro } = Astro.props;
+const { alt, projectName, imageMetaData, intro, id } = Astro.props;
 ---
 
 <div class="text-18">
-    <h2 class="font-semibold text-24 pt-12">{projectName}</h2>
+    <h2 class="font-semibold text-24 pt-12" id={id}>{projectName}</h2>
     <p class="text-22 pt-4">
         {intro}
     </p>

@@ -35,74 +35,80 @@ const imageDetails = [
         class="border-b-[1.5px] border-primary-light-shade-500 dark:border-primary-dark-900 w-12 pt-4"
     >
     </div>
-    <Project
-        alt="Trqk guided tour page"
-        imageMetaData={trqkGuidedTourImageMetadata}
-        intro={`Built to harness the power of royalty data in order to unlock new
+    <div class="grid gap-32">
+        <Project
+            alt="Trqk guided tour page"
+            id="trqk"
+            imageMetaData={trqkGuidedTourImageMetadata}
+            intro={`Built to harness the power of royalty data in order to unlock new
             opportunities for the music creator economy.`}
-        projectName="Trqk™"
-    >
-        <div class="p-16 grid gap-4">
-            <p>
-                <ExternalLink href="https:trqk.io">Trqk™</ExternalLink> is a music
-                performance and royalty analytics platform, featuring data analysis
-                and visualization with charts and dynamic data tables.
+            projectName="Trqk™"
+        >
+            <div class="p-16 grid gap-4">
+                <p>
+                    <ExternalLink href="https:trqk.io">Trqk™</ExternalLink> is a
+                    music performance and royalty analytics platform, featuring data
+                    analysis and visualization with charts and dynamic data tables.
+                </p>
+                <p>
+                    We implemented the client-facing application from the ground
+                    up using modern web technologies.
+                </p>
+            </div>
+            <p class="text-22">
+                Our approach allowed the company to respond quickly to changing
+                business requirements while providing users with a platform that
+                handles large datasets with ease.
             </p>
-            <p>
-                We implemented the client-facing application from the ground up
-                using modern web technologies.
+        </Project>
+        <Project
+            alt="PIX media player"
+            id="pix"
+            imageMetaData={pixPlayerImageMetadata}
+            intro="PIX is an Academy® award-winning media asset management platform."
+            projectName="PIX"
+        >
+            <div class="grid gap-4 pt-16">
+                <p class="px-16">
+                    <ExternalLink href="https://pix.online/">PIX</ExternalLink> is
+                    a media asset storage and collaboration system for film and television
+                    production. It provides a security-first platform which allows
+                    users to organize and share video clips and add notes and visual
+                    markup with frame-specific accuracy.
+                </p>
+                <ImageScroller imageDetails={imageDetails} />
+                <p class="px-16">
+                    Clients including Amazon, ESPN and HBO rely on these tools
+                    to remove friction from the production process without
+                    leaking sensitive files before a film or episode is
+                    released.
+                </p>
+                <p class="text-22 pt-12">
+                    Our work on this application helped to build a file
+                    management system that bridged the gap between older and
+                    newer underlying technologies.
+                </p>
+            </div>
+        </Project>
+        <Project
+            alt="Loudr"
+            id="loudr"
+            imageMetaData={loudrHomePageImageMetadata}
+            intro="Loudr is a cover song licensing platform for musicians and publishers."
+            projectName="Loudr"
+        >
+            <div class="p-16 grid gap-4">
+                <p>
+                    Loudr automates the process of acquiring mechanical licenses
+                    at scale, allowing indie artists and large publishers to
+                    comply with legal requirements with minimal effort. Loudr
+                    was acquired by Spotify.
+                </p>
+            </div>
+            <p class="text-22 pb-12">
+                Our work for Loudr included building UI features and developing
+                backend scripts to support data ingestion workflows.
             </p>
-        </div>
-        <p class="text-22">
-            Our approach allowed the company to respond quickly to changing
-            business requirements while providing users with a platform that
-            handles large datasets with ease.
-        </p>
-    </Project>
-    <Project
-        alt="PIX media player"
-        imageMetaData={pixPlayerImageMetadata}
-        intro="PIX is an Academy® award-winning media asset management platform."
-        projectName="PIX"
-    >
-        <div class="grid gap-4 pt-16">
-            <p class="px-16">
-                <ExternalLink href="https://pix.online/">PIX</ExternalLink> is a
-                media asset storage and collaboration system for film and television
-                production. It provides a security-first platform which allows users
-                to organize and share video clips and add notes and visual markup
-                with frame-specific accuracy.
-            </p>
-            <ImageScroller imageDetails={imageDetails} />
-            <p class="px-16">
-                Clients including Amazon, ESPN and HBO rely on these tools to
-                remove friction from the production process without leaking
-                sensitive files before a film or episode is released.
-            </p>
-            <p class="text-22 pt-12">
-                Our work on this application helped to build a file management
-                system that bridged the gap between older and newer underlying
-                technologies.
-            </p>
-        </div>
-    </Project>
-    <Project
-        alt="Loudr"
-        imageMetaData={loudrHomePageImageMetadata}
-        intro="Loudr is a cover song licensing platform for musicians and publishers."
-        projectName="Loudr"
-    >
-        <div class="p-16 grid gap-4">
-            <p>
-                Loudr automates the process of acquiring mechanical licenses at
-                scale, allowing indie artists and large publishers to comply
-                with legal requirements with minimal effort. Loudr was acquired
-                by Spotify.
-            </p>
-        </div>
-        <p class="text-22 pb-12">
-            Our work for Loudr included building UI features and developing
-            backend scripts to support data ingestion workflows.
-        </p>
-    </Project>
+        </Project>
+    </div>
 </MainLayout>
