@@ -1,0 +1,13 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import MailLink from '../components/MailLink.astro';
+---
+
+<MainLayout title="Contact | Woodshed">
+    <h1 class="font-cta text-36">Contact Us</h1>
+    <p>
+        Reach out at <MailLink href="mailto:hello@woodshed.tech">
+            {'hello@woodshed.tech'}
+        </MailLink> to learn how we can build your next project.
+    </p>
+</MainLayout>
