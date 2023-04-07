@@ -2,15 +2,15 @@
 // An <a> tag that opens the link in a new tab. Includes an "Envelope Closed" icon from
 // [Radix UI](https://icons.radix-ui.com/).
 interface Props {
-    href: string;
+    email: string;
 }
 
-const { href } = Astro.props;
+const { email } = Astro.props;
 ---
 
 <a
-    href={href}
-    class="decoration-primary-light-shade-700 hover:text-primary-light-shade-700 dark:decoration-primary-dark-900 dark:hover:text-primary-dark-900"
+    href={`mailto:${email}`}
+    class="ml-1 decoration-primary-light-shade-700 hover:text-primary-light-shade-700 dark:decoration-primary-dark-900 dark:hover:text-primary-dark-900"
     rel="noreferrer"
     target="_blank"
 >
@@ -30,7 +30,5 @@ const { href } = Astro.props;
         >
         </path>
     </svg>
-    <span class="underline">
-        <slot />
-    </span>
+    <span class="underline">{email}</span>
 </a>
