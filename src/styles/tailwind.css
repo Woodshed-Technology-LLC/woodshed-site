@@ -17,4 +17,46 @@
         @apply text-16;
         @apply font-sans;
     }
+
+    /*
+        Custom scrollbar with Tailwind: https://scottspence.com/posts/change-scrollbar-color-tailwind-css
+    */
+
+    :root {
+        --scrollbar-track: transparent;
+        --scrollbar-thumb-light: #779278;
+        --scrollbar-thumb-dark: #1d839a;
+        --scrollbar-width: 10px;
+    }
+
+    /* Firefox */
+    .custom-scrollbar {
+        scrollbar-width: var(--scrollbar-width);
+        scrollbar-color: var(--scrollbar-thumb-light) var(--scrollbar-track);
+    }
+
+    .dark .custom-scrollbar {
+        scrollbar-color: var(--scrollbar-thumb-dark) var(--scrollbar-track);
+    }
+
+    /* Chrome, Edge, and Safari */
+    .custom-scrollbar::-webkit-scrollbar {
+        /* width determines the horizontal size for vertical scrollbars (as you would expect) */
+        width: var(--scrollbar-width);
+        /* height determines the vertical size for horizontal scrollbars (maybe a surprise) */
+        height: var(--scrollbar-width);
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: var(--scrollbar-track);
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background-color: var(--scrollbar-thumb-light);
+        border-radius: var(--scrollbar-width);
+    }
+
+    .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+        background-color: var(--scrollbar-thumb-dark);
+    }
 }

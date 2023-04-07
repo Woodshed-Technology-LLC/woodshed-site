@@ -3,13 +3,20 @@
 </span>
 <style>
     .highlight {
-        background: linear-gradient(to bottom, transparent 35%, #86a287 35%);
+        /* background: linear-gradient(to bottom, transparent 35%, #86a287 35%); */
+        @apply bg-gradient-to-t;
+        @apply from-primary-light-shade-700;
         background-repeat: no-repeat;
         background-size: 100% 10%;
         background-position: 0 100%;
         transition: background-size 200ms ease;
         will-change: background-size;
     }
+
+    html.dark .highlight {
+        @apply from-primary-dark-900;
+    }
+
     @media (prefers-reduced-motion: no-preference) {
         .highlight:hover {
             background-size: 100% 130%;

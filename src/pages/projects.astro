@@ -2,6 +2,7 @@
 import MainLayout from '../layouts/MainLayout.astro';
 import Project from '../components/Project.astro';
 import ImageScroller from '../components/ImageScroller.astro';
+import ExternalLink from '../components/ExternalLink.astro';
 import trqkGuidedTourImageMetadata from '../assets/trqk_guided_tour.png';
 import pixPlayerImageMetadata from '../assets/pix_player.png';
 import pixPlaybackImageMetadata from '../assets/pix_playback.png';
@@ -43,11 +44,9 @@ const imageDetails = [
     >
         <div class="p-16 grid gap-4">
             <p>
-                <a
-                    class="underline decoration-primary-light-shade-700 hover:text-primary-light-shade-700"
-                    href="https:trqk.io">Trqk™</a
-                > is a music performance and royalty analytics platform, featuring
-                data analysis and visualization with charts and dynamic data tables.
+                <ExternalLink href="https:trqk.io">Trqk™</ExternalLink> is a music
+                performance and royalty analytics platform, featuring data analysis
+                and visualization with charts and dynamic data tables.
             </p>
             <p>
                 We implemented the client-facing application from the ground up
@@ -68,13 +67,11 @@ const imageDetails = [
     >
         <div class="grid gap-4 pt-16">
             <p class="px-16">
-                <a
-                    class="underline decoration-primary-light-shade-700 hover:text-primary-light-shade-700"
-                    href="https://pix.online/">PIX</a
-                > is a media asset storage and collaboration system for film and
-                television production. It provides a security-first platform which
-                allows users to organize and share video clips and add notes and
-                visual markup with frame-specific accuracy.
+                <ExternalLink href="https://pix.online/">PIX</ExternalLink> is a
+                media asset storage and collaboration system for film and television
+                production. It provides a security-first platform which allows users
+                to organize and share video clips and add notes and visual markup
+                with frame-specific accuracy.
             </p>
             <ImageScroller imageDetails={imageDetails} />
             <p class="px-16">
