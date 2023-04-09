@@ -3,7 +3,10 @@ import DarkModeSwitch from './DarkModeSwitch.astro';
 ---
 
 <div id="navigation" class="flex justify-center w-screen">
-    <div class="flex justify-between w-[956px] fixed">
+    <!-- When the modal is open, it has a fixed position with z-40, so we need to add z-50 here in
+        order to achieve a higher stacking context
+     -->
+    <div class="flex justify-between w-[956px] fixed z-50">
         <!-- Woodshed icon (home button) -->
         <a href="/">
             <img
@@ -23,8 +26,6 @@ import DarkModeSwitch from './DarkModeSwitch.astro';
                 <div id="icon"></div>
             </div>
         </button>
-    </div>
-    <div>
         <!-- Main modal -->
         <div
             id="nav-modal"
@@ -32,7 +33,7 @@ import DarkModeSwitch from './DarkModeSwitch.astro';
             aria-hidden="true"
             class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full"
         >
-            <div class="relative w-full h-full max-w-2xl md:h-auto">
+            <div class="relative w-full h-full max-w-sm md:h-auto">
                 <!-- Modal content -->
                 <div
                     class="relative bg-primary-light-shade-500 dark:bg-gray-dark-shade-400 pt-16 pb-12"
@@ -75,6 +76,7 @@ import DarkModeSwitch from './DarkModeSwitch.astro';
 
     // create a new modal component
     const modal = new Modal($modalElement, {
+        placement: 'top-right',
         backdrop: 'dynamic',
         backdropClasses:
             'bg-gray-light-shade-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40',
