@@ -1,13 +1,20 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
+const {
+    addBaseStylesToTailwind,
+} = require('./src/utils/addBaseStylesToTailwind.cjs');
 
 module.exports = {
-    content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+    content: [
+        './src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}',
+        './node_modules/flowbite/**/*.js',
+    ],
     theme: {
         colors: {
             transparent: 'transparent',
             current: 'currentColor',
             white: '#ffffff',
             black: '#000000',
+            red: 'red',
             ['gray-dark']: {
                 100: '#d1ecfa',
                 200: '#c6d9e1',
@@ -102,4 +109,5 @@ module.exports = {
     },
     darkMode: 'class',
     safelist: ['dark'],
+    plugins: [require('flowbite/plugin'), addBaseStylesToTailwind],
 };

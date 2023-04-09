@@ -1,0 +1,195 @@
+---
+import DarkModeSwitch from './DarkModeSwitch.astro';
+---
+
+<div id="navigation" class="flex justify-center w-screen">
+    <div class="flex justify-between w-[956px] fixed">
+        <!-- Woodshed icon (home button) -->
+        <a href="/">
+            <img
+                class="block dark:hidden"
+                src="/icon-black.svg"
+                alt="Woodshed icon"
+            />
+            <img
+                class="hidden dark:block"
+                src="/icon-light-blue.svg"
+                alt="Woodshed icon"
+            />
+        </a>
+        <!-- Modal toggle (animated hamburger icon) -->
+        <button id="nav-toggle">
+            <div id="hamburger">
+                <div id="icon"></div>
+            </div>
+        </button>
+    </div>
+    <div>
+        <!-- Main modal -->
+        <div
+            id="nav-modal"
+            tabindex="-1"
+            aria-hidden="true"
+            class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full"
+        >
+            <div class="relative w-full h-full max-w-2xl md:h-auto">
+                <!-- Modal content -->
+                <div
+                    class="relative bg-primary-light-shade-500 dark:bg-gray-dark-shade-400 pt-16 pb-12"
+                >
+                    <nav>
+                        <ul
+                            class="pl-12 text-22 flex flex-col gap-5 text-gray-light-shade-800 dark:text-primary-dark-200"
+                        >
+                            <li class="nav-hide-button">
+                                <a href="/">Process</a>
+                            </li>
+                            <li class="nav-hide-button">
+                                <a href="/projects/">Projects</a>
+                            </li>
+                            <li class="nav-hide-button">
+                                <a href="/contact/">Contact</a>
+                            </li>
+                        </ul>
+                        <div
+                            class="ml-12 mr-24 pt-12 border-b border-gray-light-100"
+                        >
+                        </div>
+                    </nav>
+                    <div class="ml-12 pt-10 flex flex-col">
+                        <DarkModeSwitch />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    import { Modal } from 'flowbite';
+    const $hideButtons =
+        document.querySelectorAll<HTMLButtonElement>('.nav-hide-button');
+    const $modalElement = document.querySelector<HTMLDivElement>('#nav-modal');
+    const $navToggle = document.getElementById('nav-toggle');
+    const $navigation = document.getElementById('navigation');
+
+    // create a new modal component
+    const modal = new Modal($modalElement, {
+        backdrop: 'dynamic',
+        backdropClasses:
+            'bg-gray-light-shade-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40',
+        closable: true,
+        onHide: () => {
+            if ($navigation) {
+                $navigation.classList.remove('open');
+            }
+        },
+        onShow: () => {
+            if ($navigation) {
+                $navigation.classList.add('open');
+            }
+        },
+    });
+
+    Array.from($hideButtons).forEach($hideButton => {
+        $hideButton.onclick = () => {
+            modal.hide();
+        };
+    });
+
+    if ($navToggle) {
+        $navToggle.addEventListener('click', () => {
+            modal.toggle();
+        });
+    }
+</script>
+
+<style>
+    #navigation {
+        --bar-length: 24px;
+        --bar-thickness: 3px;
+        --bar-offset: 6px;
+        --transition-duration: 0.5s;
+    }
+
+    #nav-toggle {
+        position: relative;
+        top: calc(-1 * var(--bar-thickness));
+        left: var(--bar-thickness);
+        width: var(--bar-length);
+        height: var(--bar-length);
+    }
+
+    #hamburger {
+        position: absolute;
+        transition-duration: var(--transition-duration);
+    }
+
+    #hamburger #icon {
+        transition-duration: var(--transition-duration);
+        position: absolute;
+        height: 0px;
+        width: var(--bar-length);
+        top: calc(0.5 * var(--bar-length));
+    }
+
+    #hamburger:before {
+        transition-duration: var(--transition-duration);
+        position: absolute;
+        width: var(--bar-length);
+        height: var(--bar-thickness);
+        border-radius: calc(0.5 * var(--bar-thickness));
+        content: '';
+        top: calc(-1 * var(--bar-offset));
+    }
+
+    html:not(.dark) #hamburger:before {
+        @apply bg-gray-light-shade-900;
+    }
+
+    html.dark #hamburger:before {
+        @apply bg-primary-dark-100;
+    }
+
+    #hamburger:after {
+        transition-duration: var(--transition-duration);
+        position: absolute;
+        width: var(--bar-length);
+        height: var(--bar-thickness);
+        border-radius: calc(0.5 * var(--bar-thickness));
+        content: '';
+        top: var(--bar-offset);
+    }
+
+    html:not(.dark) #hamburger:after {
+        @apply bg-gray-light-shade-900;
+    }
+
+    html.dark #hamburger:after {
+        @apply bg-primary-dark-100;
+    }
+
+    #navigation.open #hamburger #icon {
+        transition: 0.5s;
+    }
+
+    #navigation.open #hamburger:before {
+        transform: rotateZ(45deg) scaleX(1.33)
+            translate(
+                calc(0.6 * var(--bar-offset)),
+                calc(0.6 * var(--bar-offset))
+            );
+    }
+
+    #navigation.open #hamburger:after {
+        transform: rotateZ(-45deg) scaleX(1.33)
+            translate(
+                calc(0.6 * var(--bar-offset)),
+                calc(-1 * 0.6 * var(--bar-offset))
+            );
+    }
+
+    #hamburger:hover {
+        cursor: pointer;
+    }
+</style>
