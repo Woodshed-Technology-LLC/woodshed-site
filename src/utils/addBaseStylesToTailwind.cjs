@@ -5,13 +5,12 @@ const outlineNone = {
 };
 
 const getFocusVisible = theme => ({
-    outline: `2px solid ${theme('colors.primary.light.500')}`,
-    outlineOffset: '2px',
+    outlineOffset: '4px',
 });
 
 const getFocusVisibleError = theme => ({
     outline: `2px solid ${theme('colors.red')}`,
-    outlineOffset: '2px',
+    outlineOffset: '4px',
 });
 
 /**

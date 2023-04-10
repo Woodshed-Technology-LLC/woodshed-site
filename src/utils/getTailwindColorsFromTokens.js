@@ -1,4 +1,4 @@
-// This is copied from the Figma Tokens Studio plugin when viewing the Core set.
+// This is copied from the Figma Tokens Studio plugin when viewing the Core set JSON values.
 const colors = {
     grays: {
         blue: {
