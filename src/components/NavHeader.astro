@@ -29,7 +29,7 @@ import NavHighlight from './NavHighlight.astro';
             id="nav-modal"
             tabindex="-1"
             aria-hidden="true"
-            class="relative z-50 hidden w-full overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full"
+            class="relative z-50 left-[40px] bottom-[10px] hidden w-full overflow-x-hidden overflow-y-auto"
         >
             <div class="relative w-full h-full max-w-sm md:h-auto">
                 <!-- Modal content -->
@@ -69,7 +69,7 @@ import NavHighlight from './NavHighlight.astro';
             </div>
         </div>
         <!-- Modal toggle (animated hamburger icon) -->
-        <button class="flex-none" id="toggle-nav">
+        <button class="flex-none z-50 mt-2" id="toggle-nav">
             <div id="hamburger">
                 <div id="icon"></div>
             </div>
