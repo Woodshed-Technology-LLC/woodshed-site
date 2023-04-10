@@ -1,10 +1,10 @@
-<span class="highlight pb-2">
+<span class="nav-highlight pb-2">
     <slot />
 </span>
 <style>
-    .highlight {
+    .nav-highlight {
         @apply bg-gradient-to-t;
-        @apply from-primary-light-shade-700;
+        @apply from-gray-light-400;
         background-repeat: no-repeat;
         background-size: 100% 10%;
         background-position: 0 100%;
@@ -12,12 +12,12 @@
         will-change: background-size;
     }
 
-    html.dark .highlight {
+    html.dark .nav-highlight {
         @apply from-primary-dark-900;
     }
 
     @media (prefers-reduced-motion: no-preference) {
-        .highlight:hover {
+        .nav-highlight:hover {
             background-size: 100% 130%;
             transition: background-size 200ms ease;
         }
