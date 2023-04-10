@@ -4,18 +4,66 @@
 
 @layer base {
     h1 {
-        @apply text-24;
-        @apply font-sans;
-        @apply font-semibold;
-    }
-    h2 {
         @apply text-20;
+        @apply font-sans;
+    }
+
+    h1.projects {
+        @apply text-32;
+        @apply font-cta;
+        @apply font-medium;
+    }
+
+    h2 {
+        @apply text-18;
         @apply font-sans;
         @apply font-medium;
     }
+
     html {
         @apply text-16;
         @apply font-sans;
+    }
+
+    .body-1 {
+        @apply text-20;
+    }
+
+    .body-2 {
+        @apply text-18;
+    }
+
+    @media (min-width: 544px) {
+        h1 {
+            @apply text-22;
+            @apply font-semibold;
+        }
+    }
+
+    @media (min-width: 768px) {
+        h1 {
+            @apply text-24;
+        }
+
+        h1.projects {
+            @apply text-36;
+        }
+
+        h2 {
+            @apply text-20;
+        }
+
+        .body-1 {
+            @apply text-22;
+        }
+
+        .body-2 {
+            @apply text-20;
+        }
+
+        .body-3 {
+            @apply text-18;
+        }
     }
 
     /*

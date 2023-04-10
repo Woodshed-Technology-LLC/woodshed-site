@@ -51,15 +51,16 @@ const paragraphs = [
 ---
 
 <MainLayout title="Woodshed">
-    <h1>Hello. We are Woodshed.</h1>
+    <h1 class="sm:hidden">Hello.<br />We are Woodshed.</h1>
+    <h1 class="hidden sm:block">Hello. We are Woodshed.</h1>
     <div class="flex flex-col gap-10 py-5">
-        <p class="text-22">
+        <p class="body-1">
             We build intuitive online experiences that connect you and your
             audience in a seamless, engaging conversation. Our knowledge and
             experience can take your project from an abstract idea to a
             full-fledged product.
         </p>
-        <p class="text-22">
+        <p class="body-1">
             We are a web design and development agency in the San Francisco Bay
             Area.
         </p>
@@ -67,7 +68,7 @@ const paragraphs = [
             class="border-b-[1.5px] w-80 border-primary-light-shade-500 dark:border-primary-dark-900"
         >
         </div>
-        <p class="text-20">
+        <p class="body-2">
             While developing your product, we follow an iterative process that
             leads you through the stages of design and development in a
             structured, efficient workflow.
@@ -91,7 +92,7 @@ const paragraphs = [
         </div>
         <div class="flex justify-center">
             <Highlight>
-                <a class="text-22" href="/projects/">View all projects</a>
+                <a class="body-1" href="/projects/">View all projects</a>
             </Highlight>
         </div>
     </div>
