@@ -3,6 +3,12 @@
 @tailwind utilities;
 
 @layer base {
+    /*
+        A core aspect of our responsive design is to scale fonts according to device sizes. This is
+        a bit odd for the typical Tailwind setup, so we're using media queries with various @apply
+        statements to leverage our Tailwind styles.
+    */
+
     h1 {
         @apply text-20;
         @apply font-sans;
@@ -20,6 +26,12 @@
         @apply font-medium;
     }
 
+    h2.projects {
+        @apply text-22;
+        @apply font-sans;
+        @apply font-semibold;
+    }
+
     html {
         @apply text-16;
         @apply font-sans;
@@ -33,13 +45,25 @@
         @apply text-18;
     }
 
+    .cta {
+        @apply font-cta;
+        @apply font-medium;
+        @apply text-28;
+    }
+
+    /* These apply at device widths above the 'sm' screen size in tailwind.config.js */
     @media (min-width: 544px) {
         h1 {
             @apply text-22;
             @apply font-semibold;
         }
+
+        .cta {
+            @apply text-36;
+        }
     }
 
+    /* These apply at device widths above the 'md' screen size in tailwind.config.js */
     @media (min-width: 768px) {
         h1 {
             @apply text-24;
@@ -53,6 +77,10 @@
             @apply text-20;
         }
 
+        h2.projects {
+            @apply text-24;
+        }
+
         .body-1 {
             @apply text-22;
         }
@@ -63,6 +91,10 @@
 
         .body-3 {
             @apply text-18;
+        }
+
+        .cta {
+            @apply text-48;
         }
     }
 

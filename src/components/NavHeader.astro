@@ -9,6 +9,7 @@
  */
 import DarkModeSwitch from './DarkModeSwitch.astro';
 import NavHighlight from './NavHighlight.astro';
+const iconScale = 'scale-[0.6875] md:scale-100';
 ---
 
 <header id="navigation" class="flex justify-center w-screen">
@@ -16,9 +17,9 @@ import NavHighlight from './NavHighlight.astro';
         render the backdrop (i.e. overlay). This added div has a fixed position with z-40, so we
         need to add z-50 here in order to achieve a higher stacking context.
      -->
-    <div class="flex justify-between w-[956px] fixed z-50">
+    <div class="flex justify-between max-w-[956px] w-full fixed z-50 px-6">
         <!-- Woodshed icon (home button) -->
-        <div>
+        <div class={iconScale}>
             <a href="/" id="woodshed-icon">
                 <img
                     class="block dark:hidden"
@@ -86,7 +87,7 @@ import NavHighlight from './NavHighlight.astro';
             id="toggle-nav"
             aria-label="Toggle navigation menu"
         >
-            <div id="hamburger">
+            <div id="hamburger" class={iconScale}>
                 <div id="icon"></div>
             </div>
         </button>
@@ -175,7 +176,6 @@ import NavHighlight from './NavHighlight.astro';
     #toggle-nav {
         position: relative;
         top: calc(-1 * var(--bar-thickness));
-        left: calc(-1 * var(--bar-length));
         width: var(--bar-length);
         height: var(--bar-length);
     }
