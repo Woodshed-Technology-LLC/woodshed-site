@@ -4,6 +4,7 @@ import '@fontsource/montserrat';
 import '../styles/tailwind.css';
 import NavHeader from '../components/NavHeader.astro';
 import Footer from '../components/Footer.astro';
+import { bodyWidth } from '../constants';
 
 const { title } = Astro.props;
 ---
@@ -24,9 +25,7 @@ const { title } = Astro.props;
         <div
             class="text-gray-light-shade-900 dark:text-gray-dark-200 flex justify-center flex-grow main-content"
         >
-            <main
-                class="max-w-[840px] px-[60px] sm:px-[70px] md:px-[90px] py-16"
-            >
+            <main class={`${bodyWidth} py-16`}>
                 <slot />
             </main>
         </div>

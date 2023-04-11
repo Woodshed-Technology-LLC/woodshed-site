@@ -1,9 +1,10 @@
 ---
 import Highlight from './Highlight.astro';
+import { bodyWidth } from '../constants';
 ---
 
 <div class="bg-black py-24 flex justify-center">
-    <div class="w-[840px]">
+    <div class={bodyWidth}>
         <p class="cta leading-9 pb-8 text-gray-light-300">Come say hello!</p>
         <Highlight>
             <a
@@ -12,7 +13,7 @@ import Highlight from './Highlight.astro';
                 rel="noreferrer">hello@woodshed.tech</a
             >
         </Highlight>
-        <p id="copyright" class="text-gray-light-300 pt-8 text-16">
+        <p id="copyright" class="text-gray-light-300 pt-8 text-15">
             © Woodshed Technology LLC
         </p>
     </div>
