@@ -18,4 +18,6 @@ We're using [Assets](https://docs.astro.build/en/guides/assets/), which as of Ap
 
 ## Deployment
 
-TODO
+This site is deployed to Cloudflare Pages using the official Astro guide - specifically, using the section on [How to deploy a site with Git](https://docs.astro.build/en/guides/deploy/cloudflare/#how-to-deploy-a-site-with-git). After following these steps, we also connected the site to the [https://woodshed.tech](https://woodshed.tech) domain by using the **Custom domains** tab. This was very easy since we're already using Cloudflare to manage the domain.
+
+A new production deployment will be triggered by any pushes to the `main` branch. To preview changes before deploying to production, push to a different branch and create a PR using `main` as the base branch. This will result in a [preview deployment](https://developers.cloudflare.com/pages/platform/preview-deployments/) which you can use to test the changes before merging the PR.
