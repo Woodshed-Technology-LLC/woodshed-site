@@ -38,47 +38,43 @@ const iconScale = 'scale-[0.6875] md:scale-100';
             id="nav-modal"
             tabindex="-1"
             aria-hidden="true"
-            class="relative z-50 left-[40px] bottom-[10px] hidden w-full overflow-x-hidden overflow-y-auto"
+            class="absolute z-50 top-[-24px] right-0 hidden w-full overflow-x-hidden overflow-y-auto"
         >
+            <!-- Modal content -->
             <div
-                class="relative w-full h-full max-w-sm md:h-auto"
+                class="relative bg-primary-light-shade-500 dark:bg-gray-dark-shade-400 pt-16 px-12 pb-12 w-[375px] h-[548px]"
+                id="nav-menu"
                 aria-label="Navigation menu"
             >
-                <!-- Modal content -->
-                <div
-                    class="relative bg-primary-light-shade-500 dark:bg-gray-dark-shade-400 pt-16 pl-12 pb-12"
-                    id="nav-menu"
-                >
-                    <nav>
-                        <ul
-                            class="text-22 flex flex-col gap-5 text-gray-light-shade-800 dark:text-primary-dark-200"
-                        >
-                            <li class="hide-nav">
-                                <a href="/">Process</a>
-                            </li>
-                            <li class="hide-nav">
-                                <a href="/projects/">Projects</a>
-                            </li>
-                        </ul>
-                        <div class="mr-24 pt-12 border-b border-gray-light-100">
-                        </div>
-                    </nav>
-                    <div class="pt-10 flex flex-col">
-                        <DarkModeSwitch />
-                    </div>
-                    <p
-                        class="pt-14 font-cta text-28 leading-9 pb-4 text-gray-light-300 dark:text-primary-dark-200 font-medium"
+                <nav>
+                    <ul
+                        class="text-22 flex flex-col gap-5 text-gray-light-shade-800 dark:text-primary-dark-200"
                     >
-                        Come say hello!
-                    </p>
-                    <NavHighlight>
-                        <a
-                            class="hide-nav text-gray-light-shade-600 dark:text-primary-dark-200 text-22"
-                            href="mailto:hello@woodshed.tech"
-                            rel="noreferrer">hello@woodshed.tech</a
-                        >
-                    </NavHighlight>
+                        <li class="hide-nav">
+                            <a href="/">Process</a>
+                        </li>
+                        <li class="hide-nav">
+                            <a href="/projects/">Projects</a>
+                        </li>
+                    </ul>
+                    <div class="mr-24 pt-12 border-b border-gray-light-100">
+                    </div>
+                </nav>
+                <div class="pt-10 flex flex-col">
+                    <DarkModeSwitch />
                 </div>
+                <p
+                    class="pt-16 font-cta text-28 leading-9 pb-4 text-gray-light-300 dark:text-primary-dark-200 font-medium"
+                >
+                    Come say hello!
+                </p>
+                <NavHighlight>
+                    <a
+                        class="hide-nav text-gray-light-shade-600 dark:text-primary-dark-200 text-22"
+                        href="mailto:hello@woodshed.tech"
+                        rel="noreferrer">hello@woodshed.tech</a
+                    >
+                </NavHighlight>
             </div>
         </div>
         <!-- Modal toggle (animated hamburger icon) -->
@@ -86,6 +82,7 @@ const iconScale = 'scale-[0.6875] md:scale-100';
             class="flex-none z-50 mt-2"
             id="toggle-nav"
             aria-label="Toggle navigation menu"
+            type="button"
         >
             <div id="hamburger" class={iconScale}>
                 <div id="icon"></div>
