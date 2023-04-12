@@ -274,8 +274,9 @@ const colors = {
 
 // Map the colors from the Figma Tokens Studio plugin into the format that Tailwind expects. The
 // strings are not perfectly formatted in terms of casing, but that's easy to fix manually.
-// We don't use this in the application code; it's just used for copying the tokens over into
-// tailwind.config.js.
+// We don't use this in the actual Astro code; it's just useful for copying the tokens over into
+// tailwind.config.js. This is not the same tooling we use to integrate Tailwind with Figma in
+// other projects.
 function main() {
     const result = {};
 

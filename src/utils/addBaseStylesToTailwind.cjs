@@ -42,23 +42,6 @@ const getDefaultStyles = theme => {
             focusVisibleError,
         'div[role="button"]:focus:not(:focus-visible)': outlineNone,
         'div[role="button"]:focus-visible:not(.outline-none)': focusVisible,
-        // In the Dropdown component, <Item> from @radix-ui/react-dropdown-menu uses role="menuitem".
-        // In this component, we underline the focused item for both keyboard and mouse navigation.
-        'div[role="menuitem"]:focus': outlineNone,
-        'div[role="menuitem"]:focus[data-disabled="false"]': {
-            textDecoration: 'underline',
-        },
-        // In the Select component, <Item> from @radix-ui/react-select uses role="option".
-        // In this component, we underline the focused item for both keyboard and mouse navigation.
-        'div[role="option"]:focus': outlineNone,
-        'div[role="option"]:focus:not([data-disabled])': {
-            textDecoration: 'underline',
-        },
-        // In the Combobox component, <ComboboxOption> from @reach-ui/combobox uses the attributes
-        // [data-reach-combobox-option][data-highlighted].
-        '[data-reach-combobox-option][data-highlighted]': {
-            textDecoration: 'underline',
-        },
     };
 };
 

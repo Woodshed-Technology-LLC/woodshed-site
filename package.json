@@ -1,5 +1,8 @@
 {
     "name": "woodshed-site",
+    "description": "Website for Woodshed, a web design and development agency",
+    "license": "SEE LICENSE IN LICENSE",
+    "author": "Alex Nitta",
     "type": "module",
     "version": "0.0.1",
     "scripts": {
