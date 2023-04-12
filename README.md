@@ -4,13 +4,15 @@ In this document, our goal is to demonstrate how we make choices when building w
 
 This document explains reasoning behind the choices we made when building woodshed.tech specifically. If you're interested in working with us, we would analyze the requirements of your project and make choices that are appropriate for your particular needs, which might result in a different setup.
 
-The content that follows is intended for a general audience and does not presume any programming or web development experience. If you're looking for technical documentation, head over to [./docs/developer_notes.md](./docs/developer_notes.md).
+If you have any questions or are interested in working with us, reach out at [hello@woodshed.tech](mailto:hello@woodshed.tech).
+
+> Note: the content that follows is intended for a general audience and does not presume any programming or web development experience. If you're looking for technical documentation, head over to [./docs/developer_notes.md](./docs/developer_notes.md).
 
 ## Web technologies
 
 To explain our choices, it helps to understand a few core technologies that power what you see on the internet. As with any technical domain, there are a lot of acronyms and jargon, but we hope a brief introduction will provide some useful context.
 
--   **Hyper Text Markup Language (HTML)** is the language of web browsers. It's composed of elements (also known as "tags"), which define the semantics of the content that they contain. For example, a `<p>` element contains a paragraph, whereas an `<img>` contains an image. On its own, an HTML document provides content and semantic structure, but does not provide any visual styling.
+-   **Hyper Text Markup Language (HTML)** is the language of web browsers. It's composed of elements (also known as "tags"), which define the semantics of the content that they contain. For example, a `<p>` element contains a paragraph, whereas an `<img>` contains an image. On its own, an HTML document provides content and semantic structure, but leaves a lot to be desired in terms of visual styling.
 -   **Cascading Style Sheets (CSS)** provide the ability to take some HTML content and make it visually appealing. CSS allows us to set up fonts, colors, layouts, and animations. CSS can do more than just add visual styles, but this is its core purpose.
 -   **JavaScript (JS)** is a programming language that is supported by web browsers. It's a scripting language, meaning it can "manipulate, customize, and automate the facilities of an existing system" ([Wikipedia](https://en.wikipedia.org/wiki/Scripting_language)). When it runs in a browser, it can modify HTML and CSS, adding and removing content and styling on the fly. This makes it very useful for making websites interactive.
 
@@ -24,7 +26,7 @@ In its initial version, woodshed.tech is a simple website and it could be built 
 
 -   **Improved developer experience**
 
-    Most frameworks are developer-focused, and provide a fast setup and various commands that make common tasks easy and quick. This helps us keep our focus on writing code, rather than tinkering with configuration.
+    Most frameworks are built to provide a smooth developer experience, including a fast setup and various commands that make common tasks easy and quick. This helps us keep our focus on writing code, rather than tinkering with configuration.
 
 -   **Scalability**
 
@@ -38,23 +40,23 @@ In its initial version, woodshed.tech is a simple website and it could be built 
 
     As designers and developers, we're used to working with certain technologies, and many frameworks support the same tools we use in other projects. This allows us to avoid context switching as much as possible, which helps us stay productive.
 
-Also, we might choose to add a blog to woodshed.tech. This is the kind of feature that is hard to build without a framework, and if we start with a framework from the beginning, it will be easier to incorporate a blog if and when we decided to do so.
+It's also prudent to look ahead at how a project might grow, and whether the initial setup can meet future demands. For example, we might choose to add a blog to woodshed.tech. This is the kind of feature that is hard to build without a framework, and if we start with a framework from the beginning, it will be easier to incorporate a blog if and when we decide to do so.
 
 ### Rendering methods
 
-Once we decided that it was worth it to use a web framework for woodshed.tech, the next choice we needed to make was which framework to use. Frameworks describe themselves as having a few ways of rendering webpages, commonly described by the acronyms _SSG_, _SSR_, and _CSR_.
+Once we decided that it was worth it to use a web framework for woodshed.tech, the next choice we needed to make was which framework to use. Frameworks describe themselves as having a few ways of "rendering" webpages, or turning them into something the browser can display for the user. These rendering methods are commonly described by the acronyms **SSG**, **SSR**, and **CSR**.
 
 -   **Static site generation (SSG)**
 
-    SSG is where a framework creates a set of HTML, JavaScript and CSS files that can be put onto a file server and deployed as a public website. The content is "static", meaning it doesn't change depending on who is viewing it. The code is organized in templates, which can take in some data and use it to populate the pages so they can be prepared for serving to the user ahead of time.
+    SSG is where a framework creates a set of HTML, JavaScript and CSS files _before_ the user requests them by loading the site in a browser. The content is "static", meaning it doesn't change depending on who is viewing it or when it is being viewed. The code is typically organized in templates, which can take in some data and use it to populate each individual page.
 
 -   **Server-side rendering (SSR)**
 
-    In contrast to static site generation, SSR builds the response _at request time_. When a user loads the page in the browser, the server can fetch "dynamic" content, typically from a database, and use it to populate the page. Among other things, this enables user-specific data which can be protected by a login, or "authentication."
+    In contrast to static site generation, SSR is a process where the server builds the response _when the user requests it_. When a user loads the site in a browser, the server can fetch "dynamic" content, typically from a database, and use it to populate the page. Among other things, this enables user-specific data which can be protected by a login, or "authentication."
 
 -   **Client-side rendering (CSR)**
 
-    Another way to render dynamic, user-specific data into a webpage is to use client-side rendering. This means that the server sends a small, mostly empty HTML document to the user along with a JS file. The JS code then pulls in data from one or more API servers and uses it to modify the HTML. This means it can also support authenticated data, like SSR.
+    Another way to render dynamic, user-specific data into a webpage is to use client-side rendering. This means that the server sends a small, mostly empty HTML document to the user along with a JS file. The JS code then pulls in data from one or more API servers and uses it to modify the HTML. This means it can also support authenticated data, similar to SSR.
 
 These rendering methods can be blended together, and the boundaries can get blurry. Also, some frameworks can support more than one rendering method, but they often choose to prioritize one over another.
 
@@ -73,6 +75,6 @@ There are many good options when picking a web framework in 2023. Here are the c
 -   [Eleventy](https://www.11ty.dev/) bills itself as primarily an SSG framework, but can support SSR through a plugin. It's optimized for speed, so it can handle building thousands of pages very quickly. It also allows you to selectively include UI libraries like React through something called "islands architecture." This would make it a good choice for woodshed.tech, because it would give us the ability to add a blog. It looks like an solid option with many reputable testimonials, and was our second choice for building woodshed.tech.
 -   [Astro](https://astro.build/) is in the same camp as Eleventy, but has different opinions about how to organize code. We liked the structure of its `.astro` files which encapsulate HTML, CSS and JS into a single component. Coming from a React background, the component hierarchy makes a lot of sense to us. It also supports islands architecture, and allows you to add in React (or any other UI library) when and wherever you need to. If we choose to add a blog to woodshed.tech, it should be simple to get it working with Astro. In the end, we liked the balance of features and how it supported TailwindCSS out of the box.
 
-## Summary
+## Have a look around
 
-Feel free to explore this repo to see how we've built woodshed.tech. If you have any questions or are interested in working with us, reach out at [hello@woodshed.tech](mailto:hello@woodshed.tech).
+Feel free to explore this repo to see how we've built woodshed.tech. The main page is in [./src/pages/index.astro](./src/pages/index.astro), and this might be a good place to start.
