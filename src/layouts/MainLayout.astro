@@ -15,10 +15,27 @@ const { title } = Astro.props;
 
 <html lang="en">
     <head>
+        <link rel="sitemap" href="/sitemap-index.xml" />
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+            name="description"
+            content="Woodshed is a web development and design agency in the San Francisco Bay Area."
+        />
         <link rel="icon" type="image/png" href="/favicon.png" />
         <title>{title}</title>
+        <meta property="og:title" content="Woodshed" />
+        <meta
+            property="og:description"
+            content="Woodshed is a web development and design agency in the San Francisco Bay Area."
+        />
+        <meta
+            property="og:image"
+            content="https://raw.githubusercontent.com/Woodshed-Technology-LLC/woodshed-site/main/public/social_preview.png"
+        />
+        <meta property="og:image:alt" content="Stylized logo of a woodshed" />
+        <meta property="og:url" content="https://woodshed.tech" />
+        <meta property="og:type" content="website" />
     </head>
     <body class="flex flex-col min-h-screen">
         <div
@@ -35,43 +52,44 @@ const { title } = Astro.props;
         </div>
         <Footer />
     </body>
+
+    <script is:inline>
+        // Initialize the theme as either 'light' or 'dark'
+
+        // Read the user's preferred theme from localStorage. If it has not been set there, read it
+        // from the browser settings and then set it in localStorage.
+        const theme = (() => {
+            if (
+                typeof localStorage !== 'undefined' &&
+                localStorage.getItem('theme')
+            ) {
+                return localStorage.getItem('theme');
+            }
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                return 'dark';
+            }
+            return 'light';
+        })();
+
+        if (theme === 'light') {
+            document.documentElement.classList.remove('dark');
+        } else {
+            document.documentElement.classList.add('dark');
+        }
+        window.localStorage.setItem('theme', theme);
+    </script>
+    <style>
+        .main-content {
+            @apply bg-gray-light-300;
+            background-image: url('/bg-dot-tile-light.png');
+            background-repeat: repeat;
+            background-position: top 22px left 22px;
+        }
+        .dark .main-content {
+            @apply bg-gray-dark-900;
+            background-image: url('/bg-dot-tile-dark.png');
+            background-repeat: repeat;
+            background-position: top 22px left 20px;
+        }
+    </style>
 </html>
-<script is:inline>
-    // Initialize the theme as either 'light' or 'dark'
-
-    // Read the user's preferred theme from localStorage. If it has not been set there, read it from
-    // the browser settings and then set it in localStorage.
-    const theme = (() => {
-        if (
-            typeof localStorage !== 'undefined' &&
-            localStorage.getItem('theme')
-        ) {
-            return localStorage.getItem('theme');
-        }
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            return 'dark';
-        }
-        return 'light';
-    })();
-
-    if (theme === 'light') {
-        document.documentElement.classList.remove('dark');
-    } else {
-        document.documentElement.classList.add('dark');
-    }
-    window.localStorage.setItem('theme', theme);
-</script>
-<style>
-    .main-content {
-        @apply bg-gray-light-300;
-        background-image: url('/bg-dot-tile-light.png');
-        background-repeat: repeat;
-        background-position: top 22px left 22px;
-    }
-    .dark .main-content {
-        @apply bg-gray-dark-900;
-        background-image: url('/bg-dot-tile-dark.png');
-        background-repeat: repeat;
-        background-position: top 22px left 20px;
-    }
-</style>
