@@ -56,7 +56,7 @@ Once we decided that it was worth it to use a web framework for woodshed.tech, t
 
 -   **Client-side rendering (CSR)**
 
-    Another way to render dynamic, user-specific data into a webpage is to use client-side rendering. This means that the server sends a small, mostly empty HTML document to the user along with a JS file. The JS code then pulls in data from one or more API servers and uses it to modify the HTML. This means it can also support authenticated data, similar to SSR.
+    Another way to render dynamic, user-specific data into a webpage is to use client-side rendering. This means that the server sends a small, mostly empty HTML document to the user along with a JS file. The JS code then pulls in data from one or more servers and use it to modify the HTML. This means it can also support authentication, similar to SSR.
 
 These rendering methods can be blended together, and the boundaries can get blurry. Also, some frameworks can support more than one rendering method, but they often choose to prioritize one over another.
 
