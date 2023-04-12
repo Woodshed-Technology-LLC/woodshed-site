@@ -27,6 +27,9 @@ const imageDetails = [
         imageMetaData: pixManageFilesImageMetadata,
     },
 ];
+
+const subtextPadding =
+    'pl-2 sm:pl-4 md:pl-8 lg:pl-16 py-8 sm:py-10 md:py-12 lg:py-16';
 ---
 
 <MainLayout title="Projects | Woodshed">
@@ -35,7 +38,7 @@ const imageDetails = [
         class="border-b-[1.5px] border-primary-light-shade-500 dark:border-primary-dark-900 w-12 pt-4"
     >
     </div>
-    <div class="grid gap-32">
+    <div class="grid gap-24 sm:gap-28 md:gap-32">
         <Project
             alt="Trqk guided tour page"
             id="trqk"
@@ -44,7 +47,7 @@ const imageDetails = [
                 music creator economy`}
             projectName="Trqk™"
         >
-            <div class="p-16 grid gap-4">
+            <div class={`${subtextPadding} grid gap-4`}>
                 <p class="body-3">
                     <ExternalLink href="https:trqk.io">Trqk™</ExternalLink> is a
                     music performance and royalty analytics platform, featuring data
@@ -68,8 +71,8 @@ const imageDetails = [
             intro="Academy Award-winning media asset management platform"
             projectName="PIX"
         >
-            <div class="grid gap-4 pt-16">
-                <p class="body-3 px-16">
+            <div class="grid gap-4">
+                <p class={`${subtextPadding} body-3`}>
                     <ExternalLink href="https://pix.online/">PIX</ExternalLink> is
                     a media asset storage and collaboration system for film and television
                     production. It provides a security-first environment which allows
@@ -77,13 +80,13 @@ const imageDetails = [
                     markup with frame-specific accuracy.
                 </p>
                 <ImageScroller imageDetails={imageDetails} />
-                <p class="body-3 px-16">
+                <p class={`${subtextPadding} body-3`}>
                     Clients including Amazon, ESPN and HBO rely on these tools
                     to remove friction from the production process without
                     leaking sensitive files before a film or episode is
                     released.
                 </p>
-                <p class="body-1 pt-12">
+                <p class="body-1">
                     Our contributions helped to build a file management system
                     that bridged the gap between older and newer underlying
                     technologies.
@@ -97,8 +100,8 @@ const imageDetails = [
             intro="Cover song licensing platform for musicians and publishers"
             projectName="Loudr"
         >
-            <div class="p-16 grid gap-4">
-                <p>
+            <div class={subtextPadding}>
+                <p class="body-3">
                     Loudr automates the process of acquiring mechanical licenses
                     at scale, allowing indie artists and large publishers to
                     comply with legal requirements with minimal effort. Loudr
