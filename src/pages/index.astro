@@ -26,17 +26,24 @@ const paragraphs = [
     },
     {
         heading: 'Prototype',
-        body: `By mocking up potential solutions as low-fidelity designs, we can begin testing our
+        body: `By mocking up potential solutions as low-fidelity wireframes, we can begin testing our
             ideas and getting feedback as early as possible. This allows us to find viable paths to
             success with a minimal investment of time and resources.`,
+    },
+    {
+        heading: 'Full Design',
+        body: `After sketching out the wireframes for your project and adjusting as needed, we’re
+            ready to flesh out the design in a series of high-fidelity mockups. This allows us to
+            delve deep into the look and feel of the product and share our progress with you to
+            ensure that all stakeholders are aligned on your vision.`,
     },
     {
         heading: 'Development',
         body: `Once we have a solid understanding of personas and requirements and a fully detailed
             design, we build it in code. With both frontend and backend capabilities, we can
-            implement any kind of design, from marketing site to SaaS app. The technologies we use
-            will be tailored to your specific project, allowing us to meet your needs while keeping
-            maintenance and overhead low.`,
+            implement any kind of website, from marketing page to fullstack application. The
+            technologies we use will be tailored to your specific project, allowing us to meet your
+            needs while keeping maintenance and overhead low.`,
     },
     {
         heading: 'Support',
@@ -55,8 +62,7 @@ const paragraphs = [
 ---
 
 <MainLayout title="Woodshed">
-    <h1 class="sm:hidden">Hello.<br />We are Woodshed.</h1>
-    <h1 class="hidden sm:block">Hello. We are Woodshed.</h1>
+    <h1>Hello.<span id="space-or-line-break"></span>We are Woodshed.</h1>
     <div class="flex flex-col gap-10 py-5">
         <p class="body-1">
             We build intuitive online experiences that connect you and your
@@ -80,6 +86,13 @@ const paragraphs = [
         <div class="pl-[24px] sm:px-16 lg:px-20">
             <NumberedParagraphs paragraphs={paragraphs} />
         </div>
+        <p class="body-2 sm:px-8 lg:px-10">
+            On projects with a longer timeline, it often makes sense to split
+            the project into features and then design and develop each one
+            incrementally. This reduces the risk of spending too much time
+            perfecting a high-fidelity design that may need to change as
+            requirements shift over time.
+        </p>
         <div
             class="flex flex-col lg:flex-row items-center justify-center gap-x-12 gap-y-16 pt-20"
         >
@@ -103,3 +116,20 @@ const paragraphs = [
         </div>
     </div>
 </MainLayout>
+
+<style>
+    /*
+        Use a pseudo-element to add a line break in the h1 if the width is less than 544px. This is
+        better for semantic reasons than having two h1s and hiding/showing them with CSS.
+    */
+    #space-or-line-break:after {
+        content: '\a';
+        white-space: pre;
+    }
+
+    @media (min-width: 544px) {
+        #space-or-line-break:after {
+            content: ' ';
+        }
+    }
+</style>
