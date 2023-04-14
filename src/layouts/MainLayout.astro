@@ -33,20 +33,23 @@ const { title } = Astro.props;
             property="og:image"
             content="https://raw.githubusercontent.com/Woodshed-Technology-LLC/woodshed-site/main/public/social_preview.png"
         />
-        <meta property="og:image:alt" content="Stylized logo of a woodshed" />
+        <meta
+            property="og:image:alt"
+            content="A logo representation of a woodshed"
+        />
         <meta property="og:url" content="https://woodshed.tech" />
         <meta property="og:type" content="website" />
     </head>
     <body class="flex flex-col min-h-screen">
         <div
-            class="bg-gray-light-300 dark:bg-gray-dark-900 h-[94px] sm:h-[120px] border-b-2 border-primary-light-shade-500 dark:border-primary-dark-900 pt-6 sm:pt-12"
+            class="bg-gray-light-300 dark:bg-gray-dark-900 h-[96px] sm:h-[126px] border-b-2 border-primary-light-shade-500 dark:border-primary-dark-900 pt-[37px] sm:pt-[68px]"
         >
             <NavHeader />
         </div>
         <div
             class="text-gray-light-shade-900 dark:text-gray-dark-200 flex justify-center flex-grow main-content"
         >
-            <main class={`${bodyWidth} py-16`}>
+            <main class={`${bodyWidth} py-[48px] sm:py-[58px] md:py-[86px]`}>
                 <slot />
             </main>
         </div>

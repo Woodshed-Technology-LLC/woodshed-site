@@ -18,7 +18,9 @@ const iconScale = 'scale-[0.6875] md:scale-100';
         render the backdrop (i.e. overlay). This added div has a fixed position with z-40, so we
         need to add z-50 here in order to achieve a higher stacking context.
      -->
-    <div class="flex justify-between max-w-[956px] w-full fixed z-50 px-6">
+    <div
+        class="flex justify-between px-[11px] sm:px-[20px] md:px-[40px] lg:px-0 max-w-[940px] w-full fixed z-50"
+    >
         <!-- Woodshed icon (home button) -->
         <div class={iconScale}>
             <a href="/" id="woodshed-icon">
@@ -39,7 +41,7 @@ const iconScale = 'scale-[0.6875] md:scale-100';
             id="nav-modal"
             tabindex="-1"
             aria-hidden="true"
-            class="absolute z-50 top-[-24px] right-0 hidden w-full overflow-x-hidden overflow-y-auto"
+            class="absolute z-50 top-[-21px] left-[16px] hidden w-full overflow-x-hidden overflow-y-auto"
         >
             <!-- Modal content -->
             <div
@@ -165,15 +167,16 @@ const iconScale = 'scale-[0.6875] md:scale-100';
 
     /* Set up the animated hamburger menu button */
     #navigation {
-        --bar-length: 24px;
-        --bar-thickness: 3px;
-        --bar-offset: 6px;
+        --bar-length: 18px;
+        --bar-thickness: 2px;
+        --bar-offset: 5px;
         --transition-duration: 0.5s;
     }
 
     #toggle-nav {
         position: relative;
-        top: calc(-1 * var(--bar-thickness));
+        top: -5px;
+        left: -8px;
         width: var(--bar-length);
         height: var(--bar-length);
     }
