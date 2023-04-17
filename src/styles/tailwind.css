@@ -51,7 +51,7 @@
         @apply text-28;
     }
 
-    /* These apply at device widths above the 'sm' screen size in tailwind.config.js */
+    /* Applied at width 'sm' and above (see tailwind.config.js) */
     @media (min-width: 544px) {
         h1 {
             @apply text-22;
@@ -63,7 +63,7 @@
         }
     }
 
-    /* These apply at device widths above the 'md' screen size in tailwind.config.js */
+    /* Applied at width 'md' and above (see tailwind.config.js) */
     @media (min-width: 768px) {
         h1 {
             @apply text-24;

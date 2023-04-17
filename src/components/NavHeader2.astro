@@ -13,35 +13,37 @@ import NavHighlight from './NavHighlight.astro';
 const iconScale = 'scale-[0.6875] md:scale-100';
 ---
 
-<header id="navigation" class="flex justify-center w-screen">
+<header
+    id="navigation"
+    class="fixed grid grid-cols-default sm:grid-cols-sm md:grid-cols-md lg:grid-cols-lg w-screen"
+>
     <!-- When the modal is open, it inserts a <div> just before the closing </body> tag in order to
         render the backdrop (i.e. overlay). This added div has a fixed position with z-40, so we
         need to add z-50 here in order to achieve a higher stacking context.
      -->
-    <div
-        class="flex justify-between max-w-[956px] w-full fixed z-50 px-3 md:px-[40px]"
-    >
-        <!-- Woodshed icon (home button) -->
-        <div class={iconScale}>
-            <a href="/" id="woodshed-icon">
-                <img
-                    class="block dark:hidden"
-                    src="/icon-black.svg"
-                    alt="Woodshed icon"
-                />
-                <img
-                    class="hidden dark:block"
-                    src="/icon-light-blue.svg"
-                    alt="Woodshed icon"
-                />
-            </a>
-        </div>
+
+    <!-- Woodshed icon (home button) -->
+    <div class={`col-start-2 col-span-1 flex justify-end pr-5 ${iconScale}`}>
+        <a href="/" id="woodshed-icon">
+            <img
+                class="block dark:hidden"
+                src="/icon-black.svg"
+                alt="Woodshed icon"
+            />
+            <img
+                class="hidden dark:block"
+                src="/icon-light-blue.svg"
+                alt="Woodshed icon"
+            />
+        </a>
+    </div>
+    <div class="relative z-50">
         <!-- Main modal -->
         <div
             id="nav-modal"
             tabindex="-1"
             aria-hidden="true"
-            class="absolute z-50 top-[-24px] right-[-10px] hidden w-full overflow-x-hidden overflow-y-auto"
+            class="relative z-50 hidden w-full overflow-x-hidden overflow-y-auto top-[-20px]"
         >
             <!-- Modal content -->
             <div
@@ -80,9 +82,11 @@ const iconScale = 'scale-[0.6875] md:scale-100';
                 </NavHighlight>
             </div>
         </div>
+    </div>
+    <div class="col-start-4 col-span-1 pl-5 z-60">
         <!-- Modal toggle (animated hamburger icon) -->
         <button
-            class="flex-none z-50 mt-2"
+            class="flex-none z-60 mt-2"
             id="toggle-nav"
             aria-label="Toggle navigation menu"
             type="button"

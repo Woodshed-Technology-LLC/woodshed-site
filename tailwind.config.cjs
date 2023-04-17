@@ -115,6 +115,14 @@ module.exports = {
             lg: '1024px',
             xl: '1440px',
         },
+        extend: {
+            gridTemplateColumns: {
+                default: '0px 60px auto 60px 0px',
+                sm: '0px 70px auto 70px 0px',
+                md: '0px 90px auto 90px 0px',
+                lg: 'auto 90px 840px 90px auto',
+            },
+        },
     },
     darkMode: 'class',
     safelist: ['dark'],

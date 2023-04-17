@@ -1,0 +1,135 @@
+---
+/**
+ * The main page, including a brief introduction and listing of the steps in our design and
+ * development process. Links to two of the projects are included at the bottom of the main content.
+ */
+import MainLayout from '../layouts/MainLayout2.astro';
+import NumberedParagraphs from '../components/NumberedParagraphs.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import Highlight from '../components/Highlight.astro';
+import loudrImageMetaData from '../assets/loudr_card.png';
+import trqkImageMetaData from '../assets/trqk_card.png';
+
+const paragraphs = [
+    {
+        heading: 'Persona',
+        body: `An effective product begins with discovering who your audience is and what makes them
+            tick. We’ll help you identify the user profiles that will drive your success, then use
+            these identities to design experiences that deliver the highest possible value.`,
+    },
+    {
+        heading: 'Discovery',
+        body: `Once we understand who your users are, we can begin to learn what specific value you
+            can bring to their lives. This solution-oriented approach helps us establish the
+            requirements for your project, while eliminating any elements that do not serve your
+            overall mission.`,
+    },
+    {
+        heading: 'Prototype',
+        body: `By mocking up potential solutions as low-fidelity wireframes, we can begin testing our
+            ideas and getting feedback as early as possible. This allows us to find viable paths to
+            success with a minimal investment of time and resources.`,
+    },
+    {
+        heading: 'Full Design',
+        body: `After sketching out the wireframes for your project and adjusting as needed, we’re
+            ready to flesh out the design in a series of high-fidelity mockups. This allows us to
+            delve deep into the look and feel of the product and share our progress with you to
+            ensure that all stakeholders are aligned on your vision.`,
+    },
+    {
+        heading: 'Development',
+        body: `Once we have a solid understanding of personas and requirements and a fully detailed
+            design, we build it in code. With both frontend and backend capabilities, we can
+            implement any kind of website, from marketing page to fullstack application. The
+            technologies we use will be tailored to your specific project, allowing us to meet your
+            needs while keeping maintenance and overhead low.`,
+    },
+    {
+        heading: 'Support',
+        body: `The story doesn’t end when we ship your product. As you learn more about your usage
+            patterns and identify issues, we will support you with technical solutions and ensure
+            that your code is up to date in terms of security and performance improvements.`,
+    },
+    {
+        heading: 'Iteration',
+        body: `As you progress through the stages of your digital journey, we will be there to help
+            you identify new opportunities and build new solutions. The design and development
+            process is often iterative, and a tight feedback loop gives us the opportunity to
+            leverage our early research as we create more value.`,
+    },
+];
+---
+
+<MainLayout title="Woodshed">
+    <h1>Hello.<span id="space-or-line-break"></span>We are Woodshed.</h1>
+    <div class="flex flex-col gap-10 py-5">
+        <p class="body-1">
+            We build intuitive online experiences that connect you and your
+            audience in a seamless, engaging conversation. Our knowledge and
+            experience can take your project from an abstract idea to a
+            full-fledged product.
+        </p>
+        <p class="body-1">
+            We are a web design and development agency in the San Francisco Bay
+            Area.
+        </p>
+        <div
+            class="mt-10 border-b-[1.5px] w-40 sm:w-48 lg:w-[351px] border-primary-light-shade-500 dark:border-primary-dark-900"
+        >
+        </div>
+        <p class="body-2 sm:px-8 lg:px-10">
+            While developing your product, we follow an iterative process that
+            leads you through the stages of design and development in a
+            structured, efficient workflow.
+        </p>
+        <div class="pl-[24px] sm:px-16 lg:px-20">
+            <NumberedParagraphs paragraphs={paragraphs} />
+        </div>
+        <p class="body-2 sm:px-8 lg:px-10">
+            On projects with a longer timeline, it often makes sense to split
+            the project into features and then design and develop each one
+            incrementally. This reduces the risk of spending too much time
+            perfecting a high-fidelity design that may need to change as
+            requirements shift over time.
+        </p>
+        <div
+            class="flex flex-col lg:flex-row items-center justify-center gap-x-12 gap-y-16 pt-20"
+        >
+            <ProjectCard
+                alt="Trqk"
+                href="/projects#trqk"
+                imageMetaData={trqkImageMetaData}
+                projectName="Trqk™"
+            />
+            <ProjectCard
+                alt="Loudr"
+                href="/projects#loudr"
+                imageMetaData={loudrImageMetaData}
+                projectName="Loudr"
+            />
+        </div>
+        <div class="flex justify-center">
+            <Highlight>
+                <a class="body-1" href="/projects/">View all projects</a>
+            </Highlight>
+        </div>
+    </div>
+</MainLayout>
+
+<style>
+    /*
+        Use a pseudo-element to add a line break in the h1 if the width is less than 544px. This is
+        better for semantic reasons than having two h1s and hiding/showing them with CSS.
+    */
+    #space-or-line-break:after {
+        content: '\a';
+        white-space: pre;
+    }
+
+    @media (min-width: 544px) {
+        #space-or-line-break:after {
+            content: ' ';
+        }
+    }
+</style>
