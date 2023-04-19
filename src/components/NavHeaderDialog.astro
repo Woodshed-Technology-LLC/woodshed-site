@@ -1,0 +1,194 @@
+---
+/**
+ * A top navigation header that includes the Woodshed icon on the left and a hamburger menu icon on
+ * the right, which opens to reveal the site navigation. The menu is implemented with the native
+ * <dialog> element.
+ */
+
+import DarkModeSwitch from './DarkModeSwitch.astro';
+import NavHighlight from './NavHighlight.astro';
+const iconScale = 'scale-[0.6875] md:scale-100';
+---
+
+<header class="fixed w-full">
+    <div id="header-grid">
+        <!-- Woodshed icon (home button) -->
+        <div class="pr-4 flex justify-end" style={{ 'grid-area': 'left' }}>
+            <a href="/" id="woodshed-icon">
+                <img
+                    class={`${iconScale} block dark:hidden`}
+                    src="/icon-black.svg"
+                    alt="Woodshed icon"
+                />
+                <img
+                    class={`${iconScale} hidden dark:block`}
+                    src="/icon-light-blue.svg"
+                    alt="Woodshed icon"
+                />
+            </a>
+        </div>
+        <!-- Modal toggle (animated hamburger icon) -->
+        <div class="pl-4" style={{ 'grid-area': 'right' }}>
+            <button
+                class="flex-none z-50 mt-2"
+                id="toggle-nav"
+                aria-label="Toggle navigation menu"
+                type="button"
+            >
+                <div id="hamburger" class={iconScale}>
+                    <div id="icon"></div>
+                </div>
+            </button>
+        </div>
+    </div>
+    <!-- Modal content -->
+    <dialog>
+        <nav>
+            <ul
+                class="text-22 flex flex-col gap-5 text-gray-light-shade-800 dark:text-primary-dark-200"
+            >
+                <li class="hide-nav">
+                    <a href="/">Process</a>
+                </li>
+                <li class="hide-nav">
+                    <a href="/projects/">Projects</a>
+                </li>
+            </ul>
+            <div class="mr-24 pt-12 border-b border-gray-light-100"></div>
+        </nav>
+        <div class="pt-10 flex flex-col">
+            <DarkModeSwitch />
+        </div>
+        <p
+            class="pt-16 font-cta text-28 leading-9 pb-4 text-gray-light-300 dark:text-primary-dark-200 font-medium"
+        >
+            Come say hello!
+        </p>
+        <NavHighlight>
+            <a
+                class="hide-nav text-gray-light-shade-600 dark:text-primary-dark-200 text-22"
+                href="mailto:hello@woodshed.tech"
+                rel="noreferrer">hello@woodshed.tech</a
+            >
+        </NavHighlight>
+    </dialog>
+</header>
+
+<style>
+    /* Sets up the responsive grid layout */
+
+    #header-grid {
+        display: grid;
+        grid-template-areas: 'left-margin left center right right-margin';
+        grid-template-columns: 0px 60px auto 60px 0px;
+        grid-template-rows: 60px;
+    }
+
+    @media (min-width: 544px) {
+        #header-grid {
+            grid-template-columns: 0px 70px auto 70px 0px;
+            grid-template-rows: 126px;
+        }
+    }
+
+    @media (min-width: 768px) {
+        #header-grid {
+            grid-template-columns: 0px 90px auto 90px 0px;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        #header-grid {
+            grid-template-columns: auto 90px 840px 90px auto;
+        }
+    }
+
+    /* Set up the animated hamburger menu button */
+    header {
+        --bar-length: 18px;
+        --bar-thickness: 2px;
+        --bar-offset: 5px;
+        --transition-duration: 0.5s;
+    }
+
+    #toggle-nav {
+        position: relative;
+        top: -5px;
+        left: 8px;
+        width: var(--bar-length);
+        height: var(--bar-length);
+    }
+
+    #hamburger {
+        position: absolute;
+        transition-duration: var(--transition-duration);
+    }
+
+    #hamburger #icon {
+        transition-duration: var(--transition-duration);
+        position: absolute;
+        height: 0px;
+        width: var(--bar-length);
+        top: calc(0.5 * var(--bar-length));
+    }
+
+    #hamburger:before {
+        transition-duration: var(--transition-duration);
+        position: absolute;
+        width: var(--bar-length);
+        height: var(--bar-thickness);
+        border-radius: calc(0.5 * var(--bar-thickness));
+        content: '';
+        top: calc(-1 * var(--bar-offset));
+    }
+
+    html:not(.dark) #hamburger:before {
+        @apply bg-gray-light-shade-900;
+    }
+
+    html.dark #hamburger:before {
+        @apply bg-primary-dark-100;
+    }
+
+    #hamburger:after {
+        transition-duration: var(--transition-duration);
+        position: absolute;
+        width: var(--bar-length);
+        height: var(--bar-thickness);
+        border-radius: calc(0.5 * var(--bar-thickness));
+        content: '';
+        top: var(--bar-offset);
+    }
+
+    html:not(.dark) #hamburger:after {
+        @apply bg-gray-light-shade-900;
+    }
+
+    html.dark #hamburger:after {
+        @apply bg-primary-dark-100;
+    }
+
+    #navigation.open #hamburger #icon {
+        transition: 0.5s;
+    }
+
+    #navigation.open #hamburger:before {
+        transform: rotateZ(45deg) scaleX(1.33)
+            translate(
+                calc(0.6 * var(--bar-offset)),
+                calc(0.6 * var(--bar-offset))
+            );
+    }
+
+    #navigation.open #hamburger:after {
+        transform: rotateZ(-45deg) scaleX(1.33)
+            translate(
+                calc(0.6 * var(--bar-offset)),
+                calc(-1 * 0.6 * var(--bar-offset))
+            );
+    }
+
+    #hamburger:hover {
+        cursor: pointer;
+    }
+</style>

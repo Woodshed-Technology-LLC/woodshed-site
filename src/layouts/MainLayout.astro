@@ -6,7 +6,7 @@
 import '@fontsource/inter';
 import '@fontsource/montserrat';
 import '../styles/tailwind.css';
-import NavHeader from '../components/NavHeader.astro';
+import NavHeaderDialog from '../components/NavHeaderDialog.astro';
 import Footer from '../components/Footer.astro';
 
 const { title } = Astro.props;
@@ -44,7 +44,7 @@ const { title } = Astro.props;
             style={{ 'grid-area': 'header' }}
             class="border-b-2 border-primary-light-shade-500 dark:border-primary-dark-900 bg-gray-light-300 dark:bg-gray-dark-900 pt-4 sm:pt-[68px] z-50"
         >
-            <NavHeader />
+            <NavHeaderDialog />
         </div>
         <main
             class="py-[48px] sm:py-[58px] md:py-[86px]"
