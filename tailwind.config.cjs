@@ -91,7 +91,7 @@ module.exports = {
             },
         },
         fontFamily: {
-            sans: ['Inter', ...defaultTheme.fontFamily.sans],
+            sans: ['InterVariable', ...defaultTheme.fontFamily.sans],
             cta: ['Montserrat', ...defaultTheme.fontFamily.sans],
         },
         fontSize: {
