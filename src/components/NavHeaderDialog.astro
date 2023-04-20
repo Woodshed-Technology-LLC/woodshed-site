@@ -94,6 +94,9 @@ const iconScale = 'scale-[0.6875] md:scale-100';
                     $dialog.close();
                     $header.classList.remove('open');
                 } else {
+                    // We use `show()` here rather than `showModal()` because it allows us to
+                    // position the dialog as desired. If we use `showModal()`, we end up fighting
+                    // the user agent styles and resorting to hacky event-based positioning.
                     $dialog.show();
                     $header.classList.add('open');
                 }
