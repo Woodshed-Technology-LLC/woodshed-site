@@ -106,7 +106,7 @@
         --scrollbar-track: transparent;
         --scrollbar-thumb-light: #779278;
         --scrollbar-thumb-dark: #1d839a;
-        --scrollbar-width: 10px;
+        --scrollbar-width: 8px;
     }
 
     /* Firefox */

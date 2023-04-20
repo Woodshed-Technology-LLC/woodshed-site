@@ -115,4 +115,5 @@ module.exports = {
     },
     darkMode: 'class',
     safelist: ['dark'],
+    plugins: [addBaseStylesToTailwind],
 };
