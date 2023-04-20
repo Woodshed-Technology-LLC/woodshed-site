@@ -38,18 +38,19 @@ const subtextPadding =
 <MainLayout title="Projects | Woodshed">
     <h1 class="projects">Projects</h1>
     <div
-        class="border-b-[1.5px] border-primary-light-shade-500 dark:border-primary-dark-900 w-12 pt-4"
+        class="border-b-[1.5px] border-primary-light-shade-500 dark:border-primary-dark-900 w-12 pt-3"
     >
     </div>
     <div class="grid gap-24 sm:gap-28 md:gap-32">
         <Project
             alt="Trqk guided tour page"
-            id="trqk"
             imageMetaData={trqkGuidedTourImageMetadata}
             intro={`Built to harness the power of royalty data and unlock new opportunities for the
                 music creator economy`}
-            projectName="Trqk™"
         >
+            <div slot="header">
+                <h2 class="inline align-top projects" id="trqk">Trqk</h2>™
+            </div>
             <div class={`${subtextPadding} grid gap-4`}>
                 <p class="body-3">
                     <ExternalLink href="https://trqk.io">Trqk™</ExternalLink> is
@@ -70,11 +71,10 @@ const subtextPadding =
         </Project>
         <Project
             alt="PIX media player"
-            id="pix"
             imageMetaData={pixPlayerImageMetadata}
             intro="Academy Award-winning media asset management platform"
-            projectName="PIX"
         >
+            <h2 class="projects" id="pix" slot="header">PIX</h2>
             <div class="grid gap-4">
                 <p class={`${subtextPadding} body-3`}>
                     <ExternalLink href="https://pix.online/">PIX</ExternalLink> is
@@ -99,11 +99,10 @@ const subtextPadding =
         </Project>
         <Project
             alt="Loudr"
-            id="loudr"
             imageMetaData={loudrHomePageImageMetadata}
             intro="Cover song licensing platform for musicians and publishers"
-            projectName="Loudr"
         >
+            <h2 class="projects" id="loudr" slot="header">Loudr</h2>
             <div class={subtextPadding}>
                 <p class="body-3">
                     Loudr automates the process of acquiring mechanical licenses
