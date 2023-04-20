@@ -10,7 +10,7 @@ import NavHighlight from './NavHighlight.astro';
 const iconScale = 'scale-[0.6875] md:scale-100';
 ---
 
-<header class="fixed w-full">
+<header id="nav-header" class="fixed w-full">
     <div id="header-grid">
         <!-- Woodshed icon (home button) -->
         <div class="pr-4 flex justify-end" style={{ 'grid-area': 'left' }}>
@@ -39,44 +39,79 @@ const iconScale = 'scale-[0.6875] md:scale-100';
                     <div id="icon"></div>
                 </div>
             </button>
+            <!-- Modal content - this is placed here so it is positioned relative to the button and
+                so that the button sits above the dialog in the stacking order
+            -->
+            <dialog
+                id="nav-dialog"
+                class="bg-primary-light-shade-500 dark:bg-gray-dark-shade-400 pt-16 px-12 pb-12 w-[375px] h-[548px] top-[-40px] left-[-330px] relative"
+            >
+                <nav>
+                    <ul
+                        class="text-22 flex flex-col gap-5 text-gray-light-shade-800 dark:text-primary-dark-200"
+                    >
+                        <li class="hide-nav">
+                            <a href="/">Process</a>
+                        </li>
+                        <li class="hide-nav">
+                            <a href="/projects/">Projects</a>
+                        </li>
+                    </ul>
+                    <div class="mr-24 pt-12 border-b border-gray-light-100">
+                    </div>
+                </nav>
+                <div class="pt-10 flex flex-col">
+                    <DarkModeSwitch />
+                </div>
+                <p
+                    class="pt-16 font-cta text-28 leading-9 pb-4 text-gray-light-300 dark:text-primary-dark-200 font-medium"
+                >
+                    Come say hello!
+                </p>
+                <NavHighlight>
+                    <a
+                        class="hide-nav text-gray-light-shade-600 dark:text-primary-dark-200 text-22"
+                        href="mailto:hello@woodshed.tech"
+                        rel="noreferrer">hello@woodshed.tech</a
+                    >
+                </NavHighlight>
+            </dialog>
         </div>
     </div>
-    <!-- Modal content -->
-    <dialog>
-        <nav>
-            <ul
-                class="text-22 flex flex-col gap-5 text-gray-light-shade-800 dark:text-primary-dark-200"
-            >
-                <li class="hide-nav">
-                    <a href="/">Process</a>
-                </li>
-                <li class="hide-nav">
-                    <a href="/projects/">Projects</a>
-                </li>
-            </ul>
-            <div class="mr-24 pt-12 border-b border-gray-light-100"></div>
-        </nav>
-        <div class="pt-10 flex flex-col">
-            <DarkModeSwitch />
-        </div>
-        <p
-            class="pt-16 font-cta text-28 leading-9 pb-4 text-gray-light-300 dark:text-primary-dark-200 font-medium"
-        >
-            Come say hello!
-        </p>
-        <NavHighlight>
-            <a
-                class="hide-nav text-gray-light-shade-600 dark:text-primary-dark-200 text-22"
-                href="mailto:hello@woodshed.tech"
-                rel="noreferrer">hello@woodshed.tech</a
-            >
-        </NavHighlight>
-    </dialog>
 </header>
+
+<script>
+    const $toggleElement =
+        document.querySelector<HTMLButtonElement>('#toggle-nav');
+    const $header = document.getElementById('nav-header');
+    const $dialog = document.querySelector<HTMLDialogElement>('#nav-dialog');
+    const $hideElements = document.querySelectorAll('.hide-nav');
+
+    if ($toggleElement) {
+        $toggleElement.onclick = () => {
+            if ($dialog && $header) {
+                if ($dialog.open) {
+                    $dialog.close();
+                    $header.classList.remove('open');
+                } else {
+                    $dialog.show();
+                    $header.classList.add('open');
+                }
+            }
+        };
+    }
+
+    Array.from($hideElements).forEach($hideElement => {
+        $hideElement.addEventListener('click', () => {
+            if ($dialog) {
+                $dialog.close();
+            }
+        });
+    });
+</script>
 
 <style>
     /* Sets up the responsive grid layout */
-
     #header-grid {
         display: grid;
         grid-template-areas: 'left-margin left center right right-margin';
@@ -103,7 +138,7 @@ const iconScale = 'scale-[0.6875] md:scale-100';
         }
     }
 
-    /* Set up the animated hamburger menu button */
+    /* Sets up the animated hamburger menu button */
     header {
         --bar-length: 18px;
         --bar-thickness: 2px;
@@ -168,11 +203,11 @@ const iconScale = 'scale-[0.6875] md:scale-100';
         @apply bg-primary-dark-100;
     }
 
-    #navigation.open #hamburger #icon {
+    #nav-header.open #hamburger #icon {
         transition: 0.5s;
     }
 
-    #navigation.open #hamburger:before {
+    #nav-header.open #hamburger:before {
         transform: rotateZ(45deg) scaleX(1.33)
             translate(
                 calc(0.6 * var(--bar-offset)),
@@ -180,7 +215,7 @@ const iconScale = 'scale-[0.6875] md:scale-100';
             );
     }
 
-    #navigation.open #hamburger:after {
+    #nav-header.open #hamburger:after {
         transform: rotateZ(-45deg) scaleX(1.33)
             translate(
                 calc(0.6 * var(--bar-offset)),
