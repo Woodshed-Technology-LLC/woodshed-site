@@ -30,6 +30,11 @@ const { alt, firstProject, imageMetaData, intro } = Astro.props;
 </section>
 
 <style>
+    section {
+        --height-sm: 800px;
+        --height-md: 900px;
+        --height-lg: 1000px;
+    }
     /*
         When a project gets the 'viewed' class, remove its top margin. Animate this transition.
         Adding/removing the 'viewed' class is handled by the <script> in src/pages/projects.astro.
@@ -37,34 +42,70 @@ const { alt, firstProject, imageMetaData, intro } = Astro.props;
 
     .project {
         padding-top: 2rem;
-        margin-top: 10rem;
-        transition-property: margin;
-        transition-duration: 750ms;
-        transition-timing-function: ease-in-out;
     }
 
-    @media (min-height: 800px) {
+    @media (min-height: var(--height-sm)) {
         .project {
             padding-top: 2.33rem;
-            margin-top: 12rem;
         }
     }
 
-    @media (min-height: 900px) {
+    @media (min-height: var(--height-md)) {
         .project {
             padding-top: 2.66rem;
-            margin-top: 24rem;
         }
     }
 
-    @media (min-height: 1000px) {
+    @media (min-height: var(--height-lg)) {
         .project {
             padding-top: 3rem;
-            margin-top: 32rem;
         }
     }
 
-    .project.viewed {
-        margin-top: 0rem;
+    @media (prefers-reduced-motion: no-preference) {
+        .project {
+            margin-top: 10rem;
+            will-change: margin;
+            transition-property: margin;
+            transition-duration: 750ms;
+            transition-timing-function: ease-in-out;
+        }
+
+        @media (min-height: var(--height-sm)) {
+            .project {
+                margin-top: 12rem;
+            }
+        }
+
+        @media (min-height: var(--height-md)) {
+            .project {
+                margin-top: 24rem;
+            }
+        }
+
+        @media (min-height: var(--height-lg)) {
+            .project {
+                margin-top: 32rem;
+            }
+        }
+
+        .project.viewed {
+            margin-top: 0rem;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .project {
+            opacity: 0;
+            will-change: opacity;
+            transition-property: opacity;
+            transition-duration: 1000ms;
+            transition-timing-function: ease-in-out;
+            transition-delay: 400ms;
+        }
+
+        .project.viewed {
+            opacity: 1;
+        }
     }
 </style>
