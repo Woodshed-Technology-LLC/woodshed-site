@@ -1,0 +1,29 @@
+---
+/**
+ * A layout that displays an image, title and description of a staff member.
+ */
+
+import { Image } from 'astro:assets';
+
+interface Props {
+    alt: string;
+    imageMetaData: ImageMetadata;
+    name: string;
+    title: string;
+}
+
+const { alt, imageMetaData, name, title } = Astro.props;
+---
+
+<div class="py-10">
+    <div class="flex flex-col items-center justify-center">
+        <Image
+            alt={alt}
+            src={imageMetaData}
+            class="max-w-[232px] sm:max-w-[400px] lg:w-[312px] lg:h-[428px]"
+        />
+    </div>
+    <h2>{name}</h2>
+    <h3>{title}</h3>
+    <slot />
+</div>

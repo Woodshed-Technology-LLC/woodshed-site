@@ -1,0 +1,22 @@
+---
+/**
+ * A listing of our past projects, including images and links where appropriate.
+ */
+import MainLayout from '../layouts/MainLayout.astro';
+import StaffProfile from '../components/StaffProfile.astro';
+import alexNittaImageMetaData from '../assets/alex_nitta.jpg';
+---
+
+<MainLayout title="About us | Woodshed">
+    <h1 class="projects">About us</h1>
+    <div
+        class="border-b-[1.5px] border-primary-light-shade-500 dark:border-primary-dark-900 w-12 pt-3"
+    >
+    </div>
+    <StaffProfile
+        alt="Pencil drawing of Alex Nitta"
+        imageMetaData={alexNittaImageMetaData}
+        name="Alex Nitta"
+        title="Lead Developer / President"
+    />
+</MainLayout>
