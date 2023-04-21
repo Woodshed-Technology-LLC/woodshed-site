@@ -33,9 +33,6 @@ const imageDetails = [
 
 const subtextPadding =
     'px-2 sm:px-4 md:px-8 lg:px-16 py-8 sm:py-10 md:py-12 lg:py-16';
-
-const pixSubtextPadding =
-    'px-2 sm:px-4 md:px-8 lg:px-16 py-8 sm:py-10 md:py-12 lg:py-16';
 ---
 
 <MainLayout title="Projects | Woodshed">
@@ -47,6 +44,7 @@ const pixSubtextPadding =
     <div class="grid gap-24 sm:gap-28 md:gap-32">
         <Project
             alt="Trqk guided tour page"
+            firstProject={true}
             imageMetaData={trqkGuidedTourImageMetadata}
             intro={`Built to harness the power of royalty data and unlock new opportunities for the
                 music creator economy`}
@@ -124,3 +122,33 @@ const pixSubtextPadding =
         </Project>
     </div>
 </MainLayout>
+
+<script>
+    /**
+     * When a project becomes visible, add the 'viewed' class to it. This results in the effect of
+     * the project rising to meet the one above it as the user scrolls down. The animation is set
+     * up via the <style> in src/components/Project.astro.
+     */
+    const projectList = document.querySelectorAll('.project');
+
+    const observer = new IntersectionObserver(
+        entries => {
+            entries.forEach(entry => {
+                if (
+                    entry.isIntersecting &&
+                    !entry.target.classList.contains('viewed')
+                ) {
+                    entry.target.classList.add('viewed');
+                }
+            });
+        },
+        {
+            rootMargin: '0px',
+            threshold: 0,
+        },
+    );
+
+    projectList.forEach(project => {
+        observer.observe(project);
+    });
+</script>

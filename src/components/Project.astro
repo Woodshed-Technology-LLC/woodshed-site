@@ -8,18 +8,63 @@ import { Image } from 'astro:assets';
 
 interface Props {
     alt: string;
+    /**
+     * When true, the <section> is assigned the 'viewed' class immediately. This means it will not
+     * rise to meet the section above it (because it's already the top section).
+     */
+    firstProject?: boolean;
     imageMetaData: ImageMetadata;
     intro: string;
 }
 
-const { alt, imageMetaData, intro } = Astro.props;
+const { alt, firstProject, imageMetaData, intro } = Astro.props;
 ---
 
-<div class="pt-12">
+<section class={`project ${firstProject ? ' viewed' : ''}`}>
     <slot name="header" />
     <p class="body-1 pt-4">
         {intro}
     </p>
     <Image class="pt-16" alt={alt} src={imageMetaData} />
     <slot />
-</div>
+</section>
+
+<style>
+    /*
+        When a project gets the 'viewed' class, remove its top margin. Animate this transition.
+        Adding/removing the 'viewed' class is handled by the <script> in src/pages/projects.astro.
+    */
+
+    .project {
+        padding-top: 2rem;
+        margin-top: 10rem;
+        transition-property: margin;
+        transition-duration: 750ms;
+        transition-timing-function: ease-in-out;
+    }
+
+    @media (min-height: 800px) {
+        .project {
+            padding-top: 2.33rem;
+            margin-top: 12rem;
+        }
+    }
+
+    @media (min-height: 900px) {
+        .project {
+            padding-top: 2.66rem;
+            margin-top: 24rem;
+        }
+    }
+
+    @media (min-height: 1000px) {
+        .project {
+            padding-top: 3rem;
+            margin-top: 32rem;
+        }
+    }
+
+    .project.viewed {
+        margin-top: 0rem;
+    }
+</style>
