@@ -150,6 +150,21 @@ const iconScale = 'scale-[0.6875] md:scale-100';
         }
     }
 
+    /* Animates the dialog when it opens */
+
+    @keyframes show-dialog {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    dialog#nav-dialog[open] {
+        animation: show-dialog 750ms ease normal;
+    }
+
     /* Sets up the animated hamburger menu button */
     header {
         --bar-length: 18px;
