@@ -8,7 +8,6 @@ import '@fontsource/montserrat';
 import '../styles/tailwind.css';
 import NavHeader from '../components/NavHeader.astro';
 import Footer from '../components/Footer.astro';
-import { bodyWidth } from '../constants';
 
 const { title } = Astro.props;
 ---
@@ -33,26 +32,28 @@ const { title } = Astro.props;
             property="og:image"
             content="https://raw.githubusercontent.com/Woodshed-Technology-LLC/woodshed-site/main/public/social_preview.png"
         />
-        <meta property="og:image:alt" content="Stylized logo of a woodshed" />
+        <meta
+            property="og:image:alt"
+            content="A logo representation of a woodshed"
+        />
         <meta property="og:url" content="https://woodshed.tech" />
         <meta property="og:type" content="website" />
     </head>
-    <body class="flex flex-col min-h-screen">
+    <body>
         <div
-            class="bg-gray-light-300 dark:bg-gray-dark-900 h-[94px] sm:h-[120px] border-b-2 border-primary-light-shade-500 dark:border-primary-dark-900 pt-6 sm:pt-12"
+            style={{ 'grid-area': 'header' }}
+            class="border-b-2 border-primary-light-shade-500 dark:border-primary-dark-900 bg-gray-light-300 dark:bg-gray-dark-900 pt-4 sm:pt-[68px] z-50"
         >
             <NavHeader />
         </div>
-        <div
-            class="text-gray-light-shade-900 dark:text-gray-dark-200 flex justify-center flex-grow main-content"
+        <main
+            class="py-[48px] sm:py-[58px] md:py-[86px]"
+            style={{ 'grid-area': 'main' }}
         >
-            <main class={`${bodyWidth} py-16`}>
-                <slot />
-            </main>
-        </div>
+            <slot />
+        </main>
         <Footer />
     </body>
-
     <script is:inline>
         // Initialize the theme as either 'light' or 'dark'
 
@@ -78,18 +79,53 @@ const { title } = Astro.props;
         }
         window.localStorage.setItem('theme', theme);
     </script>
-    <style>
-        .main-content {
-            @apply bg-gray-light-300;
-            background-image: url('/bg-dot-tile-light.png');
-            background-repeat: repeat;
-            background-position: top 22px left 22px;
-        }
-        .dark .main-content {
-            @apply bg-gray-dark-900;
-            background-image: url('/bg-dot-tile-dark.png');
-            background-repeat: repeat;
-            background-position: top 22px left 20px;
-        }
-    </style>
 </html>
+
+<style>
+    /* Sets up the tiled background */
+    body {
+        @apply bg-gray-light-300;
+        @apply text-gray-light-shade-900;
+        background-image: url('/bg-dot-tile-light.png');
+        background-repeat: repeat;
+        background-position: top 22px left 22px;
+    }
+    .dark body {
+        @apply bg-gray-dark-900;
+        @apply text-gray-dark-200;
+        background-image: url('/bg-dot-tile-dark.png');
+        background-repeat: repeat;
+        background-position: top 22px left 20px;
+    }
+
+    /* Sets up responsive grid layout */
+
+    body {
+        display: grid;
+        grid-template-areas:
+            'header header header'
+            '. main .'
+            'footer footer footer';
+        grid-template-columns: 60px auto 60px;
+        grid-template-rows: 60px auto auto;
+    }
+
+    @media (min-width: 544px) {
+        body {
+            grid-template-columns: 70px auto 70px;
+            grid-template-rows: 126px auto auto;
+        }
+    }
+
+    @media (min-width: 768px) {
+        body {
+            grid-template-columns: 90px auto 90px;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        body {
+            grid-template-columns: auto 840px auto;
+        }
+    }
+</style>

@@ -32,24 +32,26 @@ const imageDetails = [
 ];
 
 const subtextPadding =
-    'pl-2 sm:pl-4 md:pl-8 lg:pl-16 py-8 sm:py-10 md:py-12 lg:py-16';
+    'px-2 sm:px-4 md:px-8 lg:px-16 py-8 sm:py-10 md:py-12 lg:py-16';
 ---
 
 <MainLayout title="Projects | Woodshed">
     <h1 class="projects">Projects</h1>
     <div
-        class="border-b-[1.5px] border-primary-light-shade-500 dark:border-primary-dark-900 w-12 pt-4"
+        class="border-b-[1.5px] border-primary-light-shade-500 dark:border-primary-dark-900 w-12 pt-3"
     >
     </div>
     <div class="grid gap-24 sm:gap-28 md:gap-32">
         <Project
             alt="Trqk guided tour page"
-            id="trqk"
+            firstProject={true}
             imageMetaData={trqkGuidedTourImageMetadata}
             intro={`Built to harness the power of royalty data and unlock new opportunities for the
                 music creator economy`}
-            projectName="Trqk™"
         >
+            <div slot="header">
+                <h2 class="inline align-top projects" id="trqk">Trqk</h2>™
+            </div>
             <div class={`${subtextPadding} grid gap-4`}>
                 <p class="body-3">
                     <ExternalLink href="https://trqk.io">Trqk™</ExternalLink> is
@@ -70,13 +72,12 @@ const subtextPadding =
         </Project>
         <Project
             alt="PIX media player"
-            id="pix"
             imageMetaData={pixPlayerImageMetadata}
             intro="Academy Award-winning media asset management platform"
-            projectName="PIX"
         >
+            <h2 class="projects" id="pix" slot="header">PIX</h2>
             <div class="grid gap-4">
-                <p class={`${subtextPadding} body-3`}>
+                <p class={`body-3 ${subtextPadding}`}>
                     <ExternalLink href="https://pix.online/">PIX</ExternalLink> is
                     a media asset storage and collaboration system for film and television
                     production. It provides a security-first environment which allows
@@ -84,26 +85,28 @@ const subtextPadding =
                     markup with frame-specific accuracy.
                 </p>
                 <ImageScroller imageDetails={imageDetails} />
-                <p class={`${subtextPadding} body-3`}>
+                <!-- The scrollbar makes padding seem a little off, so we compensate in this <p>'s
+                    padding -->
+                <p
+                    class="body-3 px-2 sm:px-4 md:px-8 lg:px-16 pt-6 pb-8 sm:pt-8 sm:pb-10 md:pt-10 md:pb-12 lg:pt-14 lg:pb-16"
+                >
                     Clients including Amazon, ESPN and HBO rely on these tools
                     to remove friction from the production process without
                     leaking sensitive files before a film or episode is
                     released.
                 </p>
-                <p class="body-1">
-                    Our contributions helped to build a file management system
-                    that bridged the gap between older and newer underlying
-                    technologies.
-                </p>
             </div>
+            <p class="body-1">
+                Our contributions helped to build a file management system that
+                bridged the gap between older and newer underlying technologies.
+            </p>
         </Project>
         <Project
             alt="Loudr"
-            id="loudr"
             imageMetaData={loudrHomePageImageMetadata}
             intro="Cover song licensing platform for musicians and publishers"
-            projectName="Loudr"
         >
+            <h2 class="projects" id="loudr" slot="header">Loudr</h2>
             <div class={subtextPadding}>
                 <p class="body-3">
                     Loudr automates the process of acquiring mechanical licenses
@@ -119,3 +122,33 @@ const subtextPadding =
         </Project>
     </div>
 </MainLayout>
+
+<script>
+    /**
+     * When a project becomes visible, add the 'viewed' class to it. This results in the effect of
+     * the project rising to meet the one above it as the user scrolls down. The animation is set
+     * up via the <style> in src/components/Project.astro.
+     */
+    const projectList = document.querySelectorAll('.project');
+
+    const observer = new IntersectionObserver(
+        entries => {
+            entries.forEach(entry => {
+                if (
+                    entry.isIntersecting &&
+                    !entry.target.classList.contains('viewed')
+                ) {
+                    entry.target.classList.add('viewed');
+                }
+            });
+        },
+        {
+            rootMargin: '0px',
+            threshold: 0,
+        },
+    );
+
+    projectList.forEach(project => {
+        observer.observe(project);
+    });
+</script>

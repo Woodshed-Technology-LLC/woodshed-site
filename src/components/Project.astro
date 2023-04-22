@@ -9,22 +9,103 @@ import { Image } from 'astro:assets';
 interface Props {
     alt: string;
     /**
-     * Used to refer to this section in an anchor link
+     * When true, the <section> is assigned the 'viewed' class immediately. This means it will not
+     * rise to meet the section above it (because it's already the top section).
      */
-    id: string;
+    firstProject?: boolean;
     imageMetaData: ImageMetadata;
     intro: string;
-    projectName: string;
 }
 
-const { alt, projectName, imageMetaData, intro, id } = Astro.props;
+const { alt, firstProject, imageMetaData, intro } = Astro.props;
 ---
 
-<div>
-    <h2 class="projects pt-12" id={id}>{projectName}</h2>
+<section class={`project ${firstProject ? ' viewed' : ''}`}>
+    <slot name="header" />
     <p class="body-1 pt-4">
         {intro}
     </p>
-    <Image class="pt-12" alt={alt} src={imageMetaData} />
+    <Image class="pt-16" alt={alt} src={imageMetaData} />
     <slot />
-</div>
+</section>
+
+<style>
+    section {
+        --height-sm: 800px;
+        --height-md: 900px;
+        --height-lg: 1000px;
+    }
+    /*
+        When a project gets the 'viewed' class, remove its top margin. Animate this transition.
+        Adding/removing the 'viewed' class is handled by the <script> in src/pages/projects.astro.
+    */
+
+    .project {
+        padding-top: 2rem;
+    }
+
+    @media (min-height: var(--height-sm)) {
+        .project {
+            padding-top: 2.33rem;
+        }
+    }
+
+    @media (min-height: var(--height-md)) {
+        .project {
+            padding-top: 2.66rem;
+        }
+    }
+
+    @media (min-height: var(--height-lg)) {
+        .project {
+            padding-top: 3rem;
+        }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        .project {
+            margin-top: 10rem;
+            will-change: margin;
+            transition-property: margin;
+            transition-duration: 750ms;
+            transition-timing-function: ease-in-out;
+        }
+
+        @media (min-height: var(--height-sm)) {
+            .project {
+                margin-top: 12rem;
+            }
+        }
+
+        @media (min-height: var(--height-md)) {
+            .project {
+                margin-top: 24rem;
+            }
+        }
+
+        @media (min-height: var(--height-lg)) {
+            .project {
+                margin-top: 32rem;
+            }
+        }
+
+        .project.viewed {
+            margin-top: 0rem;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .project {
+            opacity: 0;
+            will-change: opacity;
+            transition-property: opacity;
+            transition-duration: 1000ms;
+            transition-timing-function: ease-in-out;
+            transition-delay: 400ms;
+        }
+
+        .project.viewed {
+            opacity: 1;
+        }
+    }
+</style>

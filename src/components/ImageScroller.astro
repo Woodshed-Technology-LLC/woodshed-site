@@ -18,9 +18,7 @@ interface Props {
 const { imageDetails } = Astro.props;
 ---
 
-<div
-    class="custom-scrollbar overflow-x-auto whitespace-nowrap pb-4 md:pb-4 lg:pb-6 my-6"
->
+<div class="custom-scrollbar overflow-x-auto whitespace-nowrap pb-4 lg:pb-6">
     {
         imageDetails.map(({ alt, caption, imageMetaData }, index) => (
             <div class={`inline-block${index !== 0 ? ' pl-12' : ''}`}>

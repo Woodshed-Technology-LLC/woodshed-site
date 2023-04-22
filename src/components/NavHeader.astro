@@ -1,11 +1,8 @@
 ---
 /**
  * A top navigation header that includes the Woodshed icon on the left and a hamburger menu icon on
- * the right, which opens to reveal the site navigation. The menu is implemented with the [Modal
- * from Flowbite](https://flowbite.com/docs/components/modal/), which handles the state management
- * aspect of the modal and some of the Aria attributes. We use
- * [focus-trap](https://github.com/focus-trap/focus-trap) to trap focus within the modal when it is
- * open.
+ * the right, which opens to reveal the site navigation. The menu is implemented with the native
+ * <dialog> element.
  */
 
 import DarkModeSwitch from './DarkModeSwitch.astro';
@@ -13,39 +10,47 @@ import NavHighlight from './NavHighlight.astro';
 const iconScale = 'scale-[0.6875] md:scale-100';
 ---
 
-<header id="navigation" class="flex justify-center w-screen">
-    <!-- When the modal is open, it inserts a <div> just before the closing </body> tag in order to
-        render the backdrop (i.e. overlay). This added div has a fixed position with z-40, so we
-        need to add z-50 here in order to achieve a higher stacking context.
-     -->
-    <div class="flex justify-between max-w-[956px] w-full fixed z-50 px-6">
+<header id="nav-header" class="fixed w-full">
+    <div id="header-grid">
         <!-- Woodshed icon (home button) -->
-        <div class={iconScale}>
+        <div class="pr-4 flex justify-end z-10" style={{ 'grid-area': 'left' }}>
             <a href="/" id="woodshed-icon">
                 <img
-                    class="block dark:hidden"
+                    class={`${iconScale} block dark:hidden`}
                     src="/icon-black.svg"
                     alt="Woodshed icon"
                 />
                 <img
-                    class="hidden dark:block"
+                    class={`${iconScale} hidden dark:block`}
                     src="/icon-light-blue.svg"
                     alt="Woodshed icon"
                 />
             </a>
         </div>
-        <!-- Main modal -->
-        <div
-            id="nav-modal"
-            tabindex="-1"
-            aria-hidden="true"
-            class="absolute z-50 top-[-24px] right-0 hidden w-full overflow-x-hidden overflow-y-auto"
-        >
-            <!-- Modal content -->
+        <div class="pl-4" style={{ 'grid-area': 'right' }}>
+            <!-- Modal toggle (animated hamburger icon) -->
+            <button
+                class="flex-none z-50 mt-2"
+                id="toggle-nav"
+                aria-label="Toggle navigation menu"
+                type="button"
+            >
+                <div id="hamburger" class={iconScale}>
+                    <div id="icon"></div>
+                </div>
+            </button>
+            <!-- Modal backdrop - shown only when modal is open -->
             <div
-                class="relative bg-primary-light-shade-500 dark:bg-gray-dark-shade-400 pt-16 px-12 pb-12 w-[375px] h-[548px]"
-                id="nav-menu"
-                aria-label="Navigation menu"
+                id="nav-backdrop"
+                class="fixed inset-0 bg-white opacity-70 dark:bg-black dark:opacity-50 hidden"
+            >
+            </div>
+            <!-- Modal content - this is placed here so it is positioned relative to the button and
+                so that the button sits above the dialog in the stacking order
+            -->
+            <dialog
+                id="nav-dialog"
+                class="bg-primary-light-shade-500 dark:bg-gray-dark-shade-400 pt-16 px-12 pb-12 w-[375px] h-[548px] top-[-43px] left-[-331px] md:top-[-53px] md:left-[-321px] relative"
             >
                 <nav>
                     <ul
@@ -55,7 +60,10 @@ const iconScale = 'scale-[0.6875] md:scale-100';
                             <a href="/">Process</a>
                         </li>
                         <li class="hide-nav">
-                            <a href="/projects/">Projects</a>
+                            <a href="/projects">Projects</a>
+                        </li>
+                        <li class="hide-nav">
+                            <a href="/about-us">About us</a>
                         </li>
                     </ul>
                     <div class="mr-24 pt-12 border-b border-gray-light-100">
@@ -65,7 +73,7 @@ const iconScale = 'scale-[0.6875] md:scale-100';
                     <DarkModeSwitch />
                 </div>
                 <p
-                    class="pt-16 font-cta text-28 leading-9 pb-4 text-gray-light-300 dark:text-primary-dark-200 font-medium"
+                    class="pt-14 font-cta text-28 leading-9 pb-4 text-gray-light-300 dark:text-primary-dark-200 font-medium"
                 >
                     Come say hello!
                 </p>
@@ -76,104 +84,102 @@ const iconScale = 'scale-[0.6875] md:scale-100';
                         rel="noreferrer">hello@woodshed.tech</a
                     >
                 </NavHighlight>
-            </div>
+            </dialog>
         </div>
-        <!-- Modal toggle (animated hamburger icon) -->
-        <button
-            class="flex-none z-50 mt-2"
-            id="toggle-nav"
-            aria-label="Toggle navigation menu"
-            type="button"
-        >
-            <div id="hamburger" class={iconScale}>
-                <div id="icon"></div>
-            </div>
-        </button>
     </div>
 </header>
 
 <script>
-    import { Modal } from 'flowbite';
-    import * as focusTrap from 'focus-trap';
-
+    const $toggleElement =
+        document.querySelector<HTMLButtonElement>('#toggle-nav');
+    const $header = document.getElementById('nav-header');
+    const $dialog = document.querySelector<HTMLDialogElement>('#nav-dialog');
     const $hideElements = document.querySelectorAll('.hide-nav');
-    const $modalElement = document.querySelector<HTMLDivElement>('#nav-modal');
-    const $toggleElement = document.getElementById('toggle-nav');
-    const $navigation = document.getElementById('navigation');
-    const $woodshedIcon = document.getElementById('woodshed-icon');
+    const $backdrop = document.getElementById('nav-backdrop');
 
-    const trap = focusTrap.createFocusTrap('#navigation');
-
-    // create a new modal component
-    const modal = new Modal($modalElement, {
-        placement: 'top-right',
-        backdrop: 'dynamic',
-        backdropClasses:
-            'bg-gray-light-shade-900 opacity-50 fixed inset-0 z-40',
-
-        closable: true,
-        onHide: () => {
-            if ($navigation) {
-                $navigation.classList.remove('open');
+    if ($toggleElement) {
+        $toggleElement.onclick = () => {
+            if ($dialog && $header && $backdrop) {
+                if ($dialog.open) {
+                    $dialog.close();
+                    $header.classList.remove('open');
+                    $backdrop.classList.add('hidden');
+                } else {
+                    // We use `show()` here rather than `showModal()` because it allows us to
+                    // position the dialog as desired. If we use `showModal()`, we end up fighting
+                    // the user agent styles and resorting to hacky event-based positioning.
+                    $dialog.show();
+                    $header.classList.add('open');
+                    $backdrop.classList.remove('hidden');
+                }
             }
-
-            if ($woodshedIcon) {
-                $woodshedIcon.removeAttribute('inert');
-            }
-
-            trap.deactivate();
-        },
-        onShow: () => {
-            if ($navigation) {
-                $navigation.classList.add('open');
-            }
-
-            if ($woodshedIcon) {
-                $woodshedIcon.setAttribute('inert', '');
-            }
-
-            trap.activate();
-        },
-    });
+        };
+    }
 
     Array.from($hideElements).forEach($hideElement => {
         $hideElement.addEventListener('click', () => {
-            modal.hide();
+            if ($dialog) {
+                $dialog.close();
+            }
         });
     });
-
-    if ($toggleElement) {
-        $toggleElement.addEventListener('click', () => {
-            modal.toggle();
-        });
-    }
 </script>
 
 <style>
-    /* Add an animation that fades the menu into the screen when it opens */
+    /* Sets up the responsive grid layout */
+    #header-grid {
+        display: grid;
+        grid-template-areas: 'left-margin left center right right-margin';
+        grid-template-columns: 0px 60px auto 60px 0px;
+        grid-template-rows: 60px;
+    }
 
-    @keyframes show {
+    @media (min-width: 544px) {
+        #header-grid {
+            grid-template-columns: 0px 70px auto 70px 0px;
+            grid-template-rows: 126px;
+        }
+    }
+
+    @media (min-width: 768px) {
+        #header-grid {
+            grid-template-columns: 0px 90px auto 90px 0px;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        #header-grid {
+            grid-template-columns: auto 90px 840px 90px auto;
+        }
+    }
+
+    /* Animates the dialog when it opens */
+
+    @keyframes show-dialog {
+        0% {
+            opacity: 0;
+        }
         100% {
             opacity: 1;
         }
     }
-    #nav-modal {
-        animation: show 500ms 100ms cubic-bezier(0.38, 0.97, 0.56, 0.76)
-            forwards;
-        opacity: 0;
+
+    dialog#nav-dialog[open] {
+        animation: show-dialog 750ms ease normal;
     }
 
-    /* Set up the animated hamburger menu button */
-    #navigation {
-        --bar-length: 24px;
-        --bar-thickness: 3px;
-        --bar-offset: 6px;
+    /* Sets up the animated hamburger menu button */
+    header {
+        --bar-length: 18px;
+        --bar-thickness: 2px;
+        --bar-offset: 5px;
         --transition-duration: 0.5s;
     }
 
     #toggle-nav {
         position: relative;
-        top: calc(-1 * var(--bar-thickness));
+        top: -5px;
+        left: 8px;
         width: var(--bar-length);
         height: var(--bar-length);
     }
@@ -196,7 +202,7 @@ const iconScale = 'scale-[0.6875] md:scale-100';
         position: absolute;
         width: var(--bar-length);
         height: var(--bar-thickness);
-        border-radius: calc(0.5 * var(--bar-thickness));
+        border-radius: var(--bar-thickness);
         content: '';
         top: calc(-1 * var(--bar-offset));
     }
@@ -214,7 +220,7 @@ const iconScale = 'scale-[0.6875] md:scale-100';
         position: absolute;
         width: var(--bar-length);
         height: var(--bar-thickness);
-        border-radius: calc(0.5 * var(--bar-thickness));
+        border-radius: var(--bar-thickness);
         content: '';
         top: var(--bar-offset);
     }
@@ -227,11 +233,11 @@ const iconScale = 'scale-[0.6875] md:scale-100';
         @apply bg-primary-dark-100;
     }
 
-    #navigation.open #hamburger #icon {
+    #nav-header.open #hamburger #icon {
         transition: 0.5s;
     }
 
-    #navigation.open #hamburger:before {
+    #nav-header.open #hamburger:before {
         transform: rotateZ(45deg) scaleX(1.33)
             translate(
                 calc(0.6 * var(--bar-offset)),
@@ -239,7 +245,7 @@ const iconScale = 'scale-[0.6875] md:scale-100';
             );
     }
 
-    #navigation.open #hamburger:after {
+    #nav-header.open #hamburger:after {
         transform: rotateZ(-45deg) scaleX(1.33)
             translate(
                 calc(0.6 * var(--bar-offset)),

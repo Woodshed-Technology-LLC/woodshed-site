@@ -4,10 +4,7 @@ const {
 } = require('./src/utils/addBaseStylesToTailwind.cjs');
 
 module.exports = {
-    content: [
-        './src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}',
-        './node_modules/flowbite/**/*.js',
-    ],
+    content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
     theme: {
         colors: {
             transparent: 'transparent',
@@ -94,7 +91,7 @@ module.exports = {
             },
         },
         fontFamily: {
-            sans: ['Inter', ...defaultTheme.fontFamily.sans],
+            sans: ['InterVariable', ...defaultTheme.fontFamily.sans],
             cta: ['Montserrat', ...defaultTheme.fontFamily.sans],
         },
         fontSize: {
@@ -118,5 +115,5 @@ module.exports = {
     },
     darkMode: 'class',
     safelist: ['dark'],
-    plugins: [require('flowbite/plugin'), addBaseStylesToTailwind],
+    plugins: [addBaseStylesToTailwind],
 };

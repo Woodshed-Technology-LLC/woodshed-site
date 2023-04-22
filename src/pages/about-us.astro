@@ -1,0 +1,66 @@
+---
+/**
+ * A listing of our past projects, including images and links where appropriate.
+ */
+import MainLayout from '../layouts/MainLayout.astro';
+import StaffProfile from '../components/StaffProfile.astro';
+import alexNittaImageMetaData from '../assets/alex_nitta.jpg';
+import stevenBryanImageMetaData from '../assets/steven_bryan.jpg';
+---
+
+<MainLayout title="About us | Woodshed">
+    <h1 class="projects">About us</h1>
+    <div
+        class="border-b-[1.5px] border-primary-light-shade-500 dark:border-primary-dark-900 w-12 pt-3"
+    >
+    </div>
+    <StaffProfile
+        alt="Pencil drawing of Alex Nitta"
+        imageMetaData={alexNittaImageMetaData}
+        name="Alex Nitta"
+        title="Lead Developer / President"
+    >
+        <p>
+            My name is Alex Nitta. I'm a web developer based in Santa Rosa,
+            California. My introduction to programming was through learning to
+            write HTML in the computer lab at my elementary school. Since those
+            early days, I've been fortunate to witness the evolution of the web
+            from a collection of static documents into a highly dynamic and
+            immersive medium.
+        </p>
+        <p>
+            I starting working exclusively as a developer in 2016, and spent
+            several years on teams ranging in size from a handful of engineers
+            to over fifty. In 2022, I decided to establish Woodshed as an agency
+            so that I can leverage my experience on the projects that most
+            inspire me.
+        </p>
+        <p>
+            I'm also lucky to be a husband to a wonderfully supportive wife and
+            the father of two young and energetic kids. When I'm not chasing
+            them around, I enjoy trail running, photography, and gardening.
+        </p>
+    </StaffProfile>
+    <StaffProfile
+        alt="Pencil drawing of Steven Bryan"
+        imageMetaData={stevenBryanImageMetaData}
+        name="Steven Bryan"
+        title="UI/UX Designer"
+    >
+        <p>
+            Hi, I'm Steven. I'm a masters graduate of the Royal College of Art,
+            and I’ve been in the field of visual design for over 20 years.
+        </p>
+        <p>
+            A student of graphics and textiles, I feel privileged that I can
+            turn my hand to just about any visual challenge I am faced with. As
+            a designer for Woodshed, I’m very interested in how our craft can be
+            simplified, made more intuitive and greater to look at!
+        </p>
+        <p>
+            I’m also an avid home mechanic, taking interest in restoring classic
+            cars. Learning how these icons of vehicular design were engineered
+            and designed is always a source of inspiration to me.
+        </p>
+    </StaffProfile>
+</MainLayout>
