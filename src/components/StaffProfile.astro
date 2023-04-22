@@ -17,13 +17,11 @@ const { alt, imageMetaData, name, title } = Astro.props;
 
 <div class="py-10">
     <div class="flex flex-col items-center justify-center">
-        <Image
-            alt={alt}
-            src={imageMetaData}
-            class="max-w-[232px] sm:max-w-[400px] lg:w-[312px] lg:h-[428px]"
-        />
+        <Image width={300} alt={alt} src={imageMetaData} />
+        <h2 class="py-8 font-medium text-20">{name}</h2>
     </div>
-    <h2>{name}</h2>
-    <h3>{title}</h3>
-    <slot />
+    <h3 class="font-semibold text-24 py-8">{title}</h3>
+    <div class="text-22 grid gap-4">
+        <slot />
+    </div>
 </div>
