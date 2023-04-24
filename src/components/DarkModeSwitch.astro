@@ -15,6 +15,7 @@
             id="dark-mode-switch"
             role="switch"
             type="button"
+            aria-labelledby="dark-mode-on-off"
         >
             <span
                 id="dark-mode-switch-thumb"
@@ -32,17 +33,21 @@
 </div>
 
 <script>
-    const button = document.getElementById('dark-mode-switch');
-    const onOff = document.getElementById('dark-mode-on-off');
+    const $button = document.getElementById('dark-mode-switch');
+    const $onOff = document.getElementById('dark-mode-on-off');
 
-    if (document.documentElement.classList.contains('dark')) {
-        if (onOff) {
-            onOff.innerHTML = 'on';
+    if ($onOff && $button) {
+        if (document.documentElement.classList.contains('dark')) {
+            $onOff.innerHTML = 'on';
+            $button.ariaChecked = 'true';
+        } else {
+            $onOff.innerHTML = 'off';
+            $button.ariaChecked = 'false';
         }
     }
 
-    if (button) {
-        button.addEventListener('click', () => {
+    if ($onOff && $button) {
+        $button.addEventListener('click', () => {
             const currentTheme = document.documentElement.classList.contains(
                 'dark',
             )
@@ -52,15 +57,13 @@
             if (currentTheme === 'dark') {
                 localStorage.setItem('theme', 'light');
                 document.documentElement.classList.remove('dark');
-                if (onOff) {
-                    onOff.innerHTML = 'off';
-                }
+                $onOff.innerHTML = 'off';
+                $button.ariaChecked = 'false';
             } else {
                 localStorage.setItem('theme', 'dark');
                 document.documentElement.classList.add('dark');
-                if (onOff) {
-                    onOff.innerHTML = 'on';
-                }
+                $onOff.innerHTML = 'on';
+                $button.ariaChecked = 'true';
             }
         });
     }
