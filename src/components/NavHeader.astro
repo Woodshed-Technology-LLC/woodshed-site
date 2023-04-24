@@ -13,29 +13,29 @@ const iconScale = 'scale-[0.6875] md:scale-100';
 <header id="nav-header" class="fixed w-full">
     <div id="header-grid">
         <!-- Woodshed icon (home button) -->
-        <div class="pr-4 flex justify-end z-10" style={{ 'grid-area': 'left' }}>
-            <a href="/" id="woodshed-icon">
+        <div class="pr-3 flex justify-end z-10" style={{ 'grid-area': 'left' }}>
+            <a href="/" id="woodshed-icon" class="h-[44px] w-[44px] grid">
                 <img
-                    class={`${iconScale} block dark:hidden`}
+                    class={`${iconScale} block dark:hidden place-self-center`}
                     src="/icon-black.svg"
                     alt="Woodshed icon"
                 />
                 <img
-                    class={`${iconScale} hidden dark:block`}
+                    class={`${iconScale} hidden dark:block place-self-center`}
                     src="/icon-light-blue.svg"
                     alt="Woodshed icon"
                 />
             </a>
         </div>
-        <div class="pl-4" style={{ 'grid-area': 'right' }}>
+        <div class="pl-3" style={{ 'grid-area': 'right' }}>
             <!-- Modal toggle (animated hamburger icon) -->
             <button
-                class="flex-none z-50 mt-2"
+                class="flex-none z-50 h-[44px] w-[44px] grid"
                 id="toggle-nav"
                 aria-label="Toggle navigation menu"
                 type="button"
             >
-                <div id="hamburger" class={iconScale}>
+                <div id="hamburger" class={`${iconScale} place-self-center`}>
                     <div id="icon"></div>
                 </div>
             </button>
@@ -50,7 +50,7 @@ const iconScale = 'scale-[0.6875] md:scale-100';
             -->
             <dialog
                 id="nav-dialog"
-                class="bg-primary-light-shade-500 dark:bg-gray-dark-shade-400 pt-16 px-12 pb-12 w-[375px] h-[548px] top-[-43px] left-[-331px] md:top-[-53px] md:left-[-321px] relative"
+                class="bg-primary-light-shade-500 dark:bg-gray-dark-shade-400 pt-16 px-12 pb-12 w-[375px] h-[548px] top-[-54px] left-[-327px] md:top-[-64px] md:left-[-317px] relative"
             >
                 <nav>
                     <ul
@@ -90,36 +90,35 @@ const iconScale = 'scale-[0.6875] md:scale-100';
 </header>
 
 <script>
-    const $toggleElement =
-        document.querySelector<HTMLButtonElement>('#toggle-nav');
-    const $header = document.getElementById('nav-header');
-    const $dialog = document.querySelector<HTMLDialogElement>('#nav-dialog');
-    const $hideElements = document.querySelectorAll('.hide-nav');
-    const $backdrop = document.getElementById('nav-backdrop');
+    const toggleNav = document.querySelector<HTMLButtonElement>('#toggle-nav');
+    const navHeader = document.getElementById('nav-header');
+    const navDialog = document.querySelector<HTMLDialogElement>('#nav-dialog');
+    const hideNavTriggers = document.querySelectorAll('.hide-nav');
+    const navBackdrop = document.getElementById('nav-backdrop');
 
-    if ($toggleElement) {
-        $toggleElement.onclick = () => {
-            if ($dialog && $header && $backdrop) {
-                if ($dialog.open) {
-                    $dialog.close();
-                    $header.classList.remove('open');
-                    $backdrop.classList.add('hidden');
+    if (toggleNav) {
+        toggleNav.onclick = () => {
+            if (navDialog && navHeader && navBackdrop) {
+                if (navDialog.open) {
+                    navDialog.close();
+                    navHeader.classList.remove('open');
+                    navBackdrop.classList.add('hidden');
                 } else {
                     // We use `show()` here rather than `showModal()` because it allows us to
                     // position the dialog as desired. If we use `showModal()`, we end up fighting
                     // the user agent styles and resorting to hacky event-based positioning.
-                    $dialog.show();
-                    $header.classList.add('open');
-                    $backdrop.classList.remove('hidden');
+                    navDialog.show();
+                    navHeader.classList.add('open');
+                    navBackdrop.classList.remove('hidden');
                 }
             }
         };
     }
 
-    Array.from($hideElements).forEach($hideElement => {
-        $hideElement.addEventListener('click', () => {
-            if ($dialog) {
-                $dialog.close();
+    Array.from(hideNavTriggers).forEach(hideNavTrigger => {
+        hideNavTrigger.addEventListener('click', () => {
+            if (navDialog) {
+                navDialog.close();
             }
         });
     });
@@ -178,14 +177,12 @@ const iconScale = 'scale-[0.6875] md:scale-100';
 
     #toggle-nav {
         position: relative;
-        top: -5px;
-        left: 8px;
-        width: var(--bar-length);
-        height: var(--bar-length);
     }
 
     #hamburger {
         position: absolute;
+        top: 20px;
+        left: 12px;
         transition-duration: var(--transition-duration);
     }
 
