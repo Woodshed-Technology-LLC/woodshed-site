@@ -33,21 +33,21 @@
 </div>
 
 <script>
-    const $button = document.getElementById('dark-mode-switch');
-    const $onOff = document.getElementById('dark-mode-on-off');
+    const darkModeSwitch = document.getElementById('dark-mode-switch');
+    const onOff = document.getElementById('dark-mode-on-off');
 
-    if ($onOff && $button) {
+    if (onOff && darkModeSwitch) {
         if (document.documentElement.classList.contains('dark')) {
-            $onOff.innerHTML = 'on';
-            $button.ariaChecked = 'true';
+            onOff.innerHTML = 'on';
+            darkModeSwitch.ariaChecked = 'true';
         } else {
-            $onOff.innerHTML = 'off';
-            $button.ariaChecked = 'false';
+            onOff.innerHTML = 'off';
+            darkModeSwitch.ariaChecked = 'false';
         }
     }
 
-    if ($onOff && $button) {
-        $button.addEventListener('click', () => {
+    if (onOff && darkModeSwitch) {
+        darkModeSwitch.addEventListener('click', () => {
             const currentTheme = document.documentElement.classList.contains(
                 'dark',
             )
@@ -57,13 +57,13 @@
             if (currentTheme === 'dark') {
                 localStorage.setItem('theme', 'light');
                 document.documentElement.classList.remove('dark');
-                $onOff.innerHTML = 'off';
-                $button.ariaChecked = 'false';
+                onOff.innerHTML = 'off';
+                darkModeSwitch.ariaChecked = 'false';
             } else {
                 localStorage.setItem('theme', 'dark');
                 document.documentElement.classList.add('dark');
-                $onOff.innerHTML = 'on';
-                $button.ariaChecked = 'true';
+                onOff.innerHTML = 'on';
+                darkModeSwitch.ariaChecked = 'true';
             }
         });
     }

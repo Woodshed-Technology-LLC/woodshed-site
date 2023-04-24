@@ -18,7 +18,7 @@ The essential goal of UI/UX design is to match the visual aesthetic of a product
 
 There are many small choices to make when building up a design. We can best summarize them in a style guide, which we use to keep our designs consistent and on-brand.
 
-The following is an excerpt from the Woodshed style guide, which helps explain the basis for our visual language.
+The following is an excerpt from the Woodshed style guide.
 
 #### About
 
@@ -37,7 +37,7 @@ The look and feel of the site is all about making a trustworthy, solid plan for 
 
 **Positioning**
 
-Woodshed is a small agency that will scale in time, so we are currently a bespoke solution for small to mid-sized business’ UI/UX needs.
+Woodshed is a small agency that will scale in time, so we are currently a bespoke solution for small- to mid-sized business’ UI/UX needs.
 
 **Promise**
 
@@ -49,7 +49,7 @@ To always collaborate effectively, making strong plans and solutions for product
 
 The look and feel of the logo is a minimalistic representation of a home, shed or barn. A place that represents comfort, a place to be oneself, to relax, think, hone skills and make plans.
 
-Its blocky aesthetic creates a a form of technical symbolism, reminiscent of speech marks, punctuation or coded language.
+Its blocky aesthetic creates a form of technical symbolism, reminiscent of speech marks, punctuation or coded language.
 
 **Positioning**
 
@@ -57,7 +57,7 @@ The logo should always be placed to the top left of the page and be able to scro
 
 **Scale**
 
-See measurements below. Both sizes should be inside a 40px by 40px frame to meet tap/click targets.
+See measurements below. Both sizes should be inside a 44px by 44px frame to enhance accessibility for tap targets.
 
 <img alt="Woodshed logo" src="./docs/assets/woodshed_logo.png" width="300"></img>
 
@@ -92,7 +92,7 @@ Montserrat, clean and simple, a classic alternative to Gotham has become more fu
 
 ## Development
 
-The development process consists of a series of steps which lead to a publicly available, fully functional website. One aspect of this process is choosing which tools and technologies to use. This is not the only aspect of building a good website, or even the most important, but it does influence the outcome in several important ways. Good technology choices help because they get out of your way and help you build faster. In some cases, they also allow you to deliver a better user experience by making it easier to achieve good performance.
+The development process consists of a series of steps which lead to a publicly available, fully functional website. One aspect of this process is choosing which tools and technologies to use. This is not the only aspect of building a good website, or even the most important, but it does influence the outcome in several important ways. Good technologies help because they get out of your way and help you build faster. In some cases, they also allow you to deliver a better user experience by making it easier to achieve good performance.
 
 ### Web technologies
 
@@ -122,7 +122,7 @@ In its initial version, woodshed.tech is a simple website and it could be built 
 
     Frameworks are well-documented and this gives us a large knowledge base to pull from when we need to figure out how to implement a feature or fix a bug. If we don't have write documentation for our own custom setup, it means we can spend more time on actually building the project.
 
--   **Tooling portability**
+-   **Tool portability**
 
     As designers and developers, we're used to working with certain technologies, and many frameworks support the same tools we use in other projects. This allows us to avoid context switching as much as possible, which helps us stay productive.
 
@@ -163,4 +163,4 @@ There are many good options when picking a web framework in 2023. Here are the c
 
 ## Have a look around
 
-If you're interested in diving deeper into how we built [woodshed.tech](https://woodshed.tech), the best way is to have a look around. Feel free to explore the code - the main page is in [./src/pages/index.astro](./src/pages/index.astro), and this might be a good place to start.
+If you have some development experience and are interested in diving deeper into how we built [woodshed.tech](https://woodshed.tech), the best way is to have a look around. Feel free to explore the code - a good place to start is with the main page is in [./src/pages/index.astro](./src/pages/index.astro).
