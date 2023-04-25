@@ -171,15 +171,7 @@ const iconScale = 'scale-[0.6875] md:scale-100';
     });
 </script>
 
-<style>
-    header {
-        --animation-duration: 400ms;
-        --backdrop-opacity: 0.7;
-        --bar-length: 18px;
-        --bar-thickness: 2px;
-        --bar-offset: 5px;
-    }
-
+<style is:global>
     /* On smaller devices, ensure that the dialog covers the entire width of the screen */
     #nav-dialog {
         height: 548px;
@@ -199,11 +191,21 @@ const iconScale = 'scale-[0.6875] md:scale-100';
     }
 
     /* For 'sm' screens and above, adjust the positioning to accomodate a larger hamburger button */
-    @media (min-width: 544px) {
+    @media (min-width: 768px) {
         #nav-dialog {
             top: -64px;
             left: -317px;
         }
+    }
+</style>
+
+<style>
+    header {
+        --animation-duration: 400ms;
+        --backdrop-opacity: 0.7;
+        --bar-length: 18px;
+        --bar-thickness: 2px;
+        --bar-offset: 5px;
     }
 
     /* Sets up the responsive grid layout */
