@@ -17,7 +17,8 @@ export default defineConfig({
             },
         }),
         sitemap(),
-        compress(),
+        // Turn off CSS compression because it causes bugs in the NavHeader position
+        compress({ css: false }),
     ],
     sitemap: true,
     site: 'https://woodshed.tech',
