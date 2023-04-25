@@ -40,30 +40,36 @@ const iconScale = 'scale-[0.6875] md:scale-100';
                 </div>
             </button>
             <!-- Modal backdrop - shown only when modal is open -->
-            <div
-                id="nav-backdrop"
-                class="fixed inset-0 bg-white opacity-70 dark:bg-black dark:opacity-50 hidden"
-            >
-            </div>
+            <div id="nav-backdrop" class="fixed inset-0 hidden"></div>
             <!-- Modal content - this is placed here so it is positioned relative to the button and
                 so that the button sits above the dialog in the stacking order
             -->
             <dialog
                 id="nav-dialog"
-                class="bg-primary-light-shade-500 dark:bg-gray-dark-shade-400 pt-16 px-12 pb-12 w-[375px] h-[548px] top-[-54px] left-[-327px] md:top-[-64px] md:left-[-317px] relative"
+                class="bg-primary-light-shade-500 dark:bg-gray-dark-shade-400 pt-16 px-12 pb-12 relative"
             >
                 <nav>
                     <ul
-                        class="text-22 flex flex-col gap-5 text-gray-light-shade-800 dark:text-primary-dark-200"
+                        class="slide-down text-22 flex flex-col gap-5 text-gray-light-shade-800 dark:text-primary-dark-200"
                     >
-                        <li class="hide-nav">
-                            <a href="/">Process</a>
+                        <li>
+                            <button type="button" class="hide-nav" data-href="/"
+                                >Process</button
+                            >
                         </li>
-                        <li class="hide-nav">
-                            <a href="/projects">Projects</a>
+                        <li>
+                            <button
+                                class="hide-nav"
+                                type="button"
+                                data-href="/projects">Projects</button
+                            >
                         </li>
-                        <li class="hide-nav">
-                            <a href="/about-us">About us</a>
+                        <li>
+                            <button
+                                type="button"
+                                class="hide-nav"
+                                data-href="/about-us">About us</button
+                            >
                         </li>
                     </ul>
                     <div class="mr-24 pt-12 border-b border-gray-light-100">
@@ -72,18 +78,20 @@ const iconScale = 'scale-[0.6875] md:scale-100';
                 <div class="pt-10 flex flex-col">
                     <DarkModeSwitch />
                 </div>
-                <p
-                    class="pt-14 font-cta text-28 leading-9 pb-4 text-gray-light-300 dark:text-primary-dark-200 font-medium"
-                >
-                    Come say hello!
-                </p>
-                <NavHighlight>
-                    <a
-                        class="hide-nav text-gray-light-shade-600 dark:text-primary-dark-200 text-22"
-                        href="mailto:hello@woodshed.tech"
-                        rel="noreferrer">hello@woodshed.tech</a
+                <div class="slide-up">
+                    <p
+                        class="pt-14 font-cta text-28 leading-9 pb-4 text-gray-light-300 dark:text-primary-dark-200 font-medium"
                     >
-                </NavHighlight>
+                        Come say hello!
+                    </p>
+                    <NavHighlight>
+                        <a
+                            class="hide-nav text-gray-light-shade-600 dark:text-primary-dark-200 text-22"
+                            href="mailto:hello@woodshed.tech"
+                            rel="noreferrer">hello@woodshed.tech</a
+                        >
+                    </NavHighlight>
+                </div>
             </dialog>
         </div>
     </div>
@@ -96,20 +104,50 @@ const iconScale = 'scale-[0.6875] md:scale-100';
     const hideNavTriggers = document.querySelectorAll('.hide-nav');
     const navBackdrop = document.getElementById('nav-backdrop');
 
+    const openDialog = () => {
+        if (navDialog && navHeader && navBackdrop && toggleNav) {
+            // We use `show()` here rather than `showModal()` because it allows us to
+            // position the dialog as desired. If we use `showModal()`, we end up fighting
+            // the user agent styles and resorting to hacky event-based positioning.
+            navDialog.show();
+            toggleNav.classList.add('open');
+            navHeader.classList.add('open');
+            navBackdrop.classList.remove('hidden');
+        }
+    };
+
+    const closeDialog = (callback?: () => void) => {
+        if (navDialog && navHeader && navBackdrop) {
+            toggleNav.classList.remove('open');
+            navHeader.classList.add('closing');
+
+            const afterAnimation = () => {
+                navDialog.close();
+                navHeader.classList.remove('open');
+                navBackdrop.classList.add('hidden');
+                navHeader.classList.remove('closing');
+                navDialog.removeEventListener(
+                    'animationend',
+                    afterAnimation,
+                    false,
+                );
+
+                if (callback) {
+                    callback();
+                }
+            };
+
+            navDialog.addEventListener('animationend', afterAnimation);
+        }
+    };
+
     if (toggleNav) {
         toggleNav.onclick = () => {
             if (navDialog && navHeader && navBackdrop) {
                 if (navDialog.open) {
-                    navDialog.close();
-                    navHeader.classList.remove('open');
-                    navBackdrop.classList.add('hidden');
+                    closeDialog();
                 } else {
-                    // We use `show()` here rather than `showModal()` because it allows us to
-                    // position the dialog as desired. If we use `showModal()`, we end up fighting
-                    // the user agent styles and resorting to hacky event-based positioning.
-                    navDialog.show();
-                    navHeader.classList.add('open');
-                    navBackdrop.classList.remove('hidden');
+                    openDialog();
                 }
             }
         };
@@ -117,15 +155,59 @@ const iconScale = 'scale-[0.6875] md:scale-100';
 
     Array.from(hideNavTriggers).forEach(hideNavTrigger => {
         hideNavTrigger.addEventListener('click', () => {
-            if (navDialog) {
-                navDialog.close();
-            }
+            const targetHref = hideNavTrigger.getAttribute('data-href');
+
+            closeDialog(() => {
+                // Wait a bit after animation ends before navigating to the next page
+                setTimeout(() => {
+                    if (window.location.pathname !== targetHref) {
+                        window.location.assign(
+                            `${window.location.origin}${targetHref}`,
+                        );
+                    }
+                }, 100);
+            });
         });
     });
 </script>
 
 <style>
+    header {
+        --animation-duration: 400ms;
+        --backdrop-opacity: 0.7;
+        --bar-length: 18px;
+        --bar-thickness: 2px;
+        --bar-offset: 5px;
+    }
+
+    /* On smaller devices, ensure that the dialog covers the entire width of the screen */
+    #nav-dialog {
+        height: 548px;
+        width: 100vw;
+        min-width: 353px;
+        left: calc(-1 * (max(100vw - 48px, 353px - 48px)));
+        top: -54px;
+    }
+
+    /* Decrease the width as necessary to make room for the woodshed icon. This ensures that the
+    icon does not partially overlap the dialog. */
+    @media (min-width: 426px) {
+        #nav-dialog {
+            width: 375px;
+            left: -327px;
+        }
+    }
+
+    /* For 'sm' screens and above, adjust the positioning to accomodate a larger hamburger button */
+    @media (min-width: 768px) {
+        #nav-dialog {
+            top: -64px;
+            left: -317px;
+        }
+    }
+
     /* Sets up the responsive grid layout */
+
     #header-grid {
         display: grid;
         grid-template-areas: 'left-margin left center right right-margin';
@@ -152,9 +234,9 @@ const iconScale = 'scale-[0.6875] md:scale-100';
         }
     }
 
-    /* Animates the dialog when it opens */
+    /* Animates the dialog so it fades in and out */
 
-    @keyframes show-dialog {
+    @keyframes fadeInDialog {
         0% {
             opacity: 0;
         }
@@ -163,17 +245,89 @@ const iconScale = 'scale-[0.6875] md:scale-100';
         }
     }
 
-    dialog#nav-dialog[open] {
-        animation: show-dialog 750ms ease normal;
+    @keyframes fadeOutDialog {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+
+    dialog[open]#nav-dialog {
+        animation: fadeInDialog var(--animation-duration) ease-in normal;
+    }
+
+    #nav-header.closing dialog[open]#nav-dialog {
+        animation: fadeOutDialog var(--animation-duration) ease-in normal;
+    }
+
+    /* Animates the backdrop so it fades in and out */
+
+    html:not(.dark) #nav-backdrop {
+        @apply bg-gray-light-100;
+    }
+
+    html.dark #nav-backdrop {
+        @apply bg-gray-dark-shade-900;
+    }
+
+    #nav-header.open #nav-backdrop {
+        opacity: var(--backdrop-opacity);
+    }
+
+    @keyframes fadeInBackdrop {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: var(--backdrop-opacity);
+        }
+    }
+
+    @keyframes fadeOutBackdrop {
+        0% {
+            opacity: var(--backdrop-opacity);
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+
+    #nav-header.open:not(.closing) #nav-backdrop {
+        animation: fadeInBackdrop var(--animation-duration) ease-in normal;
+    }
+
+    #nav-header.open.closing #nav-backdrop {
+        animation: fadeOutBackdrop var(--animation-duration) ease-in normal;
+    }
+
+    /* Animates the list of buttons so they slide down */
+
+    .slide-down {
+        transition: transform var(--animation-duration);
+        will-change: transform;
+        transform: translateY(-50px);
+    }
+
+    #nav-header.open .slide-down {
+        transform: translateY(0px);
+    }
+
+    /* Animates the contact link so it slides up */
+
+    .slide-up {
+        transition: transform var(--animation-duration);
+        will-change: transform;
+        transform: translateY(50px);
+    }
+
+    #nav-header.open .slide-up {
+        transform: translateY(0px);
     }
 
     /* Sets up the animated hamburger menu button */
-    header {
-        --bar-length: 18px;
-        --bar-thickness: 2px;
-        --bar-offset: 5px;
-        --transition-duration: 0.5s;
-    }
 
     #toggle-nav {
         position: relative;
@@ -183,11 +337,11 @@ const iconScale = 'scale-[0.6875] md:scale-100';
         position: absolute;
         top: 20px;
         left: 12px;
-        transition-duration: var(--transition-duration);
+        transition-duration: var(--animation-duration);
     }
 
     #hamburger #icon {
-        transition-duration: var(--transition-duration);
+        transition-duration: var(--animation-duration);
         position: absolute;
         height: 0px;
         width: var(--bar-length);
@@ -195,7 +349,7 @@ const iconScale = 'scale-[0.6875] md:scale-100';
     }
 
     #hamburger:before {
-        transition-duration: var(--transition-duration);
+        transition-duration: var(--animation-duration);
         position: absolute;
         width: var(--bar-length);
         height: var(--bar-thickness);
@@ -213,7 +367,7 @@ const iconScale = 'scale-[0.6875] md:scale-100';
     }
 
     #hamburger:after {
-        transition-duration: var(--transition-duration);
+        transition-duration: var(--animation-duration);
         position: absolute;
         width: var(--bar-length);
         height: var(--bar-thickness);
@@ -230,11 +384,11 @@ const iconScale = 'scale-[0.6875] md:scale-100';
         @apply bg-primary-dark-100;
     }
 
-    #nav-header.open #hamburger #icon {
-        transition: 0.5s;
+    #toggle-nav.open #hamburger #icon {
+        transition: var(--animation-duration);
     }
 
-    #nav-header.open #hamburger:before {
+    #toggle-nav.open #hamburger:before {
         transform: rotateZ(45deg) scaleX(1.33)
             translate(
                 calc(0.6 * var(--bar-offset)),
@@ -242,7 +396,7 @@ const iconScale = 'scale-[0.6875] md:scale-100';
             );
     }
 
-    #nav-header.open #hamburger:after {
+    #toggle-nav.open #hamburger:after {
         transform: rotateZ(-45deg) scaleX(1.33)
             translate(
                 calc(0.6 * var(--bar-offset)),
