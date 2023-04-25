@@ -171,13 +171,21 @@ const iconScale = 'scale-[0.6875] md:scale-100';
     });
 </script>
 
-<style is:global>
+<style>
+    header {
+        --animation-duration: 400ms;
+        --backdrop-opacity: 0.7;
+        --bar-length: 18px;
+        --bar-thickness: 2px;
+        --bar-offset: 5px;
+    }
+
     /* On smaller devices, ensure that the dialog covers the entire width of the screen */
     #nav-dialog {
         height: 548px;
         width: 100vw;
-        min-width: 325px;
-        left: calc(-1 * (calc(max(100vw - 48px, 325px - 48px))));
+        min-width: 353px;
+        left: calc(-1 * (max(100vw - 48px, 353px - 48px)));
         top: -54px;
     }
 
@@ -196,16 +204,6 @@ const iconScale = 'scale-[0.6875] md:scale-100';
             top: -64px;
             left: -317px;
         }
-    }
-</style>
-
-<style>
-    header {
-        --animation-duration: 400ms;
-        --backdrop-opacity: 0.7;
-        --bar-length: 18px;
-        --bar-thickness: 2px;
-        --bar-offset: 5px;
     }
 
     /* Sets up the responsive grid layout */

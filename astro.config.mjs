@@ -17,9 +17,7 @@ export default defineConfig({
             },
         }),
         sitemap(),
-        compress({
-            css: false,
-        }),
+        compress(),
     ],
     sitemap: true,
     site: 'https://woodshed.tech',
