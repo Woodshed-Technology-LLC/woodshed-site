@@ -20,7 +20,7 @@ There are many small choices to make when building up a design. We can best summ
 
 The following is an excerpt from the Woodshed style guide.
 
-#### About
+#### 1. About
 
 **Personality**
 
@@ -43,7 +43,7 @@ Woodshed is a small agency that will scale in time, so we are currently a bespok
 
 To always collaborate effectively, making strong plans and solutions for product needs both now and into the future.
 
-#### Logo
+#### 2. Logo
 
 **Look and feel**
 
@@ -61,17 +61,17 @@ See measurements below. Both sizes should be inside a 44px by 44px frame to enha
 
 <img alt="Woodshed logo" src="./docs/assets/woodshed_logo.png" width="300"></img>
 
-#### Color
+#### 3. Color
 
 **Look and feel**
 
 The look and feel of the color is dictated by the brand aesthetic. We take our cues for the color stories through what is classically used in technical drawings and cyanotypes (for dark mode).
 
-**Dark mode color palette**
+_Dark mode color palette_
 
 <img alt="Dark mode color palette" src="./docs/assets/dark_mode_color_palette.png" width="560"></img>
 
-#### Accessibility
+#### 4. Accessibility
 
 We aim to meet at least [WCAG 2.0 level AA color contrast](https://www.w3.org/TR/WCAG20/#visual-audio-contrast), which requires:
 
@@ -80,7 +80,7 @@ We aim to meet at least [WCAG 2.0 level AA color contrast](https://www.w3.org/TR
 
 <img alt="Color contrast sample" src="./docs/assets/color_contrast_sample.png" width="548"></img>
 
-#### Typography
+#### 5. Typography
 
 Fonts used are Inter and Montserrat.
 
@@ -116,7 +116,7 @@ In its initial version, woodshed.tech is a simple website and it could be built 
 
 -   **Scalability**
 
-    While pure HTML, CSS and JS will work fine for a smaller website, things can start to get messy as a site grows. A framework provides a standard way to organize our code into logical units that fit together, in a way that can grow to hundreds or thousands of pages without becoming messy and hard to understand.
+    While pure HTML, CSS and JS will work fine for a smaller website, things can start to get messy as a site grows. A framework provides a standard way to organize our code into logical units that fit together, in a way that can grow to hundreds or thousands of pages without becoming convoluted and hard to understand.
 
 -   **Documentation**
 
@@ -159,7 +159,7 @@ There are many good options when picking a web framework in 2023. Here are the c
 -   [Next.js](https://nextjs.org/) is a framework that uses React as its UI library, but empowers you to use SSG, SSR and CSR within the same website. Many developers choose to start with Next.js if they are building a React project because it offers a wide range of tools and supports React Server Components, a way to leverage React in SSR. We chose not to use Next.js because we didn't want to take the performance hit of loading and initializing React when we don't need to use it in our initial version of the site.
 -   [Remix](https://remix.run/) is another framework that uses React as its UI library, so it is a natural alternative to Next.js. It has different opinions about how to load and modify data, and is built to support a pattern called "progressive enhancement," which helps in the "old phone in a subway" scenario. Although it's our preferred framework for projects that require more interactivity, we also decided not to use it for this project for the same reason that we decided against Next.js: we don't need React (yet).
 -   [Eleventy](https://www.11ty.dev/) bills itself as primarily an SSG framework, but can support SSR through a plugin. It's optimized for speed, so it can handle building thousands of pages very quickly. It also allows you to selectively include UI libraries like React through something called "islands architecture." This would make it a good choice for woodshed.tech, because it would give us the ability to add a blog. It looks like an solid option with many reputable testimonials, and was our second choice for building woodshed.tech.
--   [Astro](https://astro.build/) is in the same camp as Eleventy, but has different opinions about how to organize code. We liked the structure of its `.astro` files which encapsulate HTML, CSS and JS into a single component. Coming from a React background, the component hierarchy makes a lot of sense to us. It also supports islands architecture, and allows you to add in React (or any other UI library) when and wherever you need to. If we choose to add a blog to woodshed.tech, it should be simple to get it working with Astro. In the end, we liked the balance of features and how it supported TailwindCSS out of the box.
+-   [Astro](https://astro.build/) is in the same category as Eleventy, but has different opinions about how to organize code. We liked the structure of its `.astro` files which encapsulate HTML, CSS and JS into a single component. Coming from a React background, the idea of organizing our code into components makes a lot of sense to us. It also supports islands architecture, and allows you to add in React (or any other UI library) when and wherever you need to. If we choose to add a blog to woodshed.tech, it should be simple to get it working with Astro. In the end, we liked the balance of features and how it supported TailwindCSS out of the box.
 
 ## Have a look around
 
