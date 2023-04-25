@@ -46,7 +46,7 @@ const iconScale = 'scale-[0.6875] md:scale-100';
             -->
             <dialog
                 id="nav-dialog"
-                class="bg-primary-light-shade-500 dark:bg-gray-dark-shade-400 pt-16 px-12 pb-12 w-[375px] h-[548px] top-[-54px] left-[-327px] md:top-[-64px] md:left-[-317px] relative"
+                class="bg-primary-light-shade-500 dark:bg-gray-dark-shade-400 pt-16 px-12 pb-12 relative"
             >
                 <nav>
                     <ul
@@ -178,6 +178,32 @@ const iconScale = 'scale-[0.6875] md:scale-100';
         --bar-length: 18px;
         --bar-thickness: 2px;
         --bar-offset: 5px;
+    }
+
+    /* On smaller devices, ensure that the dialog covers the entire width of the screen */
+    #nav-dialog {
+        height: 548px;
+        width: 100vw;
+        min-width: 325px;
+        left: calc(-1 * (calc(max(100vw - 48px, 325px - 48px))));
+        top: -54px;
+    }
+
+    /* Decrease the width as necessary to make room for the woodshed icon. This ensures that the
+    icon does not partially overlap the dialog. */
+    @media (min-width: 426px) {
+        #nav-dialog {
+            width: 375px;
+            left: -327px;
+        }
+    }
+
+    /* For 'sm' screens and above, adjust the positioning to accomodate a larger hamburger button */
+    @media (min-width: 544px) {
+        #nav-dialog {
+            top: -64px;
+            left: -317px;
+        }
     }
 
     /* Sets up the responsive grid layout */
