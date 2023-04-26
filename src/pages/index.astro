@@ -59,6 +59,8 @@ const paragraphs = [
             leverage our early research as we create more value.`,
     },
 ];
+
+const prefooterBg = 'bg-gray-light-shade-700';
 ---
 
 <MainLayout title="Woodshed">
@@ -120,11 +122,27 @@ const paragraphs = [
         </div>
     </div>
 </MainLayout>
+<div style={{ 'grid-area': 'prefooter-left' }} class={prefooterBg}></div>
+<div
+    style={{ 'grid-area': 'prefooter-center' }}
+    class={`${prefooterBg} text-gray-light-300 py-20`}
+>
+    <aside class="body-1">
+        We are a passionate team ready to make your plans a reality, from your
+        earliest inspiration to a fully-realized product. We believe in
+        collaborating closely with you throughout the process in order to make
+        it as efficient and transparent as possible. As your needs change and
+        traffic builds, we’ll be there to support you and adapt to new
+        requirements.
+    </aside>
+</div>
+<div style={{ 'grid-area': 'prefooter-right' }} class={prefooterBg}></div>
 
 <style>
     /*
-        Use a pseudo-element to add a line break in the h1 if the width is less than 544px. This is
-        better for semantic purposes than having two h1s and hiding/showing them with CSS.
+        Use a pseudo-element to add a line break in the h1 if the width is less than 544px.
+        This is better for semantic purposes than having two h1s and hiding/showing them
+        with CSS.
     */
     #space-or-line-break:after {
         content: '\a';

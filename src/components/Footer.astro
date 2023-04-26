@@ -5,14 +5,16 @@
  */
 
 import Highlight from './Highlight.astro';
-import { bodyWidth } from '../constants';
+
+const bgClass = 'bg-gray-light-shade-900 dark:bg-gray-dark-shade-900';
 ---
 
+<div style={{ 'grid-area': 'footer-left' }} class={bgClass}></div>
 <div
-    style={{ 'grid-area': 'footer' }}
-    class="bg-gray-light-shade-900 dark:bg-gray-dark-shade-900 py-24 flex justify-center text-gray-light-300"
+    style={{ 'grid-area': 'footer-center' }}
+    class={`${bgClass} py-24 text-gray-light-300`}
 >
-    <footer class={bodyWidth}>
+    <footer>
         <p class="cta leading-9 pb-8">Come say hello!</p>
         <Highlight>
             <a
@@ -46,7 +48,7 @@ import { bodyWidth } from '../constants';
         </p>
     </footer>
 </div>
-
+<div style={{ 'grid-area': 'footer-right' }} class={bgClass}></div>
 <script>
     const copyright = document.getElementById('copyright');
     if (copyright) {

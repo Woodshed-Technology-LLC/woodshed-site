@@ -8,6 +8,9 @@
 import DarkModeSwitch from './DarkModeSwitch.astro';
 import NavHighlight from './NavHighlight.astro';
 const iconScale = 'scale-[0.6875] md:scale-100';
+
+const linkClasses =
+    'hide-nav hover:text-gray-light-300 dark:hover:text-primary-dark-400';
 ---
 
 <header id="nav-header" class="fixed w-full">
@@ -53,13 +56,15 @@ const iconScale = 'scale-[0.6875] md:scale-100';
                         class="slide-down text-22 flex flex-col gap-5 text-gray-light-shade-800 dark:text-primary-dark-200"
                     >
                         <li>
-                            <button type="button" class="hide-nav" data-href="/"
-                                >Process</button
+                            <button
+                                type="button"
+                                class={linkClasses}
+                                data-href="/">Process</button
                             >
                         </li>
                         <li>
                             <button
-                                class="hide-nav"
+                                class={linkClasses}
                                 type="button"
                                 data-href="/projects">Projects</button
                             >
@@ -67,7 +72,7 @@ const iconScale = 'scale-[0.6875] md:scale-100';
                         <li>
                             <button
                                 type="button"
-                                class="hide-nav"
+                                class={linkClasses}
                                 data-href="/about-us">About us</button
                             >
                         </li>
@@ -117,7 +122,7 @@ const iconScale = 'scale-[0.6875] md:scale-100';
     };
 
     const closeDialog = (callback?: () => void) => {
-        if (navDialog && navHeader && navBackdrop) {
+        if (toggleNav && navDialog && navHeader && navBackdrop) {
             toggleNav.classList.remove('open');
             navHeader.classList.add('closing');
 
@@ -158,14 +163,11 @@ const iconScale = 'scale-[0.6875] md:scale-100';
             const targetHref = hideNavTrigger.getAttribute('data-href');
 
             closeDialog(() => {
-                // Wait a bit after animation ends before navigating to the next page
-                setTimeout(() => {
-                    if (window.location.pathname !== targetHref) {
-                        window.location.assign(
-                            `${window.location.origin}${targetHref}`,
-                        );
-                    }
-                }, 100);
+                if (window.location.pathname !== targetHref) {
+                    window.location.assign(
+                        `${window.location.origin}${targetHref}`,
+                    );
+                }
             });
         });
     });
@@ -236,7 +238,7 @@ const iconScale = 'scale-[0.6875] md:scale-100';
 
     /* Animates the dialog so it fades in and out */
 
-    @keyframes fadeInDialog {
+    @keyframes fade-in-dialog {
         0% {
             opacity: 0;
         }
@@ -245,7 +247,7 @@ const iconScale = 'scale-[0.6875] md:scale-100';
         }
     }
 
-    @keyframes fadeOutDialog {
+    @keyframes fade-out-dialog {
         0% {
             opacity: 1;
         }
@@ -255,11 +257,11 @@ const iconScale = 'scale-[0.6875] md:scale-100';
     }
 
     dialog[open]#nav-dialog {
-        animation: fadeInDialog var(--animation-duration) ease-in normal;
+        animation: fade-in-dialog var(--animation-duration) ease-in normal;
     }
 
     #nav-header.closing dialog[open]#nav-dialog {
-        animation: fadeOutDialog var(--animation-duration) ease-in normal;
+        animation: fade-out-dialog var(--animation-duration) ease-in normal;
     }
 
     /* Animates the backdrop so it fades in and out */
@@ -276,17 +278,16 @@ const iconScale = 'scale-[0.6875] md:scale-100';
         opacity: var(--backdrop-opacity);
     }
 
-    @keyframes fadeInBackdrop {
+    @keyframes fade-in-backdrop {
         0% {
             opacity: 0;
         }
-
         100% {
             opacity: var(--backdrop-opacity);
         }
     }
 
-    @keyframes fadeOutBackdrop {
+    @keyframes fade-out-backdrop {
         0% {
             opacity: var(--backdrop-opacity);
         }
@@ -296,17 +297,19 @@ const iconScale = 'scale-[0.6875] md:scale-100';
     }
 
     #nav-header.open:not(.closing) #nav-backdrop {
-        animation: fadeInBackdrop var(--animation-duration) ease-in normal;
+        animation: fade-in-backdrop var(--animation-duration) ease-in normal;
     }
 
     #nav-header.open.closing #nav-backdrop {
-        animation: fadeOutBackdrop var(--animation-duration) ease-in normal;
+        animation: fade-out-backdrop var(--animation-duration) ease-in normal;
     }
 
     /* Animates the list of buttons so they slide down */
 
     .slide-down {
-        transition: transform var(--animation-duration);
+        transition-property: transform;
+        transition-duration: var(--animation-duration);
+        transition-timing-function: ease-in;
         will-change: transform;
         transform: translateY(-50px);
     }
@@ -318,7 +321,9 @@ const iconScale = 'scale-[0.6875] md:scale-100';
     /* Animates the contact link so it slides up */
 
     .slide-up {
-        transition: transform var(--animation-duration);
+        transition-property: transform;
+        transition-duration: var(--animation-duration);
+        transition-timing-function: ease-in;
         will-change: transform;
         transform: translateY(50px);
     }

@@ -105,15 +105,16 @@ const { title } = Astro.props;
         grid-template-areas:
             'header header header'
             '. main .'
-            'footer footer footer';
+            'prefooter-left prefooter-center prefooter-right'
+            'footer-left footer-center footer-right';
         grid-template-columns: 60px auto 60px;
-        grid-template-rows: 60px auto auto;
+        grid-template-rows: 60px auto auto auto;
     }
 
     @media (min-width: 544px) {
         body {
             grid-template-columns: 70px auto 70px;
-            grid-template-rows: 126px auto auto;
+            grid-template-rows: 126px auto auto auto;
         }
     }
 
