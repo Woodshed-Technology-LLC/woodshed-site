@@ -53,7 +53,7 @@ const linkClasses =
             >
                 <nav>
                     <ul
-                        class="slide-down text-22 flex flex-col gap-5 text-gray-light-shade-800 dark:text-primary-dark-200"
+                        class="slider slide-down text-22 flex flex-col gap-5 text-gray-light-shade-800 dark:text-primary-dark-200"
                     >
                         <li>
                             <button
@@ -83,7 +83,7 @@ const linkClasses =
                 <div class="pt-10 flex flex-col">
                     <DarkModeSwitch />
                 </div>
-                <div class="slide-up">
+                <div class="slider slide-up">
                     <p
                         class="pt-14 font-cta text-28 leading-9 pb-4 text-gray-light-300 dark:text-primary-dark-200 font-medium"
                     >
@@ -103,34 +103,49 @@ const linkClasses =
 </header>
 
 <script>
-    const toggleNav = document.querySelector<HTMLButtonElement>('#toggle-nav');
-    const navHeader = document.getElementById('nav-header');
-    const navDialog = document.querySelector<HTMLDialogElement>('#nav-dialog');
     const hideNavTriggers = document.querySelectorAll('.hide-nav');
     const navBackdrop = document.getElementById('nav-backdrop');
+    const navDialog = document.querySelector<HTMLDialogElement>('#nav-dialog');
+    const navHeader = document.getElementById('nav-header');
+    const sliders = document.querySelectorAll('.slider');
+    const toggleNav = document.querySelector<HTMLButtonElement>('#toggle-nav');
 
     const openDialog = () => {
-        if (navDialog && navHeader && navBackdrop && toggleNav) {
+        if (navBackdrop && navDialog && navHeader && sliders && toggleNav) {
             // We use `show()` here rather than `showModal()` because it allows us to
             // position the dialog as desired. If we use `showModal()`, we end up fighting
             // the user agent styles and resorting to hacky event-based positioning.
             navDialog.show();
-            toggleNav.classList.add('open');
-            navHeader.classList.add('open');
+
             navBackdrop.classList.remove('hidden');
+            navHeader.classList.add('open');
+            toggleNav.classList.add('open');
+
+            /* Fixes a timing bug in Safari that breaks the sliding animations */
+            requestAnimationFrame(() => {
+                Array.from(sliders).forEach(slider => {
+                    slider.classList.add('sliding');
+                });
+            });
         }
     };
 
     const closeDialog = (callback?: () => void) => {
-        if (toggleNav && navDialog && navHeader && navBackdrop) {
-            toggleNav.classList.remove('open');
+        if (navBackdrop && navDialog && navHeader && sliders && toggleNav) {
             navHeader.classList.add('closing');
+            toggleNav.classList.remove('open');
 
             const afterAnimation = () => {
                 navDialog.close();
-                navHeader.classList.remove('open');
+
                 navBackdrop.classList.add('hidden');
                 navHeader.classList.remove('closing');
+                navHeader.classList.remove('open');
+
+                Array.from(sliders).forEach(slider => {
+                    slider.classList.remove('sliding');
+                });
+
                 navDialog.removeEventListener(
                     'animationend',
                     afterAnimation,
@@ -314,7 +329,7 @@ const linkClasses =
         transform: translateY(-50px);
     }
 
-    #nav-header.open .slide-down {
+    #nav-header.open .slide-down.sliding {
         transform: translateY(0px);
     }
 
@@ -328,7 +343,7 @@ const linkClasses =
         transform: translateY(50px);
     }
 
-    #nav-header.open .slide-up {
+    #nav-header.open .slide-up.sliding {
         transform: translateY(0px);
     }
 
