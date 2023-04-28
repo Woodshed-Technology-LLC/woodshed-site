@@ -319,32 +319,34 @@ const linkClasses =
         animation: fade-out-backdrop var(--animation-duration) ease-in normal;
     }
 
-    /* Animates the list of buttons so they slide down */
+    @media (prefers-reduced-motion: no-preference) {
+        /* Animates the list of buttons so they slide down */
 
-    .slide-down {
-        transition-property: transform;
-        transition-duration: var(--animation-duration);
-        transition-timing-function: ease-in;
-        will-change: transform;
-        transform: translateY(-50px);
-    }
+        .slide-down {
+            transition-property: transform;
+            transition-duration: var(--animation-duration);
+            transition-timing-function: ease-in;
+            will-change: transform;
+            transform: translateY(-50px);
+        }
 
-    #nav-header.open .slide-down.sliding {
-        transform: translateY(0px);
-    }
+        #nav-header.open .slide-down.sliding {
+            transform: translateY(0px);
+        }
 
-    /* Animates the contact link so it slides up */
+        /* Animates the contact link so it slides up */
 
-    .slide-up {
-        transition-property: transform;
-        transition-duration: var(--animation-duration);
-        transition-timing-function: ease-in;
-        will-change: transform;
-        transform: translateY(50px);
-    }
+        .slide-up {
+            transition-property: transform;
+            transition-duration: var(--animation-duration);
+            transition-timing-function: ease-in;
+            will-change: transform;
+            transform: translateY(50px);
+        }
 
-    #nav-header.open .slide-up.sliding {
-        transform: translateY(0px);
+        #nav-header.open .slide-up.sliding {
+            transform: translateY(0px);
+        }
     }
 
     /* Sets up the animated hamburger menu button */
