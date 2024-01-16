@@ -6,6 +6,7 @@ import compress from 'astro-compress';
 
 // https://astro.build/config
 export default defineConfig({
+    compressHTML: false,
     integrations: [
         mdx(),
         tailwind({
@@ -15,7 +16,7 @@ export default defineConfig({
         }),
         sitemap(),
         // Turn off CSS compression because it causes bugs in the NavHeader position
-        compress({ css: false }),
+        compress({ CSS: false }),
     ],
     sitemap: true,
     site: 'https://woodshed.tech',
