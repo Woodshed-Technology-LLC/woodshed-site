@@ -4,6 +4,7 @@
  * GitHub.
  */
 
+import CalendarButton from './CalendarButton.astro';
 import Highlight from './Highlight.astro';
 
 const bgClass = 'bg-gray-light-shade-900 dark:bg-gray-dark-shade-900';
@@ -16,6 +17,12 @@ const bgClass = 'bg-gray-light-shade-900 dark:bg-gray-dark-shade-900';
 >
     <footer>
         <p class="cta leading-9 pb-8">Come say hello!</p>
+        <aside class="body-1 pb-10">
+            We’d love to start a conversation and see if we’re a fit for your
+            needs.
+        </aside>
+        <CalendarButton />
+        <p class="pt-10 text-15">Or reach out to us at:</p>
         <Highlight>
             <a
                 class="text-gray-light-400 dark:text-primary-dark-200 body-1"

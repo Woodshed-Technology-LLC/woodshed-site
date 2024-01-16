@@ -71,6 +71,13 @@ const linkClasses =
                         </li>
                         <li>
                             <button
+                                class={linkClasses}
+                                type="button"
+                                data-href="/services">Services</button
+                            >
+                        </li>
+                        <li>
+                            <button
                                 type="button"
                                 class={linkClasses}
                                 data-href="/about-us">About us</button
@@ -83,12 +90,7 @@ const linkClasses =
                 <div class="pt-10 flex flex-col">
                     <DarkModeSwitch />
                 </div>
-                <div class="slider slide-up">
-                    <p
-                        class="pt-14 font-cta text-28 leading-9 pb-4 text-gray-light-300 dark:text-primary-dark-200 font-medium"
-                    >
-                        Come say hello!
-                    </p>
+                <div class="slider slide-up pt-14">
                     <NavHighlight>
                         <a
                             class="hide-nav text-gray-light-shade-600 dark:text-primary-dark-200 text-22"

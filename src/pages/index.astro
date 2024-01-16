@@ -3,68 +3,25 @@
  * The main page, including a brief introduction and listing of the steps in our design and
  * development process. Links to two of the projects are included at the bottom of the main content.
  */
-import Button from '../components/Button.astro';
+import CalendarButton from '../components/CalendarButton.astro';
 import Link from '../components/Link.astro';
 import MainLayout from '../layouts/MainLayout.astro';
 import NumberedParagraphs from '../components/NumberedParagraphs.astro';
-
-const paragraphs = [
-    {
-        heading: 'Branding',
-        body: `A strong brand that is well-suited to both the company and its target audience is
-            essential to building trust and loyalty. We can help you develop a brand that
-            communicates your values and resonates with your customers.`,
-    },
-    {
-        heading: 'Design System',
-        body: `A design system is a collection of reusable components that can be combined to create
-            a consistent user experience across your products, both digital and physical. We can
-            help you develop a design system that will allow you to work quickly and efficiently
-            without sacrificing quality.`,
-    },
-    {
-        heading: 'Website',
-        body: `A mobile-first website with a full set of features is the foundation of your digital
-            platform. We can help you build a website that is tailored to your specific needs and
-            provides your customers with a first-class experience. This might include an online store,
-            customer support system, or any other features you need to provide.`,
-    },
-    {
-        heading: 'Integrations',
-        body: `Your digital platform needs to be fully integrated to provide the best user experience.
-            We can help you integrate your website with third party services such as CRM, accounting,
-            order fulfillment, email marketing and more.`,
-    },
-    {
-        heading: 'Documentation and Training',
-        body: `It's not enough to just set up a digital platform; you need to be able to run it, too.
-            We'll help you develop repeatable processes that will allow you to keep your platform
-            running smoothly and make changes as your needs evolve.`,
-    },
-];
-
-const prefooterBg = 'bg-gray-light-shade-700 dark:bg-gray-dark-shade-700';
 ---
 
 <MainLayout title="Woodshed">
     <h1>Your digital architects</h1>
     <div class="flex flex-col gap-10 py-5">
         <p class="body-1">
-            We're Woodshed, and we specialize in building solutions for small
-            businesses and nonprofits. Our strengths include branding, design
-            and software development, but we think of ourselves as digital
-            architects.
+            We’re Woodshed, and we specialize in building technical solutions
+            for small businesses and nonprofits. Our strengths include branding,
+            design and software development, but we think of ourselves as
+            digital architects.
         </p>
         <p class="body-1">
-            Need help building your digital platform? We can help.
+            Need help building your digital platform? We’d love to chat.
         </p>
-        <Button>
-            <a
-                href="https://calendly.com/alex-nitta/30min"
-                target="_blank"
-                rel="noreferrer">Book a meeting</a
-            >
-        </Button>
+        <CalendarButton />
     </div>
     <div
         class="mt-10 mb-6 border-b-[1.5px] w-40 sm:w-48 lg:w-[351px] border-primary-light-shade-500 dark:border-primary-dark-900"
@@ -74,80 +31,75 @@ const prefooterBg = 'bg-gray-light-shade-700 dark:bg-gray-dark-shade-700';
         <h2>When Squarespace isn't enough anymore</h2>
         <p class="body-2">
             When you’re running a small business or nonprofit, you have fewer
-            resources, but you need to compete in the same market as big
-            companies. These days, that means you need to be highly available to
-            your customer. In other words, you need a website.
-        </p>
-        <p class="body-2">
-            But actually, you don't just need a website; you need a <strong
-                class="font-semibold">digital platform</strong
-            >.
-        </p>
-        <p class="body-2">
-            Site builders can get you started with a basic website, but they
-            have limitations in terms of visual layout as well as technical
-            capabilities. A digital platform includes a website as well as a
-            full complement of technologies that blend together to provide a
-            seamless user experience. Your clients may take it for granted, but
-            it's no small feat to plan, build and maintain these systems.
-        </p>
-        <h2>Building your digital platform</h2>
-        <p class="body-2 sm:px-8 lg:px-10">
-            Your digital platform is the foundation of your business. It
-            includes, at a minimum:
-        </p>
-        <div class="pl-[24px] sm:px-16 lg:px-20">
-            <NumberedParagraphs paragraphs={paragraphs} />
-        </div>
-        <h2>Experience in the field</h2>
-        <p class="body-1">
-            Sometimes, knowing where to start is the hardest part. We understand
-            the landscape of current technologies, and we can guide you through
-            the myriad of choices that confront every small business and
-            nonprofit.
-        </p>
-        <p class="body-1">
-            Please see our <Link href="/projects">projects</Link> page for examples
-            of our past work. You may also be interested in reading about some of
-            the
-            <Link href="/services">services</Link> we provide.
+            resources than a big company, but you need be just as visible in the
+            marketplace. To be competetive, you need a good website.
+            <p class="body-2">
+                But actually, you don't just need a website; you need a <strong
+                    class="font-semibold">digital platform</strong
+                >.
+            </p>
+            <p class="body-2">
+                A digital platform includes a variety of technologies that
+                connect together to provide a seamless user experience. It might
+                include an online store, a blog, or other features. It might
+                integrate with third party services such as a payment processor,
+                accounting platform, or order fulfillment system. There are a
+                lot of moving parts, and it can be overwhelming to figure out
+                how they all fit together.
+            </p>
+            <h2>Building your digital platform</h2>
+            <p class="body-2 sm:px-8 lg:px-10">
+                Your digital platform is the foundation of your business. It
+                includes, at a minimum:
+            </p>
+            <div class="pl-[24px] sm:px-16 lg:px-20">
+                <NumberedParagraphs
+                    paragraphs={[
+                        {
+                            heading: 'Branding',
+                            body: `A strong brand that is well-suited to both the company and its target audience is
+                            essential to building trust and loyalty. We can help you develop a brand that
+                            communicates your values and resonates with your customers.`,
+                        },
+                        {
+                            heading: 'Design System',
+                            body: `A design system is a collection of reusable components that can be combined to create
+                            a consistent user experience across your products, both digital and physical. We can
+                            help you develop a design system that will allow you to work quickly and efficiently
+                            without sacrificing quality.`,
+                        },
+                        {
+                            heading: 'Website',
+                            body: `A fully-featured and carefully crafted website is the foundation of your digital platform. We can help you build a website that is tailored to your specific needs and
+                            provides your customers with a best-in-class experience that is highly performant (snappy to use) and accessible (functional for all users).`,
+                        },
+                        {
+                            heading: 'Integrations',
+                            body: `Your digital platform needs to be fully integrated to provide the best user experience.
+                            We can help you integrate your website with third party services such as CRM, helpdesk, order fulfillment, email marketing and more.`,
+                        },
+                        {
+                            heading: 'Documentation and Training',
+                            body: `It's not enough to just set up a digital platform; you need to be able to run it, too.
+                            We'll help you develop repeatable processes that will allow you to keep your platform
+                            running smoothly and make changes as your needs evolve.`,
+                        },
+                    ]}
+                />
+            </div>
+            <h2>Experience in the field</h2>
+            <p class="body-1">
+                Sometimes, knowing where to start is the hardest part. We
+                understand the landscape of current technologies, and we can
+                guide you through the myriad of choices that confront every
+                small business and nonprofit.
+            </p>
+            <p class="body-1">
+                Our <Link href="/projects">Projects page</Link> includes examples
+                of our past work. You may also be interested in reading about some
+                of the
+                <Link href="/services">services we provide</Link> .
+            </p>
         </p>
     </div>
 </MainLayout>
-<div style={{ 'grid-area': 'prefooter-left' }} class={prefooterBg}></div>
-<div
-    style={{ 'grid-area': 'prefooter-center' }}
-    class={`${prefooterBg} text-gray-light-300 dark:text-gray-dark-200 py-20`}
->
-    <aside class="body-1 pb-4">
-        Contact us today for a free consultation. We’d love to start a
-        conversation and see if we’re a fit for each other.
-    </aside>
-    <Button>
-        <a
-            class="text-black"
-            href="https://calendly.com/alex-nitta/30min"
-            target="_blank"
-            rel="noreferrer">Book a meeting</a
-        >
-    </Button>
-</div>
-<div style={{ 'grid-area': 'prefooter-right' }} class={prefooterBg}></div>
-
-<style>
-    /*
-        Use a pseudo-element to add a line break in the h1 if the width is less than 544px.
-        This is better for semantic purposes than having two h1s and hiding/showing them
-        with CSS.
-    */
-    #space-or-line-break:after {
-        content: '\a';
-        white-space: pre;
-    }
-
-    @media (min-width: 544px) {
-        #space-or-line-break:after {
-            content: ' ';
-        }
-    }
-</style>
