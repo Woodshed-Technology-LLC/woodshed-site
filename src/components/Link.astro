@@ -1,0 +1,17 @@
+---
+/**
+ * An <a> tag with some standard styling.
+ * */
+
+interface Props {
+    href: string;
+}
+
+const { href } = Astro.props;
+---
+
+<a
+    href={href}
+    class="decoration-primary-light-shade-700 hover:text-primary-light-shade-700 dark:decoration-primary-dark-900 dark:hover:text-primary-dark-900 underline"
+    ><slot /></a
+>
