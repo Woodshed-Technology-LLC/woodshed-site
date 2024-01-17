@@ -10,8 +10,8 @@ import NumberedParagraphs from '../components/NumberedParagraphs.astro';
 ---
 
 <MainLayout title="Woodshed">
-    <h1>Your digital architects</h1>
-    <div class="flex flex-col gap-10 py-5">
+    <section class="call-to-action">
+        <h1>Your digital architects</h1>
         <p class="body-1">
             We’re Woodshed, and we specialize in building technical solutions
             for small businesses and nonprofits. Our strengths include branding,
@@ -22,82 +22,81 @@ import NumberedParagraphs from '../components/NumberedParagraphs.astro';
             Need help building your digital platform? We’d love to chat.
         </p>
         <CalendarButton />
-    </div>
-    <div
-        class="mt-10 mb-6 border-b-[1.5px] w-40 sm:w-48 lg:w-[351px] border-primary-light-shade-500 dark:border-primary-dark-900"
-    >
-    </div>
-    <div class="flex flex-col gap-10 py-5">
+    </section>
+    <section>
         <h2>When Squarespace isn't enough anymore</h2>
         <p class="body-2">
             When you’re running a small business or nonprofit, you have fewer
             resources than a big company, but you need be just as visible in the
-            marketplace. To be competetive, you need a good website.
-            <p class="body-2">
-                But actually, you don't just need a website; you need a <strong
-                    class="font-semibold">digital platform</strong
-                >.
-            </p>
-            <p class="body-2">
-                A digital platform includes a variety of technologies that
-                connect together to provide a seamless user experience. It might
-                include an online store, a blog, or other features. It might
-                integrate with third party services such as a payment processor,
-                accounting platform, or order fulfillment system. There are a
-                lot of moving parts, and it can be overwhelming to figure out
-                how they all fit together. We’re here to help.
-            </p>
-            <h2>Building your digital platform</h2>
-            <p class="body-2 sm:px-8 lg:px-10">
-                Your digital platform is the foundation of your business. It
-                includes, at a minimum:
-            </p>
-            <div class="pl-[24px] sm:px-16 lg:px-20">
-                <NumberedParagraphs
-                    paragraphs={[
-                        {
-                            heading: 'Branding',
-                            body: `A strong brand that is well-suited to both the company and its target audience is
-                            essential to building trust and loyalty. We can help you develop a brand that
-                            communicates your values and resonates with your customers.`,
-                        },
-                        {
-                            heading: 'Design System',
-                            body: `A design system is a collection of reusable components that can be combined to create
-                            a consistent user experience across your products, both digital and physical. We can
-                            help you develop a design system that will allow you to work quickly and efficiently
-                            without sacrificing quality.`,
-                        },
-                        {
-                            heading: 'Website',
-                            body: `A fully-featured and carefully crafted website is the foundation of your digital platform. We can help you build a website that is tailored to your specific needs and
-                            provides your customers with a best-in-class experience that is highly performant (snappy to use) and accessible (functional for all users).`,
-                        },
-                        {
-                            heading: 'Integrations',
-                            body: `Your digital platform needs to be fully integrated to provide the best user experience.
-                            We can help you integrate your website with third party services such as CRM, helpdesk, order fulfillment, email marketing and more.`,
-                        },
-                        {
-                            heading: 'Documentation and Training',
-                            body: `It's not enough to just set up a digital platform; you need to be able to run it, too.
-                            We'll help you develop repeatable processes that will allow you to keep your platform
-                            running smoothly and make changes as your needs evolve.`,
-                        },
-                    ]}
-                />
-            </div>
-            <h2>Experience in the field</h2>
-            <p class="body-1">
-                Sometimes, knowing where to start is the hardest part. We
-                understand the landscape of current technologies, and we can
-                guide you through the myriad of choices that confront every
-                small business and nonprofit.
-            </p>
-            <p class="body-1">
-                For more details, see the list of <Link href="/services">services we provide</Link>. You may also be interested in reading about some
-                of the <Link href="/projects">projects we've worked on</Link>.
-            </p>
+            marketplace. To be competetive, you need a good website.</p>
+        <p class="body-2">
+            But actually, you don't just need a website; you need a <strong
+                class="font-semibold">digital platform</strong
+            >.
         </p>
-    </div>
+        <p class="body-2">
+            A digital platform includes a variety of technologies that
+            connect together to provide a seamless user experience. It might
+            include an online store, a blog, or other features. It might
+            integrate with third party services such as a payment processor,
+            accounting platform, or order fulfillment system. There are a
+            lot of moving parts, and it can be overwhelming to figure out
+            how they all fit together. We’re here to help.
+        </p>
+    </section>
+    <section>
+        <h2>Building your digital platform</h2>
+        <p class="body-2">
+            Your digital platform is the foundation of your business. It
+            includes, at a minimum:
+        </p>
+        <div class="pl-[24px] sm:px-16 lg:px-20 pb-10">
+            <NumberedParagraphs
+                paragraphs={[
+                    {
+                        heading: 'Branding',
+                        body: `A strong brand that is well-suited to both the company and its target audience is
+                        essential to building trust and loyalty. We can help you develop a brand that
+                        communicates your values and resonates with your customers.`,
+                    },
+                    {
+                        heading: 'Design System',
+                        body: `A design system is a collection of reusable components that can be combined to create
+                        a consistent user experience across your products, both digital and physical. We can
+                        help you develop a design system that will allow you to work quickly and efficiently
+                        without sacrificing quality.`,
+                    },
+                    {
+                        heading: 'Website',
+                        body: `A fully-featured and carefully crafted website is the foundation of your digital platform. We can help you build a website that is tailored to your specific needs and
+                        provides your customers with a best-in-class experience that is highly performant (snappy to use) and accessible (functional for all users).`,
+                    },
+                    {
+                        heading: 'Integrations',
+                        body: `Your digital platform needs to be fully integrated to provide the best user experience.
+                        We can help you integrate your website with third party services such as CRM, helpdesk, order fulfillment, email marketing and more.`,
+                    },
+                    {
+                        heading: 'Documentation and Training',
+                        body: `It's not enough to just set up a digital platform; you need to be able to run it, too.
+                        We'll help you develop repeatable processes that will allow you to keep your platform
+                        running smoothly and make changes as your needs evolve.`,
+                    },
+                ]}
+            />
+        </div>
+    </section>
+    <section>
+        <h2>Experience in the field</h2>
+        <p class="body-1">
+            Sometimes, knowing where to start is the hardest part. We
+            understand the landscape of current technologies, and we can
+            guide you through the myriad choices that confront every
+            small business and nonprofit.
+        </p>
+        <p class="body-1">
+            For more details, see the list of <Link href="/services">services we provide</Link>. You may also be interested in reading about some
+            of the <Link href="/projects">projects we've worked on</Link>.
+        </p>
+    </section>
 </MainLayout>
